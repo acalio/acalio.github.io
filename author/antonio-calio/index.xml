@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Antonio Caliò | Academic</title>
+    <link>/author/antonio-calio/</link>
+      <atom:link href="/author/antonio-calio/index.xml" rel="self" type="application/rss+xml" />
+    <description>Antonio Caliò</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>/author/antonio-calio/avatar_huf7b4f7f401814ac0d9e12c3bac4181e2_150042_270x270_fill_q90_lanczos_center.jpg</url>
+      <title>Antonio Caliò</title>
+      <link>/author/antonio-calio/</link>
+    </image>
+    
+  </channel>
+</rss>
