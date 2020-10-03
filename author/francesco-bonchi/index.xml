@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Francesco Bonchi | Antonio Caliò</title>
+    <link>/author/francesco-bonchi/</link>
+      <atom:link href="/author/francesco-bonchi/index.xml" rel="self" type="application/rss+xml" />
+    <description>Francesco Bonchi</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png</url>
+      <title>Francesco Bonchi</title>
+      <link>/author/francesco-bonchi/</link>
+    </image>
+    
+    <item>
+      <title>Cores matter? An analysis of graph decomposition effects on influence maximization problems</title>
+      <link>/publication/calio-cores-2020/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/calio-cores-2020/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

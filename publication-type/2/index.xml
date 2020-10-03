@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2 | Antonio Caliò</title>
+    <link>/publication-type/2/</link>
+      <atom:link href="/publication-type/2/index.xml" rel="self" type="application/rss+xml" />
+    <description>2</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 01 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png</url>
+      <title>2</title>
+      <link>/publication-type/2/</link>
+    </image>
+    
+    <item>
+      <title>Attribute based Diversification of Seeds for Targeted Influence Maximization</title>
+      <link>/publication/calio-attribute-2020/</link>
+      <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/calio-attribute-2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A Framework for Complex Inﬂuence Propagation based on the F 2DLT Class of Diﬀusion Models</title>
+      <link>/publication/calio-framework-nodate/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/calio-framework-nodate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Complex influence propagation based on trust-aware dynamic linear threshold models</title>
+      <link>/publication/calio-complex-2019/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/calio-complex-2019/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Topology-Driven Diversity for Targeted Influence Maximization with Application to User Engagement in Social Networks</title>
+      <link>/publication/calio-topology-driven-2018/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/publication/calio-topology-driven-2018/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
