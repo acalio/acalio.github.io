@@ -13,7 +13,37 @@
   </url>
   
   <url>
-    <loc>/courses/datamining/lesson1/</loc>
+    <loc>/courses/datamining/clustering/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/datamining/enslearn/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/datamining/finallesson/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/datamining/numpyintro/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/datamining/pandasintro/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/datamining/introscikit/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/datamining/classproblem/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   
