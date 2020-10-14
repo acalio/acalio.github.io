@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Antonio Caliò</title>
+    <link>/project/</link>
+      <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 14 Oct 2020 09:44:20 +0200</lastBuildDate>
+    <image>
+      <url>/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png</url>
+      <title>Projects</title>
+      <link>/project/</link>
+    </image>
+    
+    <item>
+      <title>Complex Influence Propagation based on Trust-aware Dynamic Linear Threshold Models</title>
+      <link>/project/f2dlt/</link>
+      <pubDate>Wed, 14 Oct 2020 09:44:20 +0200</pubDate>
+      <guid>/project/f2dlt/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;This project is a web-based simulation environment for Friend-Foe-Dynamic-Linear-Threshold (F2DLT) Models
+presented for the first time at &lt;a href=&#34;/publication/calio-trust-based-2018/&#34; title=&#34;publications&#34;&gt;TrustCom 2018&lt;/a&gt; and
+further discussed in &lt;a href=&#34;/publication/calio-complex-2019/&#34; title=&#34;publications&#34;&gt;Applied Network Science 2019&lt;/a&gt;
+and at &lt;a href=&#34;/publication/calio-framework-nodate/&#34; title=&#34;publications&#34;&gt;SEBD 2020&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you follow the above link you will be presented with a user-friendly interface, that allows you
+to create/upload a diffusion graph and to run a diffusion process.&lt;/p&gt;
+&lt;p&gt;As the diffusion unfolds, the platform will show you real-time statistics about the current diffusion phenomena.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>(Di)Graph Decompositions</title>
+      <link>/project/cores/</link>
+      <pubDate>Wed, 14 Oct 2020 09:30:27 +0200</pubDate>
+      <guid>/project/cores/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;This project is developed as part of the following research paper:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://doi.org/10.1145/3394231.3397908&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A. Caliò, A. Tagarelli, F. Bonchi (2020). Cores matter? An analysis of graph decomposition effects on influence maximization problem. In Procs. of the 12th ACM Web Science Conference (WebSci-2020), July 6th - July 10th, 2020,  Southampton, UK&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It contains a variety of graph-decomposition methods, specially adapted to be applied in an influence
+propagation problem &amp;ndash; i.e., upon directed and weighted graphs.&lt;/p&gt;
+&lt;p&gt;Please follow the above link for detailed instructions on how to install and use this project.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
