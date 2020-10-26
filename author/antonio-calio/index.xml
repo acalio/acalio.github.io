@@ -5,60 +5,12 @@
     <link>/author/antonio-calio/</link>
       <atom:link href="/author/antonio-calio/index.xml" rel="self" type="application/rss+xml" />
     <description>Antonio Caliò</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 01 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
     <image>
-      <url>/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png</url>
+      <url>/author/antonio-calio/avatar_huf7b4f7f401814ac0d9e12c3bac4181e2_150042_270x270_fill_q90_lanczos_center.jpg</url>
       <title>Antonio Caliò</title>
       <link>/author/antonio-calio/</link>
     </image>
-    
-    <item>
-      <title>Attribute based Diversification of Seeds for Targeted Influence Maximization</title>
-      <link>/publication/calio-attribute-2020/</link>
-      <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/calio-attribute-2020/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>A Framework for Complex Inﬂuence Propagation based on the F 2DLT Class of Diﬀusion Models</title>
-      <link>/publication/calio-framework-2020/</link>
-      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/calio-framework-2020/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cores matter? An analysis of graph decomposition effects on influence maximization problems</title>
-      <link>/publication/calio-cores-2020/</link>
-      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/calio-cores-2020/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Complex influence propagation based on trust-aware dynamic linear threshold models</title>
-      <link>/publication/calio-complex-2019/</link>
-      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/calio-complex-2019/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Topology-Driven Diversity for Targeted Influence Maximization with Application to User Engagement in Social Networks</title>
-      <link>/publication/calio-topology-driven-2018/</link>
-      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
-      <guid>/publication/calio-topology-driven-2018/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Trust-Based Dynamic Linear Threshold Models for Non-competitive and Competitive Influence Propagation</title>
-      <link>/publication/calio-trust-based-2018/</link>
-      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
-      <guid>/publication/calio-trust-based-2018/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

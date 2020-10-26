@@ -13,6 +13,25 @@
     </image>
     
     <item>
+      <title>Introduction to Scala and its Build System</title>
+      <link>/courses/bdanalytics/scalaintro/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/bdanalytics/scalaintro/</guid>
+      <description>&lt;p&gt;This lesson provides a quick introduction to the Scala ecosystem.&lt;/p&gt;
+&lt;p&gt;What you will learn:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How to write a Scala program&lt;/li&gt;
+&lt;li&gt;How to compile Scala source code via the SBT shell&lt;/li&gt;
+&lt;li&gt;Ho to work with loops and data structures&lt;/li&gt;
+&lt;li&gt;How to use the the SBT build system&lt;/li&gt;
+&lt;li&gt;How to structure a real-world project&lt;/li&gt;
+&lt;li&gt;How to  manage dependencies in your project&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The material for this lesson is available  &lt;a href=&#34;https://github.com/acalio/BDAnalytics/tree/main/01-Introduction-to-Scala&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Clustering</title>
       <link>/courses/datamining/clustering/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
