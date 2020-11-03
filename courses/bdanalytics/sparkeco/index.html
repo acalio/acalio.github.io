@@ -34,10 +34,12 @@
   
     
   
-  <meta name="description" content="Learn how to use technology for real-time analysis of your big data application.">
+  <meta name="description" content="This lesson provides a quick introduction to the Scala ecosystem.
+What you will learn:
+ The key Spark components What is an RDD How to handle RDDs in Spark How to write some basic Spark driver programs with Scala How to dockerize your environment and your appllication  The material for this lesson is available here">
 
   
-  <link rel="alternate" hreflang="en-us" href="/courses/bdanalytics/">
+  <link rel="alternate" hreflang="en-us" href="/courses/bdanalytics/sparkeco/">
 
   
 
@@ -254,14 +256,12 @@
   
 
   
-  <link rel="alternate" href="/courses/bdanalytics/index.xml" type="application/rss+xml" title="Antonio Caliò">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/courses/bdanalytics/">
+  <link rel="canonical" href="/courses/bdanalytics/sparkeco/">
 
   
   
@@ -277,29 +277,36 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Antonio Caliò">
-  <meta property="og:url" content="/courses/bdanalytics/">
-  <meta property="og:title" content="Overview | Antonio Caliò">
-  <meta property="og:description" content="Learn how to use technology for real-time analysis of your big data application."><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="/courses/bdanalytics/sparkeco/">
+  <meta property="og:title" content="The Spark Ecosystem | Antonio Caliò">
+  <meta property="og:description" content="This lesson provides a quick introduction to the Scala ecosystem.
+What you will learn:
+ The key Spark components What is an RDD How to handle RDDs in Spark How to write some basic Spark driver programs with Scala How to dockerize your environment and your appllication  The material for this lesson is available here"><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2018-09-09T00:00:00&#43;00:00">
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
   
 
   
 
 
 
-
   
 
 
   
 
 
+  
 
 
 
-  <title>Overview | Antonio Caliò</title>
+
+
+  <title>The Spark Ecosystem | Antonio Caliò</title>
 
 </head>
 
@@ -718,7 +725,7 @@
   
 
   
-  <div class="docs-toc-item active">
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/courses/bdanalytics/">Overview</a>
 
   </div>
@@ -728,7 +735,7 @@
 
   </div>
   
-  <div class="docs-toc-item">
+  <div class="docs-toc-item active">
     <a class="docs-toc-link" href="/courses/bdanalytics/sparkeco/">The Spark Ecosystem</a>
 
   </div>
@@ -744,13 +751,7 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents">
-  <ul>
-    <li><a href="#course-description">Course Description</a></li>
-    <li><a href="#teachers">Teachers</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-  </ul>
-</nav>
+      <nav id="TableOfContents"></nav>
 
       
     </div>
@@ -761,48 +762,19 @@
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Overview</h1>
+          <h1>The Spark Ecosystem</h1>
 
           <div class="article-style">
-            <h2 id="course-description">Course Description</h2>
-<p>This course provides a broad introduction about techniques used to analyze Big-Data.</p>
-<p>The course will also present a variety of tools that are leading the industry when it comes to handling and working with Big-Data.</p>
-<p>Most part of tech stack adopted throughout the course is based on the <a href="https://spark.apache.org/" target="_blank" rel="noopener">Apache Spark</a> framework.</p>
-<h2 id="teachers">Teachers</h2>
+            <p>This lesson provides a quick introduction to the Scala ecosystem.</p>
+<p>What you will learn:</p>
 <ul>
-<li>Andrea Tagarelli</li>
-<li>Antonio Caliò (Teaching Assistant)</li>
+<li>The key Spark components</li>
+<li>What is an RDD</li>
+<li>How to handle RDDs in Spark</li>
+<li>How to write some basic Spark driver programs with Scala</li>
+<li>How to dockerize your environment and your appllication</li>
 </ul>
-<h2 id="roadmap">Roadmap</h2>
-<ol>
-<li>Introduction to Scala and its Build System
-<ul>
-<li>Scala Crash Course</li>
-<li>Overview of the main Scala build system: <a href="https://www.scala-sbt.org/=sbt=" target="_blank" rel="noopener">sbt</a></li>
-</ul>
-</li>
-<li>The Spark ecosystem
-<ul>
-<li>Introduction to the Spark ecosystem</li>
-<li>Example projects in Scala</li>
-</ul>
-</li>
-<li>Useful Big-Data Libraries
-<ul>
-<li>Spark-SQL</li>
-<li>Spark-Streaming</li>
-<li>Spark-MLLib</li>
-<li>SPark-GraphX</li>
-<li>Kafka</li>
-</ul>
-</li>
-<li>Integration with other system and deploy
-<ul>
-<li>Apache Kafka</li>
-<li>Deploy on a real cluster</li>
-</ul>
-</li>
-</ol>
+<p>The material for this lesson is available  <a href="https://github.com/acalio/BDAnalytics/blob/main/02-Spark-Ecosystem/" target="_blank" rel="noopener">here</a></p>
 
           </div>
 
@@ -814,7 +786,7 @@
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Sep 9, 2018</p>
+          <p>Last updated on May 5, 2019</p>
 
           
 
@@ -827,7 +799,7 @@
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/bdanalytics/_index.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/bdanalytics/sparkEco.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>
