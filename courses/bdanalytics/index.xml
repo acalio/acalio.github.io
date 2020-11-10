@@ -32,6 +32,21 @@
     </item>
     
     <item>
+      <title>Spark (More) Advanced Examples</title>
+      <link>/courses/bdanalytics/advancedspark/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/bdanalytics/advancedspark/</guid>
+      <description>&lt;p&gt;What you will learn:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How to use Spark to compute aggregate statistics on a distributed dataset&lt;/li&gt;
+&lt;li&gt;How to do collaborative filtering in spark&lt;/li&gt;
+&lt;li&gt;How to represent a graph data structure &amp;ndash; without third party libraries &amp;ndash; and to execute a BFS algorithm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The material for this lesson is available  &lt;a href=&#34;https://github.com/acalio/BDAnalytics/blob/main/03-Spark-advanced-examples/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>The Spark Ecosystem</title>
       <link>/courses/bdanalytics/sparkeco/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
