@@ -171,6 +171,20 @@ propagation problem &amp;ndash; i.e., upon directed and weighted graphs.&lt;/p&g
     </item>
     
     <item>
+      <title>ADITUM - Attribute DIdiversity-sensitive Targeted inflUence Maximization</title>
+      <link>/project/aditum/</link>
+      <pubDate>Wed, 14 Oct 2020 09:30:27 +0200</pubDate>
+      <guid>/project/aditum/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;This project is developed as part of the following research paper:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://doi.org/10.1016/j.ins.2020.08.093&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;A. Caliò, A. Tagarelli.Attribute based Diversification of Seeds for Targeted Influence Maximization problem.
+Information Sciences, 2020&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It contains the implementation of every influence maximization algorithm discussed in above paper.
+Pleas follow the link for detailed instructions on how to install and use this project.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Attribute based Diversification of Seeds for Targeted Influence Maximization</title>
       <link>/publication/calio-attribute-2020/</link>
       <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
