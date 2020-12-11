@@ -32,6 +32,338 @@
     </item>
     
     <item>
+      <title>Introduction to Spark SQL</title>
+      <link>/courses/bdanalytics/sparksql/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/bdanalytics/sparksql/</guid>
+      <description>&lt;p&gt;SparkSQL is a library for structured data processing.
+It provides an abstraction mechanism – the main one is called &lt;code&gt;DataFrame&lt;/code&gt; – which can
+serve as  a distributed SQL query engine.&lt;/p&gt;
+&lt;p&gt;Spark SQL offers the following features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Integrated&lt;/strong&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Seamlessly mix SQL queries with Spark programs.&lt;/li&gt;
+&lt;li&gt;Spark SQL lets you query structured data as a distributed dataset (RDD) in Spark&lt;/li&gt;
+&lt;li&gt;This tight integration makes it easy to run SQL queries alongside complex analytic algorithms&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Unified Data Access&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Load and query data from a variety of different sources like: Apache Hive tables, parquet files, JSON files, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Scalability&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use the same engine for both interactive and long queries&lt;/li&gt;
+&lt;li&gt;SparkSQL leverages on the RDD model to provide fault tolerance an scalability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;architecture&#34;&gt;Architecture&lt;/h1&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-sparksql-architecture&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/arch.png&#34; data-caption=&#34;SparkSQL architecture&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/arch.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    SparkSQL architecture
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;The architecture contains three layers namely:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Language API − Spark is compatible with different languages and Spark SQL. It is also, supported by these languages- API (python, scala, java, HiveQL).&lt;/li&gt;
+&lt;li&gt;Schema RDD − Spark Core is designed with special data structure called RDD. Generally, Spark SQL works on schemas, tables, and records. Therefore, we can use the Schema RDD as temporary table. We can call this Schema RDD as Data Frame.&lt;/li&gt;
+&lt;li&gt;Data Sources − Usually the Data source for spark-core is a text file, Avro file, etc. However, the Data Sources for Spark SQL is different. Those are Parquet file, JSON document, HIVE tables, and Cassandra database.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;what-is-a-dataframe&#34;&gt;What is a DataFrame&lt;/h1&gt;
+&lt;p&gt;A DataFrame is a distributed collection of data,
+which is organized into named columns.
+You can think of a DataFrame as a relational table.&lt;/p&gt;
+&lt;p&gt;DataFrames can be constructed from a variety of different sources such as Hive tables, Structured Data files,
+external database, or also an existing RDD.&lt;/p&gt;
+&lt;h2 id=&#34;features-of-a-dataframe&#34;&gt;Features of a DataFrame&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Ability to process the data in the size of Kilobytes to Petabytes on a single node cluster to large cluster&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Supports different data formats (Avro, csv, elastic search, and Cassandra) and storage systems (HDFS, HIVE tables, mysql, etc).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;State of art optimization and code generation through the Spark SQL Catalyst optimizer (tree transformation framework).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Can be easily integrated with all Big Data tools and frameworks via Spark-Core.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Optimized application of udf function over the entire dataframe.
+The following instructions will create a new column whose values are given by the column value to the power of two&lt;/p&gt;
+&lt;p&gt;import org.apache.spark.sql.functions.udf
+val square = (x=&amp;gt; x*x)
+val squaredDF = df.withColumn(&amp;ldquo;square&amp;rdquo;, square(&amp;ldquo;value&amp;rdquo;))&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Example&lt;/p&gt;
+&lt;p&gt;Imagine you have the following data, formatted as a JSON file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+   {&amp;quot;id&amp;quot; : &amp;quot;1201&amp;quot;, &amp;quot;name&amp;quot; : &amp;quot;satish&amp;quot;, &amp;quot;age&amp;quot; : &amp;quot;25&amp;quot;}
+   {&amp;quot;id&amp;quot; : &amp;quot;1202&amp;quot;, &amp;quot;name&amp;quot; : &amp;quot;krishna&amp;quot;, &amp;quot;age&amp;quot; : &amp;quot;28&amp;quot;}
+   {&amp;quot;id&amp;quot; : &amp;quot;1203&amp;quot;, &amp;quot;name&amp;quot; : &amp;quot;amith&amp;quot;, &amp;quot;age&amp;quot; : &amp;quot;39&amp;quot;}
+   {&amp;quot;id&amp;quot; : &amp;quot;1204&amp;quot;, &amp;quot;name&amp;quot; : &amp;quot;javed&amp;quot;, &amp;quot;age&amp;quot; : &amp;quot;23&amp;quot;}
+   {&amp;quot;id&amp;quot; : &amp;quot;1205&amp;quot;, &amp;quot;name&amp;quot; : &amp;quot;prudvi&amp;quot;, &amp;quot;age&amp;quot; : &amp;quot;23&amp;quot;}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can read this file and create a dataframe as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;...
+val spark = SparkSession
+      .builder
+      .appName(&amp;quot;SparkSQL&amp;quot;)
+      .master(&amp;quot;local[*]&amp;quot;)
+      .getOrCreate()
+val df =  spark.sqlContext.read.json(&amp;quot;example.json&amp;quot;)
+df.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The last instruction returns the following result:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+----+------+--------+
+|age | id   |  name  |
++----+------+--------+
+| 25 | 1201 | satish |
+| 28 | 1202 | krishna|
+| 39 | 1203 | amith  |
+| 23 | 1204 | javed  |
+| 23 | 1205 | prudvi |
++----+------+--------+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can access to the structure underlying a dataframe as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df.printSchema
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this case it returns the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;root
+   |-- age: string (nullable = true)
+   |-- id: string (nullable = true)
+   |-- name: string (nullable = true)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You handle a DataFrame in a very similar fashion to a Pandas dataframe.&lt;/p&gt;
+&lt;p&gt;For instance:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;df.select(&amp;quot;name&amp;quot;).show 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or also&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// This import is needed to use the $-notation
+import spark.sqlContext.implicts._ 
+df.select($&amp;quot;name&amp;quot;).show 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It returns:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+--------+
+|  name  |
++--------+
+| satish |
+| krishna|
+| amith  |
+| javed  |
+| prudvi |
++--------+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can use filter:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;dfs.filter(dfs(&amp;quot;age&amp;quot;) &amp;gt; 23).show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It returns:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+----+------+--------+
+|age | id   | name   |
++----+------+--------+
+| 25 | 1201 | satish |
+| 28 | 1202 | krishna|
+| 39 | 1203 | amith  |
++----+------+--------+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can group and apply aggregate functions to your data as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;dfs.groupBy(&amp;quot;age&amp;quot;).count().show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It returns:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+----+-----+
+|age |count|
++----+-----+
+| 23 |  2  |
+| 25 |  1  |
+| 28 |  1  |
+| 39 |  1  |
++----+-----+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;running-sql-queries&#34;&gt;Running SQL Queries&lt;/h2&gt;
+&lt;p&gt;An SQLContext enables applications to run SQL queries programmatically while running SQL functions and returns the result as a DataFrame.&lt;/p&gt;
+&lt;p&gt;Generally, in the background, SparkSQL supports two different methods for converting existing RDDs into DataFrames.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Inferring the schema via reflection&lt;/p&gt;
+&lt;p&gt;This method uses reflection to generate the schema of an RDD that contains specific types
+of objects. The Scala interface for Spark SQL supports automatically converting an RDD containing case classes to a DataFrame.
+The &lt;strong&gt;case class&lt;/strong&gt; defines the schema of the table. The names
+of the arguments to the case class are read using reflection and they become the names of the columns.&lt;/p&gt;
+&lt;p&gt;Case classes can also be nested or contain complex
+types such as Sequences or Arrays. This RDD can be implicitly be
+converted to a DataFrame and then registered as a table.
+Tables can be used in subsequent SQL statements.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Example&lt;/p&gt;
+&lt;p&gt;Imagine you are given with the following data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1201, satish, 25
+1202, krishna, 28
+1203, amith, 39
+1204, javed, 23
+1205, prudvi, 23
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First you need to define a case class – which is  class that only define its contructor – to provide your data with a fixed structure:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;case class Employee(id: Int, name: String, age: Int)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, you create an RDD mapping each line to the above case class and then convert it to a DataFrame&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val spark = SparkSession
+      .builder
+      .appName(&amp;quot;SparkSQL&amp;quot;)
+      .master(&amp;quot;local[*]&amp;quot;)
+      .getOrCreate()
+        
+val df =  spark.sparkContext.textFile(&amp;quot;employee.txt&amp;quot;)
+   .map(_.split(&amp;quot;,&amp;quot;)).map(e=&amp;gt;Employee(e(0).trim.toInt, e(1), e(2).trim.toInt)).toDF
+df.show()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now you have a fully functional data frame. If you want to use the SQL engine your first need to register
+the dataframe as a table:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;empl.registerTempTable(&amp;quot;employee&amp;quot;) //set the name of the table associated with the dataset
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then your can perform regular SQL query as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;spark.sqlContext.sql(&amp;quot;Select * from employee*&amp;quot;).show
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It returns:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+------+---------+----+
+|  id  |  name   |age |
++------+---------+----+
+| 1201 | satish  | 25 |
+| 1202 | krishna | 28 |
+| 1203 | amith   | 39 |
+| 1204 | javed   | 23 |
+| 1205 | prudvi  | 23 |
++------+---------+----+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;SparkSQL understands any sql query – so if you know SQL you are good to go.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Specify the schema programmatically&lt;/p&gt;
+&lt;p&gt;The second method for creating DataFrame is through programmatic interface that allows you to construct a schema and then apply it to an existing RDD. We can create a DataFrame programmatically using the following three steps.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create an RDD of Rows from an Original RDD.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create the schema represented by a StructType matching the structure of Rows in the RDD created in Step 1.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Apply the schema to the RDD of Rows via createDataFrame method provided by SQLContext.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Example&lt;/p&gt;
+&lt;p&gt;Imagine you are given with the following data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1201, satish, 25
+1202, krishna, 28
+1203, amith, 39
+1204, javed, 23
+1205, prudvi, 23
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, you create an RDD from the text file.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//remember to include these imports
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.{StructType, StructField, StringType}
+        
+val spark = SparkSession
+      .builder
+      .appName(&amp;quot;SparkSQL&amp;quot;)
+      .master(&amp;quot;local[*]&amp;quot;)
+      .getOrCreate()
+        
+val df =  spark.sparkContext.textFile(&amp;quot;employee.txt&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, instead of defining a case class as we did earlier, we define schema with a String.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val schemaString = &amp;quot;id name age&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above string is then used to generate a schema as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val schema = StructType(schemaString.split(&amp;quot; &amp;quot;).map(fieldName =&amp;gt; =StructField(fieldName, StringType, true)))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Use the following command to convert an RDD (employee) to Rows. It means, here we are specifying the logic for reading the RDD data and store it into rowRDD. Here we are using two map functions: one is a delimiter for splitting the record string (.map(&lt;sub&gt;.split&lt;/sub&gt;(&amp;quot;,&amp;quot;))) and the second
+map function for defining a Row with the field index
+value (.map(e ⇒ Row(e(0).trim.toInt, e(1), e(2).trim.toInt))).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val rowRDD = employee.map(_.split(&amp;quot;,&amp;quot;)).map(e ⇒ Row(e(0).trim.toInt, e(1), e(2).trim.toInt))
+val employeeDF = sqlContext.createDataFrame(rowRDD, schema)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;comparative-evaluation&#34;&gt;Comparative evaluation&lt;/h1&gt;
+&lt;h2 id=&#34;dataframe-vs-dataset&#34;&gt;DataFrame vs DataSet&lt;/h2&gt;
+&lt;p&gt;They are basically the same object, namely a collection of structured data
+– for instance DataSet[Person], DataSet[(String, Double)].&lt;/p&gt;
+&lt;p&gt;Actually, a &lt;code&gt;DataFrame&lt;/code&gt; is an alias for &lt;code&gt;Dataset[Row]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The major difference between the two is that the structure of the data contained within
+a  &lt;code&gt;DataFrame&lt;/code&gt;  is inferred at runtime, while for a &lt;code&gt;DataSet&lt;/code&gt; object Scala is able to infer the
+actual type of the objects at compile time.
+Clearly, this second mechanism is beneficial in terms of performance and it is also less prone
+to potential errors.&lt;/p&gt;
+&lt;h2 id=&#34;dataset-vs-rdd&#34;&gt;DataSet vs RDD&lt;/h2&gt;
+&lt;p&gt;An RDD can be converted to a &lt;code&gt;DataSet&lt;/code&gt; object with the method &lt;code&gt;toDS&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;DataSets are more convenient than RDD for the following reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;better efficiency&lt;/li&gt;
+&lt;li&gt;better interoperability with other libraries:
+&lt;ul&gt;
+&lt;li&gt;MLlib relies on Datasets&lt;/li&gt;
+&lt;li&gt;Spark streaming is moving towards structured streaming&lt;/li&gt;
+&lt;li&gt;Everything that use apache Avro&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;The material for this lesson is available  &lt;a href=&#34;https://github.com/acalio/BDAnalytics/tree/main/04-Spark-SQL/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Spark (More) Advanced Examples</title>
       <link>/courses/bdanalytics/advancedspark/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
@@ -61,6 +393,858 @@
 &lt;li&gt;How to dockerize your environment and your appllication&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The material for this lesson is available  &lt;a href=&#34;https://github.com/acalio/BDAnalytics/blob/main/02-Spark-Ecosystem/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Working with Graphs</title>
+      <link>/courses/bdanalytics/sparkgraphx/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/bdanalytics/sparkgraphx/</guid>
+      <description>&lt;p&gt;GraphX is a new component in Spark
+for graphs and graph-parallel computation.&lt;/p&gt;
+&lt;p&gt;At a high level, GraphX extends the Spark RDD by
+introducing a new Graph abstraction: a directed multigraph
+with properties attached to each vertex and edge.&lt;/p&gt;
+&lt;p&gt;To support graph computation, GraphX exposes a set of fundamental operators
+(e.g., subgraph, joinVertices, and aggregateMessages) as well
+as an optimized variant of the Pregel API.
+In addition, GraphX includes a growing collection of graph algorithms
+and builders to simplify graph analytics tasks.&lt;/p&gt;
+&lt;p&gt;In order to use this library in your driver program you need to add the following imports:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import org.apache.spark._
+import org.apache.spark.graphx._
+import org.apache.spark.rdd.RDD
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;the-property-graph&#34;&gt;The Property Graph&lt;/h1&gt;
+&lt;p&gt;It is a directed multigraph with user defined objects attached to each vertex and edge.&lt;/p&gt;
+&lt;p&gt;A directed multigraph is simply a directed graph that can have multiple edges connecting the same
+pair of vertices. This ability enable the possibility to represent multiple relationships between
+the nodes in the graph.&lt;/p&gt;
+&lt;p&gt;Each vertex is associated with a unique 64-bit long key identifier, aka &lt;code&gt;VertexId&lt;/code&gt;.
+Similarly edges have source and destination identifiers.&lt;/p&gt;
+&lt;p&gt;The property graph is parameterized over the vertex and edge types, denoted by VD and ED, respectively.
+VD and ED are therefore the types associated with objects stored in the graph.&lt;/p&gt;
+&lt;p&gt;You can also exploit inheritance to have specialized nodes within the graph as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class VertexProperty()
+case class UserProperty(val name: String) extends VertexProperty
+case class ProductProperty(val name: String, val price: Double) extends VertexProperty
+// The graph might then have the type:
+var graph: Graph[VertexProperty, String] = null
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this case the &lt;code&gt;Graph&lt;/code&gt; can store two different types of objects.&lt;/p&gt;
+&lt;p&gt;Graphs inherit all the good things from the RDD.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Graphs are immutable, therefore any change to the values contained in a graph instance produce a new instance –
+graphs cannot be changed in place!&lt;/li&gt;
+&lt;li&gt;Graphs are distributed. The Graph is partitioned along the worker nodes using a range of heuristic methods.&lt;/li&gt;
+&lt;li&gt;Graphs are fault tolerant. Therefore, in case of failure of a worker node, the partition can be easily recreated&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-property-graph-under-the-hood&#34;&gt;The property Graph under the hood&lt;/h2&gt;
+&lt;p&gt;A property Graph is simply a compound type having two typed collections (RDDs).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Graph[VD, ED] {
+  val vertices: VertexRDD[VD]
+  val edges: EdgesRDD[ED]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;VertexRDD&lt;/code&gt; and &lt;code&gt;EdgesRDD&lt;/code&gt; are two specialized and optimized versions of &lt;code&gt;RDD[(VertexId, VD)]&lt;/code&gt; and
+&lt;code&gt;RDD[Edge[ED]]&lt;/code&gt;, respectively. As opposed to a classic RDD, both VertexRDD and EdgesRDD provide specialized
+operations tailored for Graph computation.&lt;/p&gt;
+&lt;h2 id=&#34;example-how-to-use-the-property-graph&#34;&gt;Example: How to use the Property Graph&lt;/h2&gt;
+&lt;p&gt;Suppose you want to construct the following graph.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-property-graph&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/propGraph.png&#34; data-caption=&#34;Property Graph&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/propGraph.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Property Graph
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;It has the following signature:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val userGraph: Graph[(String, String), String]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can construct a Graph object in multiple ways.
+The following method is probably the most general and useful.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Assume the SparkContext has already been constructed
+val sc: SparkContext
+// Create an RDD for the vertices
+val users: RDD[(VertexId, (String, String))] =
+  sc.parallelize(Seq((3L, (&amp;quot;rxin&amp;quot;, &amp;quot;student&amp;quot;)), (7L, (&amp;quot;jgonzal&amp;quot;, &amp;quot;postdoc&amp;quot;)),
+               (5L, (&amp;quot;franklin&amp;quot;, &amp;quot;prof&amp;quot;)), (2L, (&amp;quot;istoica&amp;quot;, &amp;quot;prof&amp;quot;))))
+// Create an RDD for edges
+val relationships: RDD[Edge[String]] =
+  sc.parallelize(Seq(Edge(3L, 7L, &amp;quot;collab&amp;quot;),    Edge(5L, 3L, &amp;quot;advisor&amp;quot;),
+               Edge(2L, 5L, &amp;quot;colleague&amp;quot;), Edge(5L, 7L, &amp;quot;pi&amp;quot;)))
+// Define a default user in case there are relationship with missing user
+val defaultUser = (&amp;quot;John Doe&amp;quot;, &amp;quot;Missing&amp;quot;)
+// Build the initial Graph
+val graph = Graph(users, relationships, defaultUser)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Edge&lt;/code&gt; is a built in class for storing edges information. It is defined as:&lt;/p&gt;
+&lt;p&gt;Edge[ED](
+srcId: VertexId = 0,
+dstId: VertexId = 0,
+attr: ED = null.asInstanceOf[ED]) extends Serializable with Product&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The Graph constructor takes as input two RDDs and a default user, which is needed to handle situations when a vertex
+is defined in the EdgeRDD but not in the VertexRDD.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Given a Graph instance, you can query both the RDD containing the vertices and the edges directly from that
+instance.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val graph: Graph[(String, String), String] // Constructed from above
+// Count all users which are postdocs
+graph.vertices.filter { case (id, (name, pos)) =&amp;gt; pos == &amp;quot;postdoc&amp;quot; }.count
+// Count all the edges where src &amp;gt; dst
+graph.edges.filter(e =&amp;gt; e.srcId &amp;gt; e.dstId).count
+// or equivalently
+graph.edges.filter{case Edge(src, dst, prop) =&amp;gt; src &amp;gt;  dst}.count
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It should be noted that &lt;code&gt;graph.vertices&lt;/code&gt; returns an &lt;code&gt;VertexRDD[(String, String)]&lt;/code&gt; in this case, which
+it is interpreted as an &lt;code&gt;RDD[(VertexID, (String, String)]&lt;/code&gt; – this is why we can use the &lt;code&gt;case&lt;/code&gt; construct
+(&lt;a href=&#34;https://docs.scala-lang.org/tour/pattern-matching.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;take a look here&lt;/a&gt;). The same holds when you access the edges with  &lt;code&gt;graph.edges&lt;/code&gt;. This returns an instance
+of &lt;code&gt;EdgeRDD&lt;/code&gt; which contains objects of type &lt;code&gt;Edge[String]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In addition to these two mechanism there is a third one, which exposes a triplet view.&lt;/p&gt;
+&lt;p&gt;A triplet view consists of a series of &lt;code&gt;EdgeTriplet&lt;/code&gt; objects. An &lt;code&gt;EdgeTriplet&lt;/code&gt; object merges the information
+about the two vertices – endpoints of the edges – and the relationship between them.
+Conceptually, you can think at the figure:&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-edge-triplet&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/triplet.png&#34; data-caption=&#34;Edge Triplet&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/triplet.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Edge Triplet
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code&gt;EdgeTriplet&lt;/code&gt; class extends &lt;code&gt;Edge&lt;/code&gt; by adding the attributes of both the source node and the target node.&lt;/p&gt;
+&lt;p&gt;You can use the triplet view as in the following example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val graph: Graph[(String, String), String] // Constructed from above
+// Use the triplets view to create an RDD of facts.
+val facts: RDD[String] =
+  graph.triplets.map(triplet =&amp;gt;
+    triplet.srcAttr._1 + &amp;quot; is the &amp;quot; + triplet.attr + &amp;quot; of &amp;quot; + triplet.dstAttr._1)
+facts.collect.foreach(println(_))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;graph-operations&#34;&gt;Graph Operations&lt;/h1&gt;
+&lt;p&gt;As any other RDD, a graph supports basic operations such as &lt;code&gt;map&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt;, &lt;code&gt;reduce&lt;/code&gt; and so on.
+In addition to that, graphs support a number of transformations specifically meaningful when working with graph.&lt;/p&gt;
+&lt;p&gt;This kind of operations are defined as &lt;code&gt;GraphOps&lt;/code&gt; and most of the time they are accessible as
+members of a Graph object.&lt;/p&gt;
+&lt;p&gt;The following list provide a summary of the major GraphOps directly accessible from a
+graph instance.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/** Summary of the functionality in the property graph */
+class Graph[VD, ED] {
+  // Information about the Graph ===================================================================
+  val numEdges: Long
+  val numVertices: Long
+  val inDegrees: VertexRDD[Int]
+  val outDegrees: VertexRDD[Int]
+  val degrees: VertexRDD[Int]
+  // Views of the graph as collections =============================================================
+  val vertices: VertexRDD[VD]
+  val edges: EdgeRDD[ED]
+  val triplets: RDD[EdgeTriplet[VD, ED]]
+  // Functions for caching graphs ==================================================================
+  def persist(newLevel: StorageLevel = StorageLevel.MEMORY_ONLY): Graph[VD, ED]
+  def cache(): Graph[VD, ED]
+  def unpersistVertices(blocking: Boolean = false): Graph[VD, ED]
+  // Change the partitioning heuristic  ============================================================
+  def partitionBy(partitionStrategy: PartitionStrategy): Graph[VD, ED]
+  // Transform vertex and edge attributes ==========================================================
+  def mapVertices[VD2](map: (VertexId, VD) =&amp;gt; VD2): Graph[VD2, ED]
+  def mapEdges[ED2](map: Edge[ED] =&amp;gt; ED2): Graph[VD, ED2]
+  def mapEdges[ED2](map: (PartitionID, Iterator[Edge[ED]]) =&amp;gt; Iterator[ED2]): Graph[VD, ED2]
+  def mapTriplets[ED2](map: EdgeTriplet[VD, ED] =&amp;gt; ED2): Graph[VD, ED2]
+  def mapTriplets[ED2](map: (PartitionID, Iterator[EdgeTriplet[VD, ED]]) =&amp;gt; Iterator[ED2])
+    : Graph[VD, ED2]
+  // Modify the graph structure ====================================================================
+  def reverse: Graph[VD, ED]
+  def subgraph(
+      epred: EdgeTriplet[VD,ED] =&amp;gt; Boolean = (x =&amp;gt; true),
+      vpred: (VertexId, VD) =&amp;gt; Boolean = ((v, d) =&amp;gt; true))
+    : Graph[VD, ED]
+  def mask[VD2, ED2](other: Graph[VD2, ED2]): Graph[VD, ED]
+  def groupEdges(merge: (ED, ED) =&amp;gt; ED): Graph[VD, ED]
+  // Join RDDs with the graph ======================================================================
+  def joinVertices[U](table: RDD[(VertexId, U)])(mapFunc: (VertexId, VD, U) =&amp;gt; VD): Graph[VD, ED]
+  def outerJoinVertices[U, VD2](other: RDD[(VertexId, U)])
+      (mapFunc: (VertexId, VD, Option[U]) =&amp;gt; VD2)
+    : Graph[VD2, ED]
+  // Aggregate information about adjacent triplets =================================================
+  def collectNeighborIds(edgeDirection: EdgeDirection): VertexRDD[Array[VertexId]]
+  def collectNeighbors(edgeDirection: EdgeDirection): VertexRDD[Array[(VertexId, VD)]]
+  def aggregateMessages[Msg: ClassTag](
+      sendMsg: EdgeContext[VD, ED, Msg] =&amp;gt; Unit,
+      mergeMsg: (Msg, Msg) =&amp;gt; Msg,
+      tripletFields: TripletFields = TripletFields.All)
+    : VertexRDD[A]
+  // Iterative graph-parallel computation ==========================================================
+  def pregel[A](initialMsg: A, maxIterations: Int, activeDirection: EdgeDirection)(
+      vprog: (VertexId, VD, A) =&amp;gt; VD,
+      sendMsg: EdgeTriplet[VD, ED] =&amp;gt; Iterator[(VertexId, A)],
+      mergeMsg: (A, A) =&amp;gt; A)
+    : Graph[VD, ED]
+  // Basic graph algorithms ========================================================================
+  def pageRank(tol: Double, resetProb: Double = 0.15): Graph[Double, Double]
+  def connectedComponents(): Graph[VertexId, ED]
+  def triangleCount(): Graph[Int, ED]
+  def stronglyConnectedComponents(numIter: Int): Graph[VertexId, ED]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Operators can be classified into three different categories:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Property Operators&lt;/p&gt;
+&lt;p&gt;They are very similar to the map operator of a regular RDD.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Graph[VD, ED] {
+  def mapVertices[VD2](map: (VertexId, VD) =&amp;gt; VD2): Graph[VD2, ED]
+  def mapEdges[ED2](map: Edge[ED] =&amp;gt; ED2): Graph[VD, ED2]
+  def mapTriplets[ED2](map: EdgeTriplet[VD, ED] =&amp;gt; ED2): Graph[VD, ED2]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Each of these operators yields a
+new graph with the vertex
+or edge properties modified
+by the user defined map function.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The structure of the graph is not affected by these operations&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Note that in order to use GraphX optimization you must prefer the following snippet&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val newGraph = graph.mapVertices((id, attr) =&amp;gt; mapUdf(id, attr))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;to the following one&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; val newVertices = graph.vertices.map { case (id, attr) =&amp;gt; (id, mapUdf(id, attr)) }
+val newGraph = Graph(newVertices, graph.edges)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Although they accomplish the same task, only the first one preserves the structural properties an it
+exploits GraphX optimizations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When to use these oprators&lt;/p&gt;
+&lt;p&gt;Usually, you want to use these transformations to prepare your graph before the application of some
+algorithm.
+For instance, if you want to prepare the graph in order to compute the page rank.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Given a graph where the vertex property is the out degree
+val inputGraph: Graph[Int, String] =
+  graph.outerJoinVertices(graph.outDegrees)((vid, _, degOpt) =&amp;gt; degOpt.getOrElse(0))
+// Construct a graph where each edge contains the weight
+// and each vertex is the initial PageRank
+val outputGraph: Graph[Double, Double] =
+  inputGraph.mapTriplets(triplet =&amp;gt; 1.0 / triplet.srcAttr).mapVertices((id, _) =&amp;gt; 1.0)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Structural Operators&lt;/p&gt;
+&lt;p&gt;Currently GraphX supports only a simple set of commonly used structural operators.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Graph[VD, ED] {
+  def reverse: Graph[VD, ED]
+  def subgraph(epred: EdgeTriplet[VD,ED] =&amp;gt; Boolean,
+           vpred: (VertexId, VD) =&amp;gt; Boolean): Graph[VD, ED]
+  def mask[VD2, ED2](other: Graph[VD2, ED2]): Graph[VD, ED]
+  def groupEdges(merge: (ED, ED) =&amp;gt; ED): Graph[VD,ED]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;reverse&lt;/code&gt; returns a new Graph where the direction of every edge is reversed&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;subgraph&lt;/code&gt; returns the subgraph induced by the conditions provided as input – it is like applying a filter.
+This kind of operator is very useful when you need to restrict the graph to a group of vertices of interest,
+or when you want to ignore a set of broken links.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Create an RDD for the vertices
+val users: RDD[(VertexId, (String, String))] =
+sc.parallelize(Seq((3L, (&amp;quot;rxin&amp;quot;, &amp;quot;student&amp;quot;)), (7L, (&amp;quot;jgonzal&amp;quot;, &amp;quot;postdoc&amp;quot;)),
+    (5L, (&amp;quot;franklin&amp;quot;, &amp;quot;prof&amp;quot;)), (2L, (&amp;quot;istoica&amp;quot;, &amp;quot;prof&amp;quot;)),
+    (4L, (&amp;quot;peter&amp;quot;, &amp;quot;student&amp;quot;))))
+// Create an RDD for edges
+val relationships: RDD[Edge[String]] =
+sc.parallelize(Seq(Edge(3L, 7L, &amp;quot;collab&amp;quot;),    Edge(5L, 3L, &amp;quot;advisor&amp;quot;),
+    Edge(2L, 5L, &amp;quot;colleague&amp;quot;), Edge(5L, 7L, &amp;quot;pi&amp;quot;),
+    Edge(4L, 0L, &amp;quot;student&amp;quot;),   Edge(5L, 0L, &amp;quot;colleague&amp;quot;)))
+// Define a default user in case there are relationship with missing user
+val defaultUser = (&amp;quot;John Doe&amp;quot;, &amp;quot;Missing&amp;quot;)
+// Build the initial Graph
+val graph = Graph(users, relationships, defaultUser)
+// Notice that there is a user 0 (for which we have no information) connected to users
+// 4 (peter) and 5 (franklin).
+graph.triplets.map(
+    triplet =&amp;gt; triplet.srcAttr._1 + &amp;quot; is the &amp;quot; + triplet.attr + &amp;quot; of &amp;quot; + triplet.dstAttr._1
+    ).collect.foreach(println(_))
+
+// Remove missing vertices as well as the edges to connected to them
+val validGraph = graph.subgraph(vpred = (id, attr) =&amp;gt; attr._2 != &amp;quot;Missing&amp;quot;)
+// The valid subgraph will disconnect users 4 and 5 by removing user 0
+validGraph.vertices.collect.foreach(println(_))
+validGraph.triplets.map(
+triplet =&amp;gt; triplet.srcAttr._1 + &amp;quot; is the &amp;quot; + triplet.attr + &amp;quot; of &amp;quot; + triplet.dstAttr._1
+).collect.foreach(println(_))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It should be noted that you are not required to provide two different predicates. The one that you do not provided
+is defaulted to a predicate that returns always true&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mask&lt;/code&gt; returns a new graph containing only the vertices contained in the input graph.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  // Run Connected Components
+val ccGraph = graph.connectedComponents() // No longer contains missing field
+// Remove missing vertices as well as the edges to connected to them
+val validGraph = graph.subgraph(vpred = (id, attr) =&amp;gt; attr._2 != &amp;quot;Missing&amp;quot;)
+// Restrict the answer to the valid subgraph
+val validCCGraph = ccGraph.mask(validGrap
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;groupEdges&lt;/code&gt; merges parallel edges in the multigraph.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Join Operators&lt;/p&gt;
+&lt;p&gt;In many cases it is necessary to join data from external collections (RDDs) with graphs.
+For example, we might have extra user
+properties that we want to merge
+with an existing graph or we might want to pull
+vertex properties from one graph
+into another. These tasks can be
+accomplished using the join operators.
+Below we list the key join operators:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Graph[VD, ED] {
+  def joinVertices[U](table: RDD[(VertexId, U)])(map: (VertexId, VD, U) =&amp;gt; VD)
+    : Graph[VD, ED]
+  def outerJoinVertices[U, VD2](table: RDD[(VertexId, U)])(map: (VertexId, VD, Option[U]) =&amp;gt; VD2)
+    : Graph[VD2, ED]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;joinVertices&lt;/code&gt; returns a new Graph where the vertices are obtaining by merging the original ones with ones
+of the input RDD. Then, the user defined map function is applied upon the joined set of vertices.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val nonUniqueCosts: RDD[(VertexId, Double)]
+val uniqueCosts: VertexRDD[Double] =
+graph.vertices.aggregateUsingIndex(nonUnique, (a,b) =&amp;gt; a + b)
+val joinedGraph = graph.joinVertices(uniqueCosts)(
+(id, oldCost, extraCost) =&amp;gt; oldCost + extraCost)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It should be noted that if an RDD contains more that one value for a given vertex index, only the first value
+is involved in the join operation.&lt;br&gt;
+Also, nodes in the original graph that are not involved in the join process keep their original value.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;outerJoinVertices&lt;/code&gt; is similar to the previous operation, the only exception is that the user defined
+map function is applied to every node both in the graph and in the input RDD and it can also change the vertex
+property type.
+For instance, we can set the up a graph for PageRank by initializing the vertex properties with the out degree of each node.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val outDegrees: VertexRDD[Int] = graph.outDegrees
+val degreeGraph = graph.outerJoinVertices(outDegrees) { (id, oldAttr, outDegOpt) =&amp;gt;
+outDegOpt match { //this ampping function change the type of the property
+    case Some(outDeg) =&amp;gt; outDeg
+    case None =&amp;gt; 0 // No outDegree means zero outDegree
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that, since it is not required that every node in the original graph has a counterpart in the input RDD,
+the map function returns an Option type.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;graph-specific-operations&#34;&gt;Graph Specific Operations&lt;/h1&gt;
+&lt;p&gt;A key step in many graph analytics tasks is aggregating information about the neighborhood of each vertex.&lt;/p&gt;
+&lt;p&gt;For example, we might want to know the number of
+followers each user has or the average age
+of the followers of each user.&lt;/p&gt;
+&lt;p&gt;Many iterative graph algorithms (e.g., PageRank, Shortest Path, and connected components)
+repeatedly aggregate properties of neighboring vertices
+(e.g., current PageRank Value, shortest path to the source, and smallest reachable vertex id).&lt;/p&gt;
+&lt;p&gt;The core of this aggregation mechanism in GraphX is represented by the &lt;code&gt;aggregateMessages&lt;/code&gt; operation.
+This operator applies a user defined &lt;code&gt;sendMsg&lt;/code&gt; function to each edge triplet in the graph and then uses the &lt;code&gt;mergeMsg&lt;/code&gt;
+function to aggregate those messages as their destination vertex.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Graph[VD, ED] {
+  def aggregateMessages[Msg: ClassTag](
+      sendMsg: EdgeContext[VD, ED, Msg] =&amp;gt; Unit,
+      mergeMsg: (Msg, Msg) =&amp;gt; Msg,
+      tripletFields: TripletFields = TripletFields.All)
+    : VertexRDD[Msg]
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;sendMsg&lt;/code&gt; takes an &lt;code&gt;EdgeContext&lt;/code&gt;, which exposes the source and destination attributes along with the edge
+attribute and function (&lt;code&gt;sendToSrc&lt;/code&gt; and &lt;code&gt;sendToDst&lt;/code&gt;) to send messages to the source and destination attributes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mergeMsg&lt;/code&gt; takes two messages destined to the same vertex and returns a single message.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;tripletFields&lt;/code&gt; it is an optional argument that indicates what data is accessed in the EdgeContext (i.e., the source vertex attribute).
+The default option is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;TripletFields.All&lt;/code&gt;, which indicates that the user defined &lt;code&gt;sendMsg&lt;/code&gt; function may access any fields in the &lt;code&gt;EdgeContext&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;TripletFields&lt;/code&gt; are  a convenient way to specify which part of the &lt;code&gt;EdgeContext&lt;/code&gt; is involved in the transformation, allowing
+GraphX to apply some optimization.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can think at a these two function &lt;code&gt;send/mergeMsg&lt;/code&gt; as a  &lt;code&gt;map/reduce&lt;/code&gt; transformation.
+The aggregateMessages returns a VertexRDD[Msg] containing the aggregate messages (of type Msg) destined to
+each vertex. All the vertices that did not receive any message are not included in the final result.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Example&lt;/p&gt;
+&lt;p&gt;In the following example we use the aggregateMessages operator to compute the average age of the more senior followers of each user.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import org.apache.spark.graphx.{Graph, VertexRDD}
+import org.apache.spark.graphx.util.GraphGenerators
+    
+// Create a graph with &amp;quot;age&amp;quot; as the vertex property.
+// Here we use a random graph for simplicity.
+val graph: Graph[Double, Int] =
+  GraphGenerators.logNormalGraph(sc, numVertices = 100).mapVertices( (id, _) =&amp;gt; id.toDouble )
+// Compute the number of older followers and their total age
+val olderFollowers: VertexRDD[(Int, Double)] = graph.aggregateMessages[(Int, Double)](
+  triplet =&amp;gt; { // Map Function
+    if (triplet.srcAttr &amp;gt; triplet.dstAttr) {
+      // Send message to destination vertex containing counter and age
+      triplet.sendToDst((1, triplet.srcAttr))
+    }
+  },
+  // Add counter and age
+  (a, b) =&amp;gt; (a._1 + b._1, a._2 + b._2) // Reduce Function
+)
+// Divide total age by number of older followers to get average age of older followers
+val avgAgeOfOlderFollowers: VertexRDD[Double] =
+  olderFollowers.mapValues( (id, value) =&amp;gt;
+    value match { case (count, totalAge) =&amp;gt; totalAge / count } )
+// Display the results
+avgAgeOfOlderFollowers.collect.foreach(println(_))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; AggregateMessages works best when the messages are constant sized – so no list, no concatenation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;degree-information&#34;&gt;Degree Information&lt;/h2&gt;
+&lt;p&gt;The following  example shows how to compute the maximum degree of any vertex in the graph.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/ Define a reduce operation to compute the highest degree vertex
+def max(a: (VertexId, Int), b: (VertexId, Int)): (VertexId, Int) = {
+  if (a._2 &amp;gt; b._2) a else b
+}
+// Compute the max degrees
+val maxInDegree: (VertexId, Int)  = graph.inDegrees.reduce(max)
+val maxOutDegree: (VertexId, Int) = graph.outDegrees.reduce(max)
+val maxDegrees: (VertexId, Int)   = graph.degrees.reduce(max)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;caching-and-uncaching&#34;&gt;Caching and Uncaching&lt;/h2&gt;
+&lt;p&gt;As any other RDD,if you need to use a graph multiple time you should cache it first – call &lt;code&gt;graph.cache()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Unlike regular RDDs, graphs are often involved in iterative computations, therefore it would be great to have
+a mechanism to &lt;em&gt;uncaching&lt;/em&gt; the intermediate graphs created within an algorithm iteration.
+Even though these intermediate results are eventually evicted by the system, it still a waste of memory,
+thus performance.&lt;/p&gt;
+&lt;p&gt;There is no trivial way to uncache a Graph, or in general an RDD, for this reason, if you need to design an iterative
+algorithm over a graph, it is better to use the &lt;strong&gt;Pregel  API&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;pregel-api&#34;&gt;Pregel API&lt;/h1&gt;
+&lt;h2 id=&#34;what-is-pregel&#34;&gt;What is Pregel&lt;/h2&gt;
+&lt;p&gt;Pregel is a data flow paradigm and system for large-scale graph processing created at Google,
+to solve problems that were not easily solvable with an approach based on map-reduce.&lt;/p&gt;
+&lt;p&gt;If the system remains proprietary at Google, the computational paradigm was adopted by many graph-processing systems,
+including GraphX. In order to adopt the Pregel paradigm, most algorithms need to be redesigned
+to embrace this approach.
+Pregel is essentially a
+message-passing interface constrained to the edges of a graph.&lt;br&gt;
+To re-design an algorithm in a Pregel fashion, ones should &amp;ldquo;Think like a vertex&amp;rdquo;.
+Also, the state of a node is defined by the state of its neighborhood.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-pregel-paradigm&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/Screenshot%20from%202020-12-10%2021-47-22.png&#34; data-caption=&#34;Pregel Paradigm&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/Screenshot%20from%202020-12-10%2021-47-22.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Pregel Paradigm
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;The above figure shows the Pregel data flow model.
+A Pregel computation takes as input:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;a graph&lt;/li&gt;
+&lt;li&gt;a set of vertex states&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;At each iteration, referred to as a superstep, each vertex can:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;send a message to its neighbors,&lt;/li&gt;
+&lt;li&gt;process the messages received in a previous superstep and update its state, accordingly.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Thus, each superstep consists of a round of messages being passed between neighbors and an
+update of the global vertex state.&lt;/p&gt;
+&lt;p&gt;A few examples of Pregel implementations of graph algorithmswill help clarify how the paradigm works.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Example&lt;/p&gt;
+&lt;p&gt;Imagine you need to compute the maximum value among all the nodes in the network.
+The following sequence of figures show how we can accomplish this task with the Pregel paradigm.
+The following figure represents the input graph.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-initial-graph&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/Screenshot%20from%202020-12-10%2021-57-04.png&#34; data-caption=&#34;Initial Graph&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/Screenshot%20from%202020-12-10%2021-57-04.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Initial Graph
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In each step a vertex reads the messages received bu its incoming neighbors and
+set its state to the maximum value between its own vale and  all the received messages.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-step-1&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/Screenshot%20from%202020-12-10%2021-57-16.png&#34; data-caption=&#34;Step 1&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/Screenshot%20from%202020-12-10%2021-57-16.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Step 1
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;If during an iteration a node does not update its state, then it becomes halted.
+This means that it will not send any message in the following iteration.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-step-2&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/Screenshot%20from%202020-12-10%2021-57-28.png&#34; data-caption=&#34;Step 2&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/Screenshot%20from%202020-12-10%2021-57-28.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Step 2
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The algorithm proceeds until every node becomes halted.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-step-3&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/Screenshot%20from%202020-12-10%2021-57-37.png&#34; data-caption=&#34;Step 3&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/Screenshot%20from%202020-12-10%2021-57-37.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Step 3
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In general, sever optimization can be applied to the above example.
+For instance one may use &lt;em&gt;combiners&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;em&gt;combiner&lt;/em&gt; is a user provided function that can combine multiple messages
+intended for the same vertex. This mechanism leads to a reduction in the number
+of messages transmitted between the vertices.
+In the above example a &lt;em&gt;combiner&lt;/em&gt; could collapse multiple messages into a single
+one containing the maximum.&lt;/p&gt;
+&lt;p&gt;Another useful mechanism is offered by the &lt;em&gt;aggregators&lt;/em&gt;.
+An &lt;em&gt;aggregator&lt;/em&gt; enables global information exchange. Each vertex can provide
+a value to an aggregator during a superste S, the Pregel framework combines
+those values using a reduction operator, and the resulting value is made available to all
+the vertices in the subsequent superstep S+1.
+Another common way to use aggregators is to elect a node to play a distinguished role in
+an algorithm.&lt;/p&gt;
+&lt;p&gt;There is also a mechanism that allows the removal or the addition of a new vertex
+or edge. This is very useful for those algorithms that need to change the graph&amp;rsquo;s
+topology – for instance a clustering algorithm might collapse every node belonging
+to the same cluster into a single node.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;pregel-in-graphx&#34;&gt;Pregel in GraphX&lt;/h2&gt;
+&lt;p&gt;The Pregel implementation of GraphX has some key difference from the original
+definition.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Messages are compute in parallel as a function of the edgetriplet&lt;/li&gt;
+&lt;li&gt;The message computation is not only available to recipient of the message, but it is also
+available to the sender node&lt;/li&gt;
+&lt;li&gt;Nodes can only send messages to their direct neighbors – no hops are allowed as in many other
+pregel implementations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As in the original Pregel definition, a node that becomes inactive – because it has not
+any message to send or to process – is ignored during the superstep.
+Also as in the original Pregel, the algorithm terminates when there are no remaining messages.&lt;/p&gt;
+&lt;p&gt;The signature of the &lt;code&gt;pregel&lt;/code&gt; function – which is a member function of &lt;code&gt;Graph&lt;/code&gt; –
+is defined as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def pregel[A]
+      (initialMsg: A,
+       maxIter: Int = Int.MaxValue,
+       activeDir: EdgeDirection = EdgeDirection.Out)
+      (vprog: (VertexId, VD, A) =&amp;gt; VD,
+       sendMsg: EdgeTriplet[VD, ED] =&amp;gt; Iterator[(VertexId, A)],
+       mergeMsg: (A, A) =&amp;gt; A)
+    : Graph[VD, ED] 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It takes two arguments lists:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The first list contains configuration parameters including:
+&lt;ul&gt;
+&lt;li&gt;The initial message&lt;/li&gt;
+&lt;li&gt;The maximum number of iterations&lt;/li&gt;
+&lt;li&gt;The edge direction in which to send messages (by default messages are sent via outgoing links)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The second argument list contains:
+&lt;ul&gt;
+&lt;li&gt;The user defined function for receiving messages - &lt;code&gt;vprog&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The user defined function for computing messages - &lt;code&gt;sendMsg&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The user defined function for combining messages - &lt;code&gt;mergeMsg&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The previous example in GraphX can be solved as follows.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import org.apache.spark.graphx.{Graph, VertexId}
+import org.apache.spark.graphx.util.GraphGenerators
+val r = scala.util.Random
+// A graph with edge attributes containing distances
+val graph: Graph[Long, Double] =
+  GraphGenerators.logNormalGraph(sc, numVertices = 100).mapEdges(e =&amp;gt; e.attr.toDouble)
+val sourceId: VertexId = 42 // The ultimate source
+// Initialize the graph such that all vertices except the root have distance infinity.
+val initialGraph = graph.mapVertices((id, _) =&amp;gt; r.nextInt)
+
+//pregel
+val sssp = initialGraph.pregel(
+    Int.MinValue //inital messages 
+)(
+  (id, currentValue, receivedValue) =&amp;gt; math.max(currentValue, receivedValue), // Vertex Program
+  triplet =&amp;gt; {  // Send Message 
+    val sourceVertex = triplet.srcAttr //get the property associated with the src vertex
+    if (sourceVertex._1 == sourceVertex._2_) //new value match the current one - the node is halted
+      Iterator.empty // no messages
+    else
+      Iterator((triplet.dstId, sourceVertex._1)) //send out the message
+    }
+  },
+  (a, b) =&amp;gt; math.max(a, b) // Merge Message if multiple messages are received from the same vertex
+)
+println(sssp.vertices.collect.mkString(&amp;quot;\n&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;
+An edge triplet has five properties:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;srcId&lt;/code&gt;. The source vertex id&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;srcAttr&lt;/code&gt;. The source vertex property&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;stdId&lt;/code&gt;. The destination vertex id&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dstAttr&lt;/code&gt;. The destination vertex property&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;attr&lt;/code&gt;. The edge property.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;The material for this lesson is available  &lt;a href=&#34;https://github.com/acalio/BDAnalytics/blob/main/05-Spark-GraphX/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

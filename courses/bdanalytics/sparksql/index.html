@@ -34,11 +34,10 @@
   
     
   
-  <meta name="description" content="What you will learn:
- How to use Spark to compute aggregate statistics on a distributed dataset How to do collaborative filtering in spark How to represent a graph data structure &ndash; without third party libraries &ndash; and to execute a BFS algorithm  The material for this lesson is available here">
+  <meta name="description" content="SparkSQL is a library for structured data processing. It provides an abstraction mechanism – the main one is called DataFrame – which can serve as a distributed SQL query engine.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/courses/bdanalytics/advancedspark/">
+  <link rel="alternate" hreflang="en-us" href="/courses/bdanalytics/sparksql/">
 
   
 
@@ -260,7 +259,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/courses/bdanalytics/advancedspark/">
+  <link rel="canonical" href="/courses/bdanalytics/sparksql/">
 
   
   
@@ -276,10 +275,9 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Antonio Caliò">
-  <meta property="og:url" content="/courses/bdanalytics/advancedspark/">
-  <meta property="og:title" content="Spark (More) Advanced Examples | Antonio Caliò">
-  <meta property="og:description" content="What you will learn:
- How to use Spark to compute aggregate statistics on a distributed dataset How to do collaborative filtering in spark How to represent a graph data structure &ndash; without third party libraries &ndash; and to execute a BFS algorithm  The material for this lesson is available here"><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="/courses/bdanalytics/sparksql/">
+  <meta property="og:title" content="Introduction to Spark SQL | Antonio Caliò">
+  <meta property="og:description" content="SparkSQL is a library for structured data processing. It provides an abstraction mechanism – the main one is called DataFrame – which can serve as a distributed SQL query engine."><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -304,7 +302,7 @@
 
 
 
-  <title>Spark (More) Advanced Examples | Antonio Caliò</title>
+  <title>Introduction to Spark SQL | Antonio Caliò</title>
 
 </head>
 
@@ -738,12 +736,12 @@
 
   </div>
   
-  <div class="docs-toc-item active">
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/courses/bdanalytics/advancedspark/">Spark (More) Advanced Examples</a>
 
   </div>
   
-  <div class="docs-toc-item">
+  <div class="docs-toc-item active">
     <a class="docs-toc-link" href="/courses/bdanalytics/sparksql/">Introduction to Spark SQL</a>
 
   </div>
@@ -764,7 +762,17 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents"></nav>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#features-of-a-dataframe">Features of a DataFrame</a></li>
+    <li><a href="#running-sql-queries">Running SQL Queries</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#dataframe-vs-dataset">DataFrame vs DataSet</a></li>
+    <li><a href="#dataset-vs-rdd">DataSet vs RDD</a></li>
+  </ul>
+</nav>
 
       
     </div>
@@ -775,16 +783,333 @@
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Spark (More) Advanced Examples</h1>
+          <h1>Introduction to Spark SQL</h1>
 
           <div class="article-style">
-            <p>What you will learn:</p>
+            <p>SparkSQL is a library for structured data processing.
+It provides an abstraction mechanism – the main one is called <code>DataFrame</code> – which can
+serve as  a distributed SQL query engine.</p>
+<p>Spark SQL offers the following features:</p>
 <ul>
-<li>How to use Spark to compute aggregate statistics on a distributed dataset</li>
-<li>How to do collaborative filtering in spark</li>
-<li>How to represent a graph data structure &ndash; without third party libraries &ndash; and to execute a BFS algorithm</li>
+<li>
+<p><strong>Integrated</strong>.</p>
+<ul>
+<li>Seamlessly mix SQL queries with Spark programs.</li>
+<li>Spark SQL lets you query structured data as a distributed dataset (RDD) in Spark</li>
+<li>This tight integration makes it easy to run SQL queries alongside complex analytic algorithms</li>
 </ul>
-<p>The material for this lesson is available  <a href="https://github.com/acalio/BDAnalytics/blob/main/03-Spark-advanced-examples/" target="_blank" rel="noopener">here</a></p>
+</li>
+<li>
+<p><strong>Unified Data Access</strong></p>
+<ul>
+<li>Load and query data from a variety of different sources like: Apache Hive tables, parquet files, JSON files, etc.</li>
+</ul>
+</li>
+<li>
+<p><strong>Scalability</strong></p>
+<ul>
+<li>Use the same engine for both interactive and long queries</li>
+<li>SparkSQL leverages on the RDD model to provide fault tolerance an scalability</li>
+</ul>
+</li>
+</ul>
+<h1 id="architecture">Architecture</h1>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-sparksql-architecture">
+
+
+  <a data-fancybox="" href="/media/img/arch.png" data-caption="SparkSQL architecture">
+
+
+  <img src="/media/img/arch.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    SparkSQL architecture
+  </figcaption>
+
+
+</figure>
+
+<p>The architecture contains three layers namely:</p>
+<ol>
+<li>Language API − Spark is compatible with different languages and Spark SQL. It is also, supported by these languages- API (python, scala, java, HiveQL).</li>
+<li>Schema RDD − Spark Core is designed with special data structure called RDD. Generally, Spark SQL works on schemas, tables, and records. Therefore, we can use the Schema RDD as temporary table. We can call this Schema RDD as Data Frame.</li>
+<li>Data Sources − Usually the Data source for spark-core is a text file, Avro file, etc. However, the Data Sources for Spark SQL is different. Those are Parquet file, JSON document, HIVE tables, and Cassandra database.</li>
+</ol>
+<h1 id="what-is-a-dataframe">What is a DataFrame</h1>
+<p>A DataFrame is a distributed collection of data,
+which is organized into named columns.
+You can think of a DataFrame as a relational table.</p>
+<p>DataFrames can be constructed from a variety of different sources such as Hive tables, Structured Data files,
+external database, or also an existing RDD.</p>
+<h2 id="features-of-a-dataframe">Features of a DataFrame</h2>
+<ul>
+<li>
+<p>Ability to process the data in the size of Kilobytes to Petabytes on a single node cluster to large cluster</p>
+</li>
+<li>
+<p>Supports different data formats (Avro, csv, elastic search, and Cassandra) and storage systems (HDFS, HIVE tables, mysql, etc).</p>
+</li>
+<li>
+<p>State of art optimization and code generation through the Spark SQL Catalyst optimizer (tree transformation framework).</p>
+</li>
+<li>
+<p>Can be easily integrated with all Big Data tools and frameworks via Spark-Core.</p>
+</li>
+<li>
+<p>Optimized application of udf function over the entire dataframe.
+The following instructions will create a new column whose values are given by the column value to the power of two</p>
+<p>import org.apache.spark.sql.functions.udf
+val square = (x=&gt; x*x)
+val squaredDF = df.withColumn(&ldquo;square&rdquo;, square(&ldquo;value&rdquo;))</p>
+</li>
+<li>
+<p>Example</p>
+<p>Imagine you have the following data, formatted as a JSON file:</p>
+<pre><code>{
+   {&quot;id&quot; : &quot;1201&quot;, &quot;name&quot; : &quot;satish&quot;, &quot;age&quot; : &quot;25&quot;}
+   {&quot;id&quot; : &quot;1202&quot;, &quot;name&quot; : &quot;krishna&quot;, &quot;age&quot; : &quot;28&quot;}
+   {&quot;id&quot; : &quot;1203&quot;, &quot;name&quot; : &quot;amith&quot;, &quot;age&quot; : &quot;39&quot;}
+   {&quot;id&quot; : &quot;1204&quot;, &quot;name&quot; : &quot;javed&quot;, &quot;age&quot; : &quot;23&quot;}
+   {&quot;id&quot; : &quot;1205&quot;, &quot;name&quot; : &quot;prudvi&quot;, &quot;age&quot; : &quot;23&quot;}
+}
+</code></pre>
+<p>You can read this file and create a dataframe as follows:</p>
+<pre><code>...
+val spark = SparkSession
+      .builder
+      .appName(&quot;SparkSQL&quot;)
+      .master(&quot;local[*]&quot;)
+      .getOrCreate()
+val df =  spark.sqlContext.read.json(&quot;example.json&quot;)
+df.show()
+</code></pre>
+<p>The last instruction returns the following result:</p>
+<pre><code>+----+------+--------+
+|age | id   |  name  |
++----+------+--------+
+| 25 | 1201 | satish |
+| 28 | 1202 | krishna|
+| 39 | 1203 | amith  |
+| 23 | 1204 | javed  |
+| 23 | 1205 | prudvi |
++----+------+--------+
+</code></pre>
+<p>You can access to the structure underlying a dataframe as follows:</p>
+<pre><code>df.printSchema
+</code></pre>
+<p>In this case it returns the following:</p>
+<pre><code>root
+   |-- age: string (nullable = true)
+   |-- id: string (nullable = true)
+   |-- name: string (nullable = true)
+</code></pre>
+<p>You handle a DataFrame in a very similar fashion to a Pandas dataframe.</p>
+<p>For instance:</p>
+<pre><code>df.select(&quot;name&quot;).show 
+</code></pre>
+<p>Or also</p>
+<pre><code>// This import is needed to use the $-notation
+import spark.sqlContext.implicts._ 
+df.select($&quot;name&quot;).show 
+</code></pre>
+<p>It returns:</p>
+<pre><code>+--------+
+|  name  |
++--------+
+| satish |
+| krishna|
+| amith  |
+| javed  |
+| prudvi |
++--------+
+</code></pre>
+<p>You can use filter:</p>
+<pre><code>dfs.filter(dfs(&quot;age&quot;) &gt; 23).show()
+</code></pre>
+<p>It returns:</p>
+<pre><code>+----+------+--------+
+|age | id   | name   |
++----+------+--------+
+| 25 | 1201 | satish |
+| 28 | 1202 | krishna|
+| 39 | 1203 | amith  |
++----+------+--------+
+</code></pre>
+<p>You can group and apply aggregate functions to your data as follows:</p>
+<pre><code>dfs.groupBy(&quot;age&quot;).count().show()
+</code></pre>
+<p>It returns:</p>
+<pre><code>+----+-----+
+|age |count|
++----+-----+
+| 23 |  2  |
+| 25 |  1  |
+| 28 |  1  |
+| 39 |  1  |
++----+-----+
+</code></pre>
+</li>
+</ul>
+<h2 id="running-sql-queries">Running SQL Queries</h2>
+<p>An SQLContext enables applications to run SQL queries programmatically while running SQL functions and returns the result as a DataFrame.</p>
+<p>Generally, in the background, SparkSQL supports two different methods for converting existing RDDs into DataFrames.</p>
+<ul>
+<li>
+<p>Inferring the schema via reflection</p>
+<p>This method uses reflection to generate the schema of an RDD that contains specific types
+of objects. The Scala interface for Spark SQL supports automatically converting an RDD containing case classes to a DataFrame.
+The <strong>case class</strong> defines the schema of the table. The names
+of the arguments to the case class are read using reflection and they become the names of the columns.</p>
+<p>Case classes can also be nested or contain complex
+types such as Sequences or Arrays. This RDD can be implicitly be
+converted to a DataFrame and then registered as a table.
+Tables can be used in subsequent SQL statements.</p>
+<ul>
+<li>
+<p>Example</p>
+<p>Imagine you are given with the following data:</p>
+<pre><code>1201, satish, 25
+1202, krishna, 28
+1203, amith, 39
+1204, javed, 23
+1205, prudvi, 23
+</code></pre>
+<p>First you need to define a case class – which is  class that only define its contructor – to provide your data with a fixed structure:</p>
+<pre><code>case class Employee(id: Int, name: String, age: Int)
+</code></pre>
+<p>Next, you create an RDD mapping each line to the above case class and then convert it to a DataFrame</p>
+<pre><code>val spark = SparkSession
+      .builder
+      .appName(&quot;SparkSQL&quot;)
+      .master(&quot;local[*]&quot;)
+      .getOrCreate()
+        
+val df =  spark.sparkContext.textFile(&quot;employee.txt&quot;)
+   .map(_.split(&quot;,&quot;)).map(e=&gt;Employee(e(0).trim.toInt, e(1), e(2).trim.toInt)).toDF
+df.show()
+</code></pre>
+<p>Now you have a fully functional data frame. If you want to use the SQL engine your first need to register
+the dataframe as a table:</p>
+<pre><code>empl.registerTempTable(&quot;employee&quot;) //set the name of the table associated with the dataset
+</code></pre>
+<p>Then your can perform regular SQL query as follows:</p>
+<pre><code>spark.sqlContext.sql(&quot;Select * from employee*&quot;).show
+</code></pre>
+<p>It returns:</p>
+<pre><code>+------+---------+----+
+|  id  |  name   |age |
++------+---------+----+
+| 1201 | satish  | 25 |
+| 1202 | krishna | 28 |
+| 1203 | amith   | 39 |
+| 1204 | javed   | 23 |
+| 1205 | prudvi  | 23 |
++------+---------+----+
+</code></pre>
+<p>SparkSQL understands any sql query – so if you know SQL you are good to go.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Specify the schema programmatically</p>
+<p>The second method for creating DataFrame is through programmatic interface that allows you to construct a schema and then apply it to an existing RDD. We can create a DataFrame programmatically using the following three steps.</p>
+<ul>
+<li>
+<p>Create an RDD of Rows from an Original RDD.</p>
+</li>
+<li>
+<p>Create the schema represented by a StructType matching the structure of Rows in the RDD created in Step 1.</p>
+</li>
+<li>
+<p>Apply the schema to the RDD of Rows via createDataFrame method provided by SQLContext.</p>
+</li>
+<li>
+<p>Example</p>
+<p>Imagine you are given with the following data:</p>
+<pre><code>1201, satish, 25
+1202, krishna, 28
+1203, amith, 39
+1204, javed, 23
+1205, prudvi, 23
+</code></pre>
+<p>Next, you create an RDD from the text file.</p>
+<pre><code>//remember to include these imports
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.{StructType, StructField, StringType}
+        
+val spark = SparkSession
+      .builder
+      .appName(&quot;SparkSQL&quot;)
+      .master(&quot;local[*]&quot;)
+      .getOrCreate()
+        
+val df =  spark.sparkContext.textFile(&quot;employee.txt&quot;)
+</code></pre>
+<p>Now, instead of defining a case class as we did earlier, we define schema with a String.</p>
+<pre><code>val schemaString = &quot;id name age&quot;
+</code></pre>
+<p>The above string is then used to generate a schema as follows:</p>
+<pre><code>val schema = StructType(schemaString.split(&quot; &quot;).map(fieldName =&gt; =StructField(fieldName, StringType, true)))
+</code></pre>
+<p>Use the following command to convert an RDD (employee) to Rows. It means, here we are specifying the logic for reading the RDD data and store it into rowRDD. Here we are using two map functions: one is a delimiter for splitting the record string (.map(<sub>.split</sub>(&quot;,&quot;))) and the second
+map function for defining a Row with the field index
+value (.map(e ⇒ Row(e(0).trim.toInt, e(1), e(2).trim.toInt))).</p>
+<pre><code>val rowRDD = employee.map(_.split(&quot;,&quot;)).map(e ⇒ Row(e(0).trim.toInt, e(1), e(2).trim.toInt))
+val employeeDF = sqlContext.createDataFrame(rowRDD, schema)
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="comparative-evaluation">Comparative evaluation</h1>
+<h2 id="dataframe-vs-dataset">DataFrame vs DataSet</h2>
+<p>They are basically the same object, namely a collection of structured data
+– for instance DataSet[Person], DataSet[(String, Double)].</p>
+<p>Actually, a <code>DataFrame</code> is an alias for <code>Dataset[Row]</code>.</p>
+<p>The major difference between the two is that the structure of the data contained within
+a  <code>DataFrame</code>  is inferred at runtime, while for a <code>DataSet</code> object Scala is able to infer the
+actual type of the objects at compile time.
+Clearly, this second mechanism is beneficial in terms of performance and it is also less prone
+to potential errors.</p>
+<h2 id="dataset-vs-rdd">DataSet vs RDD</h2>
+<p>An RDD can be converted to a <code>DataSet</code> object with the method <code>toDS</code>.</p>
+<p>DataSets are more convenient than RDD for the following reasons:</p>
+<ul>
+<li>better efficiency</li>
+<li>better interoperability with other libraries:
+<ul>
+<li>MLlib relies on Datasets</li>
+<li>Spark streaming is moving towards structured streaming</li>
+<li>Everything that use apache Avro</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>The material for this lesson is available  <a href="https://github.com/acalio/BDAnalytics/tree/main/04-Spark-SQL/" target="_blank" rel="noopener">here</a></p>
 
           </div>
 
@@ -809,7 +1134,7 @@
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/bdanalytics/advancedSpark.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/bdanalytics/sparkSQL.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>
