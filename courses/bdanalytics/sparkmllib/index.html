@@ -793,6 +793,7 @@ MLlib provides the following features:
     <li><a href="#feature-transformers">Feature Transformers</a></li>
     <li><a href="#standardscaler">StandardScaler</a></li>
     <li><a href="#bucketizer">Bucketizer</a></li>
+    <li><a href="#vectorassembler">VectorAssembler</a></li>
     <li><a href="#imputer">Imputer</a></li>
   </ul>
 
@@ -1368,6 +1369,63 @@ println(s&quot;Bucketizer output with [&quot; +
   s&quot;${bucketizer2.getSplitsArray(1).length-1}] buckets for each input column&quot;)
 bucketedData2.show()
 </code></pre>
+<h2 id="vectorassembler">VectorAssembler</h2>
+<p>A VectorAssembler is a transformer that allows you to combine several columns
+into a single vector column.</p>
+<p>It is able to deal with the following column types: numeric, boolean and vector.
+In each row, the vector is obtained by concatenating the value of each column in the
+order specified by the user.</p>
+<p>The following snippet shows how to use this transformer</p>
+<pre><code>import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.Vectors
+
+val dataset = spark.createDataFrame(
+    Seq((0, 18, 1.0, Vectors.dense(0.0, 10.0, 0.5), 1.0))
+).toDF(&quot;id&quot;, &quot;hour&quot;, &quot;mobile&quot;, &quot;userFeatures&quot;, &quot;clicked&quot;)
+
+val assembler = new VectorAssembler()
+    .setInputCols(Array(&quot;hour&quot;, &quot;mobile&quot;, &quot;userFeatures&quot;))
+    .setOutputCol(&quot;features&quot;)
+  val output = assembler.transform(dataset)
+  println(&quot;Assembled columns 'hour', 'mobile', 'userFeatures' to vector column 'features'&quot;)
+  output.select(&quot;features&quot;, &quot;clicked&quot;).show(false)
+</code></pre>
+<p>Starting from the following situation:</p>
+<pre><code>| id | hour | mobile | userFeatures     | clicked |
+|:--:|:----:|:------:|:----------------:|:-------:|
+| 0  | 18   | 1.0    | [0.0, 10.0, 0.5] | 1.0     |
+</code></pre>
+<p>The above snippet will tranform the dataset as follows:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">id</th>
+<th style="text-align:center">hour</th>
+<th style="text-align:center">mobile</th>
+<th style="text-align:center">userFeatures</th>
+<th style="text-align:center">clicked</th>
+<th style="text-align:center">features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">[0.0, 10.0, 0.5]</td>
+<td style="text-align:center">1.05</td>
+<td style="text-align:center">[18.0, 1.0, 0.0, 10.0,0.5]</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
 <h2 id="imputer">Imputer</h2>
 <p>The Imputer is an estimator that is useful for replacing missing/null/NaN values accordingly
 to a predefined strategy. For instance, you might use an Imputer to replace the missing values
