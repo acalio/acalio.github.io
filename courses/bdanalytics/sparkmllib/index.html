@@ -1,0 +1,1794 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 4.8.0 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Antonio Caliò">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="MLlib is the Spark is the primary library for addressing machine learning problem within the Spark ecosystem.
+MLlib provides the following features:
+ A collection of ML Algorithms for solving a variety of ML problem, such as classification, regression, clustering and collaborative filtering A collection of techniques for featurization, i.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/bdanalytics/sparkmllib/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/courses/bdanalytics/sparkmllib/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Antonio Caliò">
+  <meta property="og:url" content="/courses/bdanalytics/sparkmllib/">
+  <meta property="og:title" content="Machine Learning with Spark | Antonio Caliò">
+  <meta property="og:description" content="MLlib is the Spark is the primary library for addressing machine learning problem within the Spark ecosystem.
+MLlib provides the following features:
+ A collection of ML Algorithms for solving a variety of ML problem, such as classification, regression, clustering and collaborative filtering A collection of techniques for featurization, i."><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Machine Learning with Spark | Antonio Caliò</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class=" ">
+
+  
+  
+  
+    <script>window.wcDarkLightEnabled = true;</script>
+  
+  
+    <script>const isSiteThemeDark = false;</script>
+  
+  
+  <script src="/js/load-theme.js"></script>
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Antonio Caliò</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Antonio Caliò</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+    
+  
+
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/scalaintro/">Introduction to Scala and its Build System</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparkeco/">The Spark Ecosystem</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/advancedspark/">Spark (More) Advanced Examples</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparksql/">Introduction to Spark SQL</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparkgraphx/">Working with Graphs</a>
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparkmllib/">Machine Learning with Spark</a>
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#correlation">Correlation</a></li>
+    <li><a href="#summarizer">Summarizer</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#image-data-source">Image data source</a></li>
+    <li><a href="#libsvm-data-source">LIBSVM data source</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#how-pipelines-work">How Pipelines Work</a></li>
+    <li><a href="#parameters">Parameters</a></li>
+    <li><a href="#examples">Examples</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#feature-extractors">Feature Extractors</a></li>
+    <li><a href="#feature-transformers">Feature Transformers</a></li>
+    <li><a href="#standardscaler">StandardScaler</a></li>
+    <li><a href="#bucketizer">Bucketizer</a></li>
+    <li><a href="#imputer">Imputer</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#parameter-tuning">Parameter Tuning</a></li>
+    <li><a href="#cross-validation">Cross Validation</a></li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>Machine Learning with Spark</h1>
+
+          <div class="article-style">
+            <p>MLlib is the Spark is the primary library for addressing machine learning problem within the Spark ecosystem.</p>
+<p>MLlib provides the following features:</p>
+<ul>
+<li>A collection of ML Algorithms for solving a variety of ML problem, such as classification, regression,
+clustering and collaborative filtering</li>
+<li>A collection of techniques for featurization, i.e., extracting and transforming the features of your dataset</li>
+<li>The ability to design e construct Pipeline of execution</li>
+<li>Persistence: models can be saved on file so that you will not be required to train a model every time you need to
+use it</li>
+<li>Utility tools, mostly for linear algebra e statistics</li>
+</ul>
+<p>Spark MLlib is available in the version 3.0. It now uses dataset instead
+of regular RDDs.</p>
+<p>In the following we will discuss some of the main tools provided by MLlib.</p>
+<p>The code for this lesson is available <a href="https://github.com/acalio/BDAnalytics/tree/main/07-Spark-MLlib" target="_blank" rel="noopener">here</a>.</p>
+<h1 id="basic-statistics">Basic Statistics</h1>
+<h2 id="correlation">Correlation</h2>
+<p>Correlation measures the strength of a linear relationship between two variables.
+More specifically, given two variables X e Y, they are considered:</p>
+<ul>
+<li>positively correlated – if when X increases Y increases and vice versa</li>
+<li>negatively correlated – if when X increases Y increases and vice versa</li>
+<li>no correlated – when their trends are not dependent from one another</li>
+</ul>
+<p>The quantity compute by MLLlib is the Pearson&rsquo;s coefficient, which is defined in [-1,1].
+A coefficient equal to 1 (-1) defines a <em>strong</em> positive (negative) correlation.</p>
+<p>The following snippet compute the correlation matrix between each pair of variables.</p>
+<pre><code>import org.apache.spark.ml.linalg.{Matrix, Vectors}
+import org.apache.spark.ml.stat.Correlation
+import org.apache.spark.sql.Row
+
+val data = Seq(
+  Vectors.sparse(4, Seq((0, 1.0), (3, -2.0))),
+  Vectors.dense(4.0, 5.0, 0.0, 3.0),
+  Vectors.dense(6.0, 7.0, 0.0, 8.0),
+  Vectors.sparse(4, Seq((0, 9.0), (3, 1.0)))
+)
+
+val df = data.map(Tuple1.apply).toDF(&quot;features&quot;)
+val Row(coeff1: Matrix) = Correlation.corr(df, &quot;features&quot;).head
+println(s&quot;Pearson correlation matrix:\n $coeff1&quot;)
+
+val Row(coeff2: Matrix) = Correlation.corr(df, &quot;features&quot;, &quot;spearman&quot;).head
+println(s&quot;Spearman correlation matrix:\n $coeff2&quot;)
+</code></pre>
+<h2 id="summarizer">Summarizer</h2>
+<p>It provides a summary of the main statistics for each column of a given <em>DataFrame</em>. The metrics computed
+by this object are the column-wise:</p>
+<ul>
+<li>
+<p>max</p>
+</li>
+<li>
+<p>min</p>
+</li>
+<li>
+<p>average</p>
+</li>
+<li>
+<p>sum</p>
+</li>
+<li>
+<p>variance/std</p>
+</li>
+<li>
+<p>number of non-zero elements</p>
+</li>
+<li>
+<p>total count</p>
+<pre><code>import org.apache.spark.ml.linalg.{Vector, Vectors}
+import org.apache.spark.ml.stat.Summarizer
+	
+val data = Seq(
+    (Vectors.dense(2.0, 3.0, 5.0), 1.0),
+    (Vectors.dense(4.0, 6.0, 7.0), 2.0)
+    )
+	
+val df = data.toDF(&quot;features&quot;, &quot;weight&quot;)
+	
+val (meanVal, varianceVal) = df.select(metrics(&quot;mean&quot;, &quot;variance&quot;)
+    .summary($&quot;features&quot;, $&quot;weight&quot;).as(&quot;summary&quot;))
+    .select(&quot;summary.mean&quot;, &quot;summary.variance&quot;)
+    n.as[(Vector, Vector)].first()
+	
+println(s&quot;with weight: mean = ${meanVal}, variance = ${varianceVal}&quot;)
+	
+val (meanVal2, varianceVal2) = df.select(mean($&quot;features&quot;), variance($&quot;features&quot;))
+    .as[(Vector, Vector)].first()
+	
+println(s&quot;without weight: mean = ${meanVal2}, sum = ${varianceVal2}&quot;)
+</code></pre>
+</li>
+</ul>
+<h1 id="data-sources">Data Sources</h1>
+<p>MLlib is able to  work with a variety of &ldquo;standard&rdquo; formats as Parquet, CSV, JSON. In addition to that the
+library provides mechanisms to read some other special data format.</p>
+<h2 id="image-data-source">Image data source</h2>
+<p>This data is used to load image files directly from a folder. Images can be in any format (e.g., jpg, png, …).
+When you load the DataFrame, it has a column of type StryctType, which represents the actual image.
+Each image has an image schema which comprises the following information:</p>
+<ul>
+<li>origin: StringType, the path of the file containing the image</li>
+<li>height: IntegerType, the height of the image</li>
+<li>width: IntegerType, the width of the image</li>
+<li>nChannels: Integertype, number of image channels</li>
+<li>mode: IntegerType, OpenCV compatible type</li>
+<li>data: BinaryType, the image bytes in OpenCV-compatible format</li>
+</ul>
+<p>In order to read the images you need to use the &ldquo;image&rdquo; format. You also need to provide the path of the folder
+containing the images you want to read.</p>
+<pre><code>val df = spark.read.format(&quot;image&quot;).option(&quot;dropInvalid&quot;, true).load(&quot;{your path}&quot;)
+</code></pre>
+<h2 id="libsvm-data-source">LIBSVM data source</h2>
+<p>This source is used to read data in the libsvm format from a given directory.
+When you load the file, MLlib creates a data frame with two columns:</p>
+<ul>
+<li>label: DoubleType, represents the labels of the dataset</li>
+<li>features: VectorUDT, represents the feature-vectors of each data point</li>
+</ul>
+<p>In order to read this type of data you need to specify the &ldquo;libsvm&rdquo; format.</p>
+<pre><code>val df = spark.read.format(&quot;libsvm&quot;).option(&quot;numFeatures&quot;, &quot;780&quot;).load(&quot;{your path}&quot;)
+</code></pre>
+<h1 id="pipelines">Pipelines</h1>
+<p>Pipelines are a very convenient to define e organize all the single procedures and step that contribute to you entire
+machine learning approach.</p>
+<p>They are very similar to <em>scikit-learn</em> pipelines. The Pipelines API are designed around the following concepts:</p>
+<ul>
+<li>DataFrame</li>
+<li>Transformer. It is an abstraction that includes both feature transformers and ML models.
+Any transformer has a method <code>transform()</code> which takes a DataFrame as input and returns another DataFrame
+obtained by applying some function, whose results are retrieved within a new column appended to the original structure.</li>
+<li>Estimators. It is an abstraction for denoting any algorithm that has the method <code>fit</code>  in its own interface.
+The <code>fit()</code> method takes as input a <code>DataFrame</code>  and returns an object of type <code>Model</code>.</li>
+<li>Pipelines. Usually, when you deal with ML problems, the entire algorithm representing your approach for solving the problem
+can be narrowed down to a set of subsequent different steps.</li>
+</ul>
+<h2 id="how-pipelines-work">How Pipelines Work</h2>
+<p>Let&rsquo;s imagine you are dealing with some
+classification problems over text documents.</p>
+<p>Chances are that your workflow will include the following stages:</p>
+<ol>
+<li>Split each document into words</li>
+<li>Convert each word int a vector – you may want to apply some representation model such as Word2Vec</li>
+<li>Train and compute the prediction of your model</li>
+</ol>
+<p>Step 1 requires  a Transformer, while Step 2 and Step 3 require to use some Estimators. Through a Pipeline you
+will be able to aggregate all these steps and to represent them as a pipeline.</p>
+<p>A Pipeline is specified as a sequence of stages, and each stage is either a Transformer or an Estimator.
+These stages are run in order, and the input DataFrame is transformed as it passes through each stage.</p>
+<p>For Transformer stages, the transform() method is called on the DataFrame.
+For Estimator stages, the fit() method is called to produce a Transformer
+(which becomes part of the PipelineModel, or fitted Pipeline),
+and that Transformer’s transform() method is called on the DataFrame.</p>
+<p>We illustrate this for the simple text document workflow. The figure below is for the training time usage of a Pipeline.</p>
+<p>The following image represents the pipeline described above.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-pipeline">
+
+
+  <a data-fancybox="" href="/media/img/pip.png" data-caption="Pipeline">
+
+
+  <img src="/media/img/pip.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Pipeline
+  </figcaption>
+
+
+</figure>
+</p>
+<p>A Pipeline works as an Estimator, it means that it has the method <code>fit()</code>. When you call this method
+on the pipeline, all the stages are executed. More specifically, for any stage S<sub>i</sub> we have:</p>
+<ul>
+<li>if S<sub>i</sub> is a transformer, the pipeline will call the method transform.</li>
+<li>if S<sub>i</sub> is an estimator, the pipeline will first call the <code>fit</code> method and then the <code>transform</code> method</li>
+</ul>
+<p>The method <code>fit</code> called on a Pipeline yields a Pipeline model, which is also a Transformer. This means that you can
+use the this model to call the <code>transform</code> method. As a result, the pipeline will go through all the stages by calling
+the <code>transform</code> method over each on of them. Be careful that, as opposed to when you called the <code>fit</code> method
+over the entire pipeline, when you call <code>transform</code> on the Pipeline, all the estimators work as Transformers.</p>
+<h2 id="parameters">Parameters</h2>
+<p>You can specify the parameters for either a Transformer of an Estimators in one of the following
+two ways:</p>
+<ol>
+<li>
+<p>Both Estimators and Transformers share a common API to specify their parameters.
+A parameter is specified via a <code>Param</code> object, which is a named parameter with a self-contained documentation.
+A <code>ParamMap</code> is instead a set of parameter-value pairs. You can define a <code>ParamMap</code> and pass it to the
+<code>fit()</code> or the <code>transform()</code> method. A <code>ParamMap</code> is created with the following notation:</p>
+<pre><code>ParamMap(l1.maxIter -&gt; 10, l2.maxIter -&gt; 20)
+</code></pre>
+<p>Where l1 and l2 are two instance included in the Pipeline.</p>
+</li>
+<li>
+<p>Set the parameter directly on the instance that you include within the your Pipeline. Let <code>algo</code> be an instance
+of any ML algorithm available in MLlib. You can use this instance to set directly the parameters for that particular algoirthm
+Usually, you have method like <code>set{NameOfTheParameter}</code>.</p>
+</li>
+</ol>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>
+<p>Estimator, Transformer and Param</p>
+<pre><code>import org.apache.spark.ml.classification.LogisticRegression
+import org.apache.spark.ml.linalg.{Vector, Vectors}
+import org.apache.spark.ml.param.ParamMap
+import org.apache.spark.sql.Row
+    
+// Prepare training data from a list of (label, features) tuples.
+val training = spark.createDataFrame(Seq(
+  (1.0, Vectors.dense(0.0, 1.1, 0.1)),
+  (0.0, Vectors.dense(2.0, 1.0, -1.0)),
+  (0.0, Vectors.dense(2.0, 1.3, 1.0)),
+  (1.0, Vectors.dense(0.0, 1.2, -0.5))
+)).toDF(&quot;label&quot;, &quot;features&quot;)
+    
+// Create a LogisticRegression instance. This instance is an Estimator.
+val lr = new LogisticRegression()
+// Print out the parameters, documentation, and any default values.
+println(s&quot;LogisticRegression parameters:\n ${lr.explainParams()}\n&quot;)
+    
+// We may set parameters using setter methods.
+lr.setMaxIter(10)
+  .setRegParam(0.01)
+    
+// Learn a LogisticRegression model. This uses the parameters stored in lr.
+val model1 = lr.fit(training)
+// Since model1 is a Model (i.e., a Transformer produced by an Estimator),
+// we can view the parameters it used during fit().
+// This prints the parameter (name: value) pairs, where names are unique IDs for this
+// LogisticRegression instance.
+println(s&quot;Model 1 was fit using parameters: ${model1.parent.extractParamMap}&quot;)
+    
+// We may alternatively specify parameters using a ParamMap,
+// which supports several methods for specifying parameters.
+val paramMap = ParamMap(lr.maxIter -&gt; 20)
+  .put(lr.maxIter, 30)  // Specify 1 Param. This overwrites the original maxIter.
+  .put(lr.regParam -&gt; 0.1, lr.threshold -&gt; 0.55)  // Specify multiple Params.
+    
+// One can also combine ParamMaps.
+val paramMap2 = ParamMap(lr.probabilityCol -&gt; &quot;myProbability&quot;)  // Change output column name.
+val paramMapCombined = paramMap ++ paramMap2
+    
+// Now learn a new model using the paramMapCombined parameters.
+// paramMapCombined overrides all parameters set earlier via lr.set* methods.
+val model2 = lr.fit(training, paramMapCombined)
+println(s&quot;Model 2 was fit using parameters: ${model2.parent.extractParamMap}&quot;)
+    
+// Prepare test data.
+val test = spark.createDataFrame(Seq(
+  (1.0, Vectors.dense(-1.0, 1.5, 1.3)),
+  (0.0, Vectors.dense(3.0, 2.0, -0.1)),
+  (1.0, Vectors.dense(0.0, 2.2, -1.5))
+)).toDF(&quot;label&quot;, &quot;features&quot;)
+    
+// Make predictions on test data using the Transformer.transform() method.
+// LogisticRegression.transform will only use the 'features' column.
+// Note that model2.transform() outputs a 'myProbability' column instead of the usual
+// 'probability' column since we renamed the lr.probabilityCol parameter previously.
+model2.transform(test)
+  .select(&quot;features&quot;, &quot;label&quot;, &quot;myProbability&quot;, &quot;prediction&quot;)
+  .collect()
+  .foreach { case Row(features: Vector, label: Double, prob: Vector, prediction: Double) =&gt;
+    println(s&quot;($features, $label) -&gt; prob=$prob, prediction=$prediction&quot;)
+  }
+</code></pre>
+</li>
+<li>
+<p>Pipeline</p>
+<pre><code>import org.apache.spark.ml.{Pipeline, PipelineModel}
+import org.apache.spark.ml.classification.LogisticRegression
+import org.apache.spark.ml.feature.{HashingTF, Tokenizer}
+import org.apache.spark.ml.linalg.Vector
+import org.apache.spark.sql.Row
+    
+// Prepare training documents from a list of (id, text, label) tuples.
+val training = spark.createDataFrame(Seq(
+  (0L, &quot;a b c d e spark&quot;, 1.0),
+  (1L, &quot;b d&quot;, 0.0),
+  (2L, &quot;spark f g h&quot;, 1.0),
+  (3L, &quot;hadoop mapreduce&quot;, 0.0)
+)).toDF(&quot;id&quot;, &quot;text&quot;, &quot;label&quot;)
+    
+// Configure an ML pipeline, which consists of three stages: tokenizer, hashingTF, and lr.
+val tokenizer = new Tokenizer()
+  .setInputCol(&quot;text&quot;)
+  .setOutputCol(&quot;words&quot;)
+val hashingTF = new HashingTF()
+  .setNumFeatures(1000)
+  .setInputCol(tokenizer.getOutputCol)
+  .setOutputCol(&quot;features&quot;)
+val lr = new LogisticRegression()
+  .setMaxIter(10)
+  .setRegParam(0.001)
+val pipeline = new Pipeline()
+  .setStages(Array(tokenizer, hashingTF, lr))
+    
+// Fit the pipeline to training documents.
+val model = pipeline.fit(training)
+    
+// Now we can optionally save the fitted pipeline to disk
+model.write.overwrite().save(&quot;/tmp/spark-logistic-regression-model&quot;)
+    
+// We can also save this unfit pipeline to disk
+pipeline.write.overwrite().save(&quot;/tmp/unfit-lr-model&quot;)
+    
+// And load it back in during production
+val sameModel = PipelineModel.load(&quot;/tmp/spark-logistic-regression-model&quot;)
+    
+// Prepare test documents, which are unlabeled (id, text) tuples.
+val test = spark.createDataFrame(Seq(
+  (4L, &quot;spark i j k&quot;),
+  (5L, &quot;l m n&quot;),
+  (6L, &quot;spark hadoop spark&quot;),
+  (7L, &quot;apache hadoop&quot;)
+)).toDF(&quot;id&quot;, &quot;text&quot;)
+    
+// Make predictions on test documents.
+model.transform(test)
+  .select(&quot;id&quot;, &quot;text&quot;, &quot;probability&quot;, &quot;prediction&quot;)
+  .collect()
+  .foreach { case Row(id: Long, text: String, prob: Vector, prediction: Double) =&gt;
+    println(s&quot;($id, $text) --&gt; prob=$prob, prediction=$prediction&quot;)
+  }
+</code></pre>
+</li>
+</ul>
+<h1 id="extracting-transforming-and-selecting">Extracting, transforming and Selecting</h1>
+<p>This section is organized into three different subsections:</p>
+<ol>
+<li>Feature Extractors. This section introduces some algorithm for extracting features from your dataset</li>
+<li>Feature Transformers. This section introduces some of the algorithm that execute commonly used transformations
+the input dataset</li>
+</ol>
+<h2 id="feature-extractors">Feature Extractors</h2>
+<ul>
+<li>
+<p>Word2Vec</p>
+<p>Word2Vec is an Estimator which takes as input a sequence of words representing a document and then
+it trains a Word2VecModel over these words. The model maps each word to a unique fixed-size vector.
+A document is then represented by simply taking the average of all the vectors associated with any word
+contained within the original text.
+Once you have a vector, you can apply all sorts of ML algorithms.</p>
+<p>The following snippet shows how to use this model.</p>
+<pre><code>import org.apache.spark.ml.feature.Word2Vec
+import org.apache.spark.ml.linalg.Vector
+import org.apache.spark.sql.Row
+    
+// Input data: Each row is a bag of words from a sentence or document.
+val documentDF = spark.createDataFrame(Seq(
+  &quot;Hi I heard about Spark&quot;.split(&quot; &quot;),
+  &quot;I wish Java could use case classes&quot;.split(&quot; &quot;),
+  &quot;Logistic regression models are neat&quot;.split(&quot; &quot;)
+).map(Tuple1.apply)).toDF(&quot;text&quot;)
+    
+// Learn a mapping from words to Vectors.
+val word2Vec = new Word2Vec()
+  .setInputCol(&quot;text&quot;)
+  .setOutputCol(&quot;result&quot;)
+  .setVectorSize(3)
+  .setMinCount(0)
+val model = word2Vec.fit(documentDF)
+    
+val result = model.transform(documentDF)
+result.collect().foreach { case Row(text: Seq[_], features: Vector) =&gt;
+  println(s&quot;Text: [${text.mkString(&quot;, &quot;)}] =&gt; \nVector: $features\n&quot;) }
+</code></pre>
+</li>
+</ul>
+<h2 id="feature-transformers">Feature Transformers</h2>
+<ul>
+<li>
+<p>Binarizer</p>
+<p>Binarization is the process of thresholding numerical features to binary (0/1) features.</p>
+<p>Binarizer takes the common parameters inputCol and outputCol, as
+well as the threshold for binarization. Feature values greater than the threshold
+are binarized to 1.0; values equal to or less
+than the threshold are binarized to 0.0.
+Both Vector and Double types are supported for inputCol.</p>
+<pre><code>import org.apache.spark.ml.feature.Binarizer
+    
+val data = Array((0, 0.1), (1, 0.8), (2, 0.2))
+val dataFrame = spark.createDataFrame(data).toDF(&quot;id&quot;, &quot;feature&quot;)
+    
+val binarizer: Binarizer = new Binarizer()
+  .setInputCol(&quot;feature&quot;)
+  .setOutputCol(&quot;binarized_feature&quot;)
+  .setThreshold(0.5)
+    
+val binarizedDataFrame = binarizer.transform(dataFrame)
+    
+println(s&quot;Binarizer output with Threshold = ${binarizer.getThreshold}&quot;)
+binarizedDataFrame.show()
+</code></pre>
+</li>
+<li>
+<p>PCA</p>
+<p>PCA is a statistical procedure that uses
+an orthogonal transformation to convert a set of observations of possibly correlated
+variables into a set of values of linearly uncorrelated variables
+called principal components. A PCA class trains a model to project
+vectors to a low-dimensional space using PCA. The example below shows how to
+project 5-dimensional feature vectors into 3-dimensional principal components.</p>
+<pre><code>import org.apache.spark.ml.feature.PCA
+import org.apache.spark.ml.linalg.Vectors
+    
+val data = Array(
+  Vectors.sparse(5, Seq((1, 1.0), (3, 7.0))),
+  Vectors.dense(2.0, 0.0, 3.0, 4.0, 5.0),
+  Vectors.dense(4.0, 0.0, 0.0, 6.0, 7.0)
+)
+val df = spark.createDataFrame(data.map(Tuple1.apply)).toDF(&quot;features&quot;)
+    
+val pca = new PCA()
+  .setInputCol(&quot;features&quot;)
+  .setOutputCol(&quot;pcaFeatures&quot;)
+  .setK(3)
+  .fit(df)
+    
+val result = pca.transform(df).select(&quot;pcaFeatures&quot;)
+result.show(false)
+</code></pre>
+</li>
+<li>
+<p>OneHotEncoder</p>
+<p>One-hot-encoding maps a categorical feature to a binary vector with at most a single one-value.
+For instance, imagine you have a categorical feature that allows 5 possible categorical values:
+A,B,C,D,E. This feature is then represented as a 5-sized vector where each value is mapped to
+a particular position. Therefore the value A - becomes -&gt; [1,0,0,0,0], the value B - becomes -&gt; [0,1,0,0,0]
+ans so on.</p>
+<p>The following snippet shows how to use this transformer:</p>
+<pre><code>import org.apache.spark.ml.feature.OneHotEncoder
+    
+val df = spark.createDataFrame(Seq(
+  (0.0, 1.0),
+  (1.0, 0.0),
+  (2.0, 1.0),
+  (0.0, 2.0),
+  (0.0, 1.0),
+  (2.0, 0.0)
+)).toDF(&quot;categoryIndex1&quot;, &quot;categoryIndex2&quot;)
+    
+val encoder = new OneHotEncoder()
+  .setInputCols(Array(&quot;categoryIndex1&quot;, &quot;categoryIndex2&quot;))
+  .setOutputCols(Array(&quot;categoryVec1&quot;, &quot;categoryVec2&quot;))
+val model = encoder.fit(df)
+    
+val encoded = model.transform(df)
+encoded.show()
+</code></pre>
+</li>
+</ul>
+<h2 id="standardscaler">StandardScaler</h2>
+<p>Many ML algorithm are very sensitive to the scale of the input dataset. These algorithms work best when
+all the feature have the same scale. For this reason it is often required to normalize your data.
+This scaler normalize  the data so that each numerical feature has unit standard deviation and zero mean.</p>
+<p>The StandardScaler is actually an Estimator, thus it has the method <code>fit</code> which returns a <code>StandardScalerModel</code>
+object, which is a Transformer. Therefore, by calling <code>transform</code> on the StandardScaler model you can scale
+the input features as desired.</p>
+<p>The following snippet shows how to use this scaler.</p>
+<pre><code>import org.apache.spark.ml.feature.StandardScaler
+
+val dataFrame = spark.read.format(&quot;libsvm&quot;).load(&quot;data/mllib/sample_libsvm_data.txt&quot;)
+
+val scaler = new StandardScaler()
+  .setInputCol(&quot;features&quot;)
+  .setOutputCol(&quot;scaledFeatures&quot;)
+  .setWithStd(true)
+  .setWithMean(false)
+
+// Compute summary statistics by fitting the StandardScaler.
+val scalerModel = scaler.fit(dataFrame)
+
+// Normalize each feature to have unit standard deviation.
+val scaledData = scalerModel.transform(dataFrame)
+scaledData.show()
+</code></pre>
+<p>This is not the only option when it comes to scaling your data.
+There are other techniques that work the same way as this scaler, the only
+thing that change of course is the algorithm used for scale the data.</p>
+<h2 id="bucketizer">Bucketizer</h2>
+<p>A Bucketizer transforms a real-valued feature into a column where values are divided into buckets.</p>
+<p>When you use this type of transformer you need to specify the buckets into which you wish to divided your
+feature. Therefore you must specify an ordered vector containing the ranges according to which buckets
+have to been defined.</p>
+<p>The following snippet shows how to use this transformer.</p>
+<pre><code>import org.apache.spark.ml.feature.Bucketizer
+
+val splits = Array(Double.NegativeInfinity, -0.5, 0.0, 0.5, Double.PositiveInfinity)
+
+val data = Array(-999.9, -0.5, -0.3, 0.0, 0.2, 999.9)
+val dataFrame = spark.createDataFrame(data.map(Tuple1.apply)).toDF(&quot;features&quot;)
+
+val bucketizer = new Bucketizer()
+  .setInputCol(&quot;features&quot;)
+  .setOutputCol(&quot;bucketedFeatures&quot;)
+  .setSplits(splits)
+
+// Transform original data into its bucket index.
+val bucketedData = bucketizer.transform(dataFrame)
+
+println(s&quot;Bucketizer output with ${bucketizer.getSplits.length-1} buckets&quot;)
+bucketedData.show()
+
+val splitsArray = Array(
+  Array(Double.NegativeInfinity, -0.5, 0.0, 0.5, Double.PositiveInfinity),
+  Array(Double.NegativeInfinity, -0.3, 0.0, 0.3, Double.PositiveInfinity))
+
+val data2 = Array(
+  (-999.9, -999.9),
+  (-0.5, -0.2),
+  (-0.3, -0.1),
+  (0.0, 0.0),
+  (0.2, 0.4),
+  (999.9, 999.9))
+val dataFrame2 = spark.createDataFrame(data2).toDF(&quot;features1&quot;, &quot;features2&quot;)
+
+val bucketizer2 = new Bucketizer()
+  .setInputCols(Array(&quot;features1&quot;, &quot;features2&quot;))
+  .setOutputCols(Array(&quot;bucketedFeatures1&quot;, &quot;bucketedFeatures2&quot;))
+  .setSplitsArray(splitsArray)
+
+// Transform original data into its bucket index.
+val bucketedData2 = bucketizer2.transform(dataFrame2)
+
+println(s&quot;Bucketizer output with [&quot; +
+  s&quot;${bucketizer2.getSplitsArray(0).length-1}, &quot; +
+  s&quot;${bucketizer2.getSplitsArray(1).length-1}] buckets for each input column&quot;)
+bucketedData2.show()
+</code></pre>
+<h2 id="imputer">Imputer</h2>
+<p>The Imputer is an estimator that is useful for replacing missing/null/NaN values accordingly
+to a predefined strategy. For instance, you might use an Imputer to replace the missing values
+in a feature of the dataset by replacing them with the average value computed with respect
+to that feature.
+An Imputer can only work with numerical features – it is not able to understand
+categorical values. It also provides the ability to configure which value has to be considered
+as  &ldquo;missing&rdquo;. For instance, if we set <code>.setMissingValue(0)</code> then all the occurrences of 0
+will be replaced by the Imputer.</p>
+<p>The following snippet shows how to use the Imputer.</p>
+<pre><code>import org.apache.spark.ml.feature.Imputer
+
+val df = spark.createDataFrame(Seq(
+  (1.0, Double.NaN),
+  (2.0, Double.NaN),
+  (Double.NaN, 3.0),
+  (4.0, 4.0),
+  (5.0, 5.0)
+)).toDF(&quot;a&quot;, &quot;b&quot;)
+
+val imputer = new Imputer()
+  .setInputCols(Array(&quot;a&quot;, &quot;b&quot;))
+  .setOutputCols(Array(&quot;out_a&quot;, &quot;out_b&quot;))
+
+val model = imputer.fit(df)
+model.transform(df).show()
+</code></pre>
+<h1 id="classification--regression">Classification &amp; Regression</h1>
+<p>These are two different types of supervised learning problem.</p>
+<p>In any supervised learning problem you are provided with a set of items, each item
+has a set of features, and more importantly it is assigned with a label.</p>
+<p>The type of the label tells you if you are dealing with a regression problem rather
+than a classification one. More specifically, if the label is a real value then you have
+a regression problem, while if it is a categorical value then you are dealing with
+a classification problem.</p>
+<p>MLlib offers a lot of algorithms for addressing these kinds of supervised problems.
+This is the list of algorithms provided by the library:</p>
+<ul>
+<li>Classification
+<ul>
+<li>Logistic regression
+<ul>
+<li>Binomial logistic regression</li>
+<li>Multinomial logistic regression</li>
+</ul>
+</li>
+<li>Decision tree classifier</li>
+<li>Random forest classifier</li>
+<li>Gradient-boosted tree classifier</li>
+<li>Multilayer perceptron classifier</li>
+<li>Linear Support Vector Machine</li>
+<li>One-vs-Rest classifier (a.k.a. One-vs-All)</li>
+<li>Naive Bayes</li>
+<li>Factorization machines classifier</li>
+</ul>
+</li>
+<li>Regression
+<ul>
+<li>Linear regression</li>
+<li>Generalized linear regression
+<ul>
+<li>Available families</li>
+</ul>
+</li>
+<li>Decision tree regression</li>
+<li>Random forest regression</li>
+<li>Gradient-boosted tree regression</li>
+<li>Survival regression</li>
+<li>Isotonic regression</li>
+<li>Factorization machines regressor</li>
+</ul>
+</li>
+<li>Linear methods</li>
+<li>Factorization Machines</li>
+<li>Decision trees
+<ul>
+<li>Inputs and Outputs
+<ul>
+<li>Input Columns</li>
+<li>Output Columns</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tree Ensembles
+<ul>
+<li>Random Forests
+<ul>
+<li>Inputs and Outputs
+<ul>
+<li>Input Columns</li>
+<li>Output Columns (Predictions)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Gradient-Boosted Trees (GBTs)
+<ul>
+<li>Inputs and Outputs
+<ul>
+<li>Input Columns</li>
+<li>Output Columns (Predictions)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>We will not discuss any of the previous algorithms. Since this is beyond the scope
+of this lesson. A useful resource to learn (quickly) is the scikit-learn documentation,
+available <a href="https://scikit-learn.org/" target="_blank" rel="noopener">here</a>.</p>
+<h1 id="model-selection-and-tuning">Model Selection and Tuning</h1>
+<p>This section describes how to use MLlib’s tooling
+for tuning ML algorithms and Pipelines. Built-in Cross-Validation
+and other tooling allow users to
+optimize hyperparameters in algorithms and Pipelines.</p>
+<h2 id="parameter-tuning">Parameter Tuning</h2>
+<p>Parameter Tuning is the task of trying different configuration in order to
+improve performance.</p>
+<p>You can tune a single estimator as well as an entire pipeline.
+When you want to improve the performance of your model you need an object
+of type Evaluator. An Evaluator allows you to evaluate how well your model is able to
+fit the data. There is a number of different evaluators, the right one depends on the
+type of problem you are dealing with. For instance if you are dealing with a regression problem
+you should use the RegressionEvaluator, while for classification problems you should use
+the BinaryClassificationEvaluator or the MulticlassificationEvaluator.</p>
+<p>A common way tune an ML model is by defining a grid, which determines the range of values
+a particular parameter can assume. This kind of behavior is achieved via the
+ParamGridBuilder object. A grid based tuning works as follows. Imagine
+your model M has depends on two different hyperparameters: p<sub>1</sub> and p<sub>2</sub>. You define a
+range of values for each one of them. For instance you may specify that p<sub>1</sub> varies within
+the range [0,10] with step 2, while p<sub>2</sub> varies within the range [-10, 10] with step.
+This means that you would have 5 different possible configuration for p<sub>1</sub> and 3 different
+configuration for p<sub>2</sub>. In this case your model will be trained 5x3=15 different times, assessing
+every possible configuration with respect to both parameters.</p>
+<h2 id="cross-validation">Cross Validation</h2>
+<p>Another important technique for selecting the best model is the Cross-Validation.
+In order to train your model with the cross-validation there is an object
+called <code>CrossValidator</code>.
+A <code>CrossValidator</code> is actually an Estimator, so you can call <code>fit</code> and then you get
+a model.
+The following snippet shows how to use the a CrossValidator.</p>
+<pre><code>...
+val tokenizer = new Tokenizer()
+  .setInputCol(&quot;text&quot;)
+  .setOutputCol(&quot;words&quot;)
+val hashingTF = new HashingTF()
+  .setInputCol(tokenizer.getOutputCol)
+  .setOutputCol(&quot;features&quot;)
+val lr = new LogisticRegression()
+  .setMaxIter(10)
+val pipeline = new Pipeline()
+  .setStages(Array(tokenizer, hashingTF, lr))
+
+// We use a ParamGridBuilder to construct a grid of parameters to search over.
+// With 3 values for hashingTF.numFeatures and 2 values for lr.regParam,
+// this grid will have 3 x 2 = 6 parameter settings for CrossValidator to choose from.
+val paramGrid = new ParamGridBuilder()
+  .addGrid(hashingTF.numFeatures, Array(10, 100, 1000))
+  .addGrid(lr.regParam, Array(0.1, 0.01))
+  .build()
+
+val cv = new CrossValidator()
+  .setEstimator(pipeline)
+  .setEvaluator(new BinaryClassificationEvaluator)
+  .setEstimatorParamMaps(paramGrid)
+  .setNumFolds(2)  // Use 3+ in practice
+  .setParallelism(2)  // Evaluate up to 2 parameter settings in parallel
+
+val model = cv.fit(data)
+</code></pre>
+<h1 id="anatomy-of-a-ml-application">Anatomy of a ML application</h1>
+<p>Any ML application should adopt the following development steps:</p>
+<ul>
+<li>Think about the problem you are interested in. You should ask yourself the following
+questions:
+<ul>
+<li>How would I frame it?</li>
+<li>Is it a supervised problem? Is it better to address the problem as a
+classification problem rather then a regression one?</li>
+</ul>
+</li>
+<li>Get the data. In this stage you get the data required to solve the problem you
+are interested in.</li>
+<li>Analyze your data, compute summary statistics, plot the data, gain insights.</li>
+<li>Prepare your data to apply ML algorithms. In this stage you apply transformer to clean
+your data – for instance you can apply the Imputer to replace missing value –, or
+you can apply transformer to obtain a different representation of your data – for
+instance Word2Vec or OneHotEncoding.</li>
+<li>Split your dataset. You <strong><strong>must</strong></strong> always remember to reserve a fraction of your data
+to validate your model. It means that you must split the data (at least) into training and test
+set. The training set is used to train your model, while the test is used to understand how godd
+is your model in terms of generalization</li>
+<li>Select the most promising models and apply parameter tuning on them</li>
+<li>Present the results</li>
+</ul>
+
+          </div>
+
+          
+
+
+
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/bdanalytics/sparkMLlib.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    Published with
+    <a href="https://wowchemy.com" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/wowchemy.min.832c0c66be3ec862b3635a8119cc9647.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
