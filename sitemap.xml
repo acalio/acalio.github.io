@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/courses/bdanalytics/exampleproject/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/bdanalytics/kafka/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/courses/bdanalytics/scalaintro/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
@@ -19,6 +29,11 @@
   
   <url>
     <loc>/courses/bdanalytics/advancedspark/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/courses/bdanalytics/sparkstreaming/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   

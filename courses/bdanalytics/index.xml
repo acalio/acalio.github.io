@@ -13,6 +13,645 @@
     </image>
     
     <item>
+      <title>Example Project</title>
+      <link>/courses/bdanalytics/exampleproject/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/bdanalytics/exampleproject/</guid>
+      <description>&lt;p&gt;The goal of this project is to build an interaction graph starting from the
+comments associated to a collection of YouTube videos.&lt;/p&gt;
+&lt;p&gt;The entire pipeline is organized as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A user provides a certain query &lt;em&gt;q&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;q&lt;/em&gt; is executed via the YouTube API.&lt;/li&gt;
+&lt;li&gt;The query returns a collection of related videos (V).
+&lt;ul&gt;
+&lt;li&gt;For each video (v \in V), extract the collection of comment threads underlying (v)&lt;/li&gt;
+&lt;li&gt;Each comment thread (t \in T) has a number of comments. Among them, there is the &lt;em&gt;top-level&lt;/em&gt;
+comment, which represents the comment that started the discussion.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Create an edge from a user u to another user v, if u is the author of a &lt;em&gt;top-level&lt;/em&gt; comment of a thread where v has participated in.&lt;/li&gt;
+&lt;li&gt;Associate a score to each edge that matches the sentiment score of the comment.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The following image shows the process behind the extraction of the interaction graph.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-interaction-graph&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/ytExample.jpg&#34; data-caption=&#34;Interaction Graph&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/ytExample.jpg&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Interaction Graph
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;architecture&#34;&gt;Architecture&lt;/h1&gt;
+&lt;p&gt;The project has the following components:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;DataAPI&lt;/em&gt;. It executes and manages the queries to the YouTube API&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Kafka-Producer&lt;/em&gt;. It is in charge of the data download and the data transmission to Kafka&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Spark-Consumer&lt;/em&gt;. It extracts the interaction graph directly from Kafka.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Apache Avro for data serialization&lt;/li&gt;
+&lt;li&gt;CoreNLP for sentiment analysis - download the following &lt;a href=&#34;http://nlp.stanford.edu/software/stanford-corenlp-latest.zip&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;jar&lt;/a&gt; and put it in the lib of the Spark-Consumer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;how-to-run-the-project&#34;&gt;How to run the project&lt;/h1&gt;
+&lt;p&gt;You need a working docker distribution on your machine, with docker-compose.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Go to the Docker directory and run&lt;/p&gt;
+&lt;p&gt;docker-compose up -d&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Then go to the &lt;em&gt;DataAPI&lt;/em&gt; compile your project by running &lt;code&gt;mvn package&lt;/code&gt;, then move the jar file into
+the &lt;code&gt;lib&lt;/code&gt; inside the &lt;em&gt;Kafka-Producer&lt;/em&gt; root folder.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the producer with &lt;code&gt;sbt run&lt;/code&gt; providing all the necessary arguments&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the consumer with &lt;code&gt;sbt run&lt;/code&gt; providing all the necessary arguments&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Apache Kafka</title>
+      <link>/courses/bdanalytics/kafka/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/bdanalytics/kafka/</guid>
+      <description>&lt;p&gt;Apache kafka is a distributed streaming platform.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;What is Event Streaming?&lt;/p&gt;
+&lt;p&gt;Event streaming is the practice of capturing data in real-time from
+event sources like databases, sensors or mobile devices.&lt;/p&gt;
+&lt;p&gt;With event-streaming you need to design your application as an event-driven
+application. This means that events your application has constantly to reach
+to what is happening in its surrounding environment.&lt;/p&gt;
+&lt;p&gt;Event streaming nsures a continuous flow and interpretation of data so that the right information is at the right
+time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What can I use event streaming for?&lt;/p&gt;
+&lt;p&gt;There is number of different contexts where real-time processing is a real thing.
+For instance:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To process payments and financial transactions&lt;/li&gt;
+&lt;li&gt;To track and monitor cars, trucks, fleets and shipments&lt;/li&gt;
+&lt;li&gt;To continuously capture and analyze sensor data coming from and IoT ecosystem&lt;/li&gt;
+&lt;li&gt;To collect and immediately react to customer interactions and orders&lt;/li&gt;
+&lt;li&gt;To monitor patients in a hospital to ensures timely treatment in emergencies&lt;/li&gt;
+&lt;li&gt;To connect, store and make available data produced by different division of a company&lt;/li&gt;
+&lt;li&gt;To serve as the foundation for data platforms and event-driven architectures&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Apache Kafka in the real world&lt;/p&gt;
+&lt;p&gt;Here is a list of company that are using Kafka:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;The New York Times&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Pinterest&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;zalando&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;line&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;adidas&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;airbnb&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;cisco&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What does it mean to be an event streaming platform?&lt;/p&gt;
+&lt;p&gt;Kafka combines together three key capabilities:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;publish&lt;/strong&gt; (write) and &lt;strong&gt;subscribe to&lt;/strong&gt; (read) to stream of events&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;store&lt;/strong&gt; streams of events in a durable and reliable fashion&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;process&lt;/strong&gt; streams of event as they occur or retrospectively&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All this functionality is provided in a distributed, highly scalable, elastic, fault-tolerant and
+secure manner.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;How does Kafka work in a nutshell?&lt;/p&gt;
+&lt;p&gt;The Kafka system consists of &lt;strong&gt;servers&lt;/strong&gt; and &lt;strong&gt;clients&lt;/strong&gt; communicating with each over via high-performance
+TCP network protocol.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SERVERS&lt;/strong&gt;. Kafka runs on a cluster comprising several servers which can be distributed across different
+datacenters or cloud regions.
+One of  the advantage of using Kafka as a cluster is that if a server goes down there is always
+another server that  will cover for the failed server – this means being fault-tolerant.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CLIENTS&lt;/strong&gt;. In the client-side of a Kafka application are to one in charge of the process either
+writing or process the stream of events.
+Kafka has several client libraries that allows you to develop kafka clients in a variety of
+different languages.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Main Concepts and Terminology&lt;/p&gt;
+&lt;p&gt;Kafka is built around the following concepts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Event&lt;/strong&gt;. Generally speaking, an event records the fact that &lt;em&gt;something happened&lt;/em&gt; in your business world.
+An event is often referred as &lt;strong&gt;message&lt;/strong&gt;.
+An event is associated with a key, and it has a value and a timestamp (plus, optional metadata).
+An example is the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Event Key: &amp;ldquo;Alice&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Event Value: &amp;ldquo;Made a payment to Bob&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Event timestamp: &amp;ldquo;Sept 29, 2020 at 11:00&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Producers&lt;/strong&gt; and &lt;strong&gt;Consumers&lt;/strong&gt;.  The producers are all the client applications that write the events
+on Kafka, while the consumers are those application that &lt;em&gt;subscribe&lt;/em&gt; to these events, thus they are
+the one consuming the data produced by the producers.
+Kafka provides several guarantees, for instance with Kafka you have the guarantee that each event
+will be processed exactly once&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Topics&lt;/strong&gt;. Event are organized in topics. They resemble the concept of folder within a file system.
+For instance, you can have a topic called &amp;ldquo;payments&amp;rdquo; that records all the transactions that happened
+in your business.&lt;/p&gt;
+&lt;p&gt;A topic can have zero-to-multiple producers or receivers.&lt;/p&gt;
+&lt;p&gt;Events can be consumed any time, in fact they can reside with the Kafka storage system for
+an arbitrarily long time, without affecting the performance of the application. In fact,
+one cool feature about Kafka is that its operations are constant with respect to the data size.
+Therefore, storing data for a long time is perfectly fine.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Partitions&lt;/strong&gt;. Usually, a topic is spread across different &amp;ldquo;buckets&amp;rdquo; located on different Kafka
+brokers.
+When an event occurs, it is actually appended to one of the topic partitions,
+Kafka is able to guarantee:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Events with same event key are always written in the same partition&lt;/li&gt;
+&lt;li&gt;Consumers  read the event within the same partition in the exact order of arrival&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-a-topic-with-four-partitions&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/kafka-partititons.png&#34; data-caption=&#34;A topic with four partitions&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/kafka-partititons.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    A topic with four partitions
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Replica&lt;/strong&gt;. In order to achieve the fault-tolerance and high-availability each topic is
+replicated across different datacenters or geographical regions.
+Therefore there are always multiple brokers that have a copy of the data, just in case something
+goes wrong.
+A commonly used setting is to use a replication factor of 3 – these each data is copied three times.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The code for this lesson is available &lt;a href=&#34;https://github.com/acalio/BDAnalytics/tree/main/08-Kafka&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;quickstart&#34;&gt;QuickStart&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Step-1: Download Kafka from: &lt;a href=&#34;https://downloads.apache.org/kafka/2.6.0/kafka_2.13-2.6.0.tgz&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://downloads.apache.org/kafka/2.6.0/kafka&lt;sub&gt;2.13&lt;/sub&gt;-2.6.0.tgz&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wget https://downloads.apache.org/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+tar -xzf kafka_2.13-2.6.0.tgz
+cd kafka_2.13-2.6.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Step-2: Start the Kafka Environment&lt;/p&gt;
+&lt;p&gt;First you need to activate the Zookeeper service.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;zookeper-server-start.sh config/zookeper.properties
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In another terminal session run:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kafka-server-start.sh config/server.properties
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Step-3: Create a topic to store your events&lt;/p&gt;
+&lt;p&gt;Before you can write your first event you have to create a topic.&lt;/p&gt;
+&lt;p&gt;In order to create a topic, you must issue the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to obtain some information on the topic you have just created, you need to issue the
+following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Step-4: Setup a producer and a consumer from the command line&lt;/p&gt;
+&lt;p&gt;First you need to setup a &lt;em&gt;producer&lt;/em&gt;. There is a built-in command line tool.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then you can produce messages directly from the console:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; my first event
+&amp;gt; my second event
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There is also a built-in command line tool for the consumer.
+You can run the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;kafka-architecture&#34;&gt;Kafka Architecture&lt;/h1&gt;
+&lt;p&gt;Kafka is essentially a commit with a very simple data structure that is able
+to be extremely fault tolerant and (horizontally) scalable.&lt;/p&gt;
+&lt;p&gt;The Kafka commit log is basically ad queue where the records cannot be directly
+deleted or modified, but they can only be appended at the end of the data structure.&lt;/p&gt;
+&lt;p&gt;The order of items stored in the queue reflects the order of arrival to the system.
+In particular, for all the messages stored in the same partition kafka guarantees its order.&lt;/p&gt;
+&lt;p&gt;Because of this strong guarantee, records are immutable, once they are in the queue
+they cannot be modified.&lt;/p&gt;
+&lt;p&gt;Moreover, Kafka automatically assigns each record with a unique sequential ID, known
+as &amp;ldquo;offset&amp;rdquo;.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-kafka-offset&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/kafka-offset.png&#34; data-caption=&#34;Kafka Offset&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/kafka-offset.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Kafka Offset
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h1 id=&#34;component-overview&#34;&gt;Component Overview&lt;/h1&gt;
+&lt;p&gt;In the Kafka architecture the following entities are involved:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Topics&lt;/li&gt;
+&lt;li&gt;Producers&lt;/li&gt;
+&lt;li&gt;Consumers&lt;/li&gt;
+&lt;li&gt;Consumers groups&lt;/li&gt;
+&lt;li&gt;Clusters&lt;/li&gt;
+&lt;li&gt;Brokers&lt;/li&gt;
+&lt;li&gt;Partitions&lt;/li&gt;
+&lt;li&gt;Replicas&lt;/li&gt;
+&lt;li&gt;Leaders&lt;/li&gt;
+&lt;li&gt;Followers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following diagram provides a high lever overview of how
+these components interact with each others
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-kafka-components-overview&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/kafka-component.png&#34; data-caption=&#34;Kafka components overview&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/kafka-component.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Kafka components overview
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;kafka-api-architecture&#34;&gt;Kafka API Architecture&lt;/h1&gt;
+&lt;p&gt;There are four different APIs:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Producer API&lt;/strong&gt;. It enables an application to publish a stream of records to one
+or more Kafka topics.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Consumer API&lt;/strong&gt;. It enables an application to subscribe to one or more Kafka topics.
+It also enables an application to process the stream of data deriving from the topic it
+is subscribed to.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Streams API&lt;/strong&gt;. It enables an application to process  input streams and to produce
+other streams as output. It is very useful when you need to design stream-oriented applications&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Connect API&lt;/strong&gt;. It connects application or data systems to Kafka topics.
+For instance, with the Connect API, a connector could capture all the updates
+to a database and ensure that all the updates are available within a Kafka topic&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;kafka-cluster-architecture&#34;&gt;Kafka Cluster Architecture&lt;/h1&gt;
+&lt;p&gt;Here is a list of the main Kafka components within a Kafka cluster.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Broker&lt;/p&gt;
+&lt;p&gt;Any server within a Kafka cluster is considered a Kafka Broker.
+Brokers achieves the requirement of fault-tolerance, reliability and
+availability at the heart of the Kafka ecosystem.&lt;/p&gt;
+&lt;p&gt;Each broker is able to handle, thus to read and write, hundreds of messages every second.&lt;/p&gt;
+&lt;p&gt;A broker has a unique ID and it responsible for a number of partitions belonging to one of
+more topics.&lt;/p&gt;
+&lt;p&gt;The brokers leverage ZooKeper to elect a leader among them. A leader is in charge
+for dealing with client requests directed towards a particular partition.&lt;/p&gt;
+&lt;p&gt;Clearly, the more brokers are in the cluster, the higher the reliability of the entire
+system will be.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Apache Zookeeper Architecture&lt;/p&gt;
+&lt;p&gt;ZooKeper is the manager of the entire cluster.
+It knows, every time, who are the nodes involved in the cluster and
+it notifies the other brokers when something changes in terms of
+topics added or removed.&lt;/p&gt;
+&lt;p&gt;For instance, when a new Broker joins the cluster, ZooKeper is responsible for
+informing the entire cluster. It does the same thing also when a Borker fails.&lt;/p&gt;
+&lt;p&gt;Furthermore, the ZooKeeper coordinates the  elections of the leader of each partition.&lt;/p&gt;
+&lt;p&gt;The election is run every time something changes from the broker perspective.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Producer&lt;/p&gt;
+&lt;p&gt;It represents a data source. The process that publishes messages to
+one or more Kafka topics.&lt;/p&gt;
+&lt;p&gt;A Kafka producer is also able to balance the data among  different brokers&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Consumer&lt;/p&gt;
+&lt;p&gt;It reads data by reading messages directly from the topics it is subscribed to.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;kafka-architecture-1&#34;&gt;Kafka Architecture&lt;/h1&gt;
+&lt;p&gt;The following concepts are the main concepts required to understand the entire
+framework.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Kafka Topic&lt;/p&gt;
+&lt;p&gt;It is basically a channel through which data is streamed.&lt;/p&gt;
+&lt;p&gt;Producers publish their messages to topics while consumers read messages from
+the topic thy are subscribed to.&lt;/p&gt;
+&lt;p&gt;Topics are useful because they provide the ability of organizing messages within
+groups. A topic is identified with a unique names within the same Kafka cluster.&lt;/p&gt;
+&lt;p&gt;There is no limit to the number of topics that can be created on the same cluster.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Kafka Partitions&lt;/p&gt;
+&lt;p&gt;Topics are divided into partitions.
+The partitions are also replicated across the different brokers partecipating to
+a Kafka cluster.&lt;/p&gt;
+&lt;p&gt;From each partition, multiple consumers and producers can read and write in parallel.&lt;/p&gt;
+&lt;p&gt;All the messages  that have the same keys will be written on the same partition.&lt;/p&gt;
+&lt;p&gt;As regards messages without a key, they will be written among different partitions in
+a round robin fashion.&lt;/p&gt;
+&lt;p&gt;Messages with the same key will be processed respecting the order of their arrival.&lt;/p&gt;
+&lt;p&gt;There is no limit on the number of different partitions that can be created on
+topic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Topic Replication Factor&lt;/p&gt;
+&lt;p&gt;Replicating data is essential in order to achieve both availability and reliability.
+The replication factor determines how many replicas are there for every topic.&lt;/p&gt;
+&lt;p&gt;It is defined on the topic level and it applies on the partition level.&lt;/p&gt;
+&lt;p&gt;For instance, a topic replication factor of 3 means that each partition, belonging to
+that topic, will be replicated 3 times.&lt;/p&gt;
+&lt;p&gt;Given a topic, for each partition a broker is elected as leaders while the other ones
+are in charge of keeping the replicas.&lt;/p&gt;
+&lt;p&gt;Clearly, the replication factor cannot be greater than the total number of brokers.&lt;/p&gt;
+&lt;p&gt;When a replica is up to date with the leader is said to be an In-Sync Replica (ISR)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Consumer Group&lt;/p&gt;
+&lt;p&gt;A group of consumers includes all the consumers that share a common task.&lt;/p&gt;
+&lt;p&gt;When Kafka sends messages to a group of consumers, each individual consumer is assigned
+to a particular partition, then only that particular consumer will read from that partition.
+This means that there is a one-to-one relationship between partitions and consumers within
+the group. As a consequence, if the number of consumer within group exceeds the number
+partitions, some consumer will be inactive.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;understanding-the-entire-architecture&#34;&gt;Understanding the entire Architecture&lt;/h1&gt;
+&lt;p&gt;Here we focus on understanding how the components
+presented above cooperate with each others.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Example 1: One Consumer, One Producer&lt;/li&gt;
+&lt;/ol&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-one-producer-one-consumer&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/kafka-example1.png&#34; data-caption=&#34;One Producer, One Consumer&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/kafka-example1.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    One Producer, One Consumer
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Example 2: One Producer, Multiple Consumers
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-one-producers-multiple-consumers&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/kafka-example2.png&#34; data-caption=&#34;One Producers, Multiple Consumers&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/kafka-example2.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    One Producers, Multiple Consumers
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Example 3: Consumer Groups
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-consumer-groups&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/kafka-example3.png&#34; data-caption=&#34;Consumer Groups&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/kafka-example3.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Consumer Groups
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Introduction to Scala and its Build System</title>
       <link>/courses/bdanalytics/scalaintro/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
@@ -1192,6 +1831,673 @@ is your model in terms of generalization&lt;/li&gt;
 &lt;li&gt;How to represent a graph data structure &amp;ndash; without third party libraries &amp;ndash; and to execute a BFS algorithm&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The material for this lesson is available  &lt;a href=&#34;https://github.com/acalio/BDAnalytics/blob/main/03-Spark-advanced-examples/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Structured Streaming</title>
+      <link>/courses/bdanalytics/sparkstreaming/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/bdanalytics/sparkstreaming/</guid>
+      <description>&lt;p&gt;Structured Streaming is a very efficient stream processing engine built on top of the Spark SQL.&lt;/p&gt;
+&lt;p&gt;There is no significance difference in the way you define your computations between an input stream and
+a batch of static data.&lt;/p&gt;
+&lt;p&gt;The SQL engine takes care of   running your queries or transformations incrementally, updating the results
+as the streaming data continue to arrive. It should be also noted that Spark process each data &lt;em&gt;exactly once&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Spark Streaming can work in two different modes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;micro-batch&lt;/em&gt;, it the one used by default. The streams of data is processed as a series of small batches of data.
+The latency in this case can decrease as low as 100 milliseconds.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;continuous processing&lt;/em&gt;, the latency is decreased further, so that it can be achieved a 1 millisecond latency.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The code for this lesson is available &lt;a href=&#34;https://github.com/acalio/BDAnalytics/tree/main/07-Streaming&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;warming-up&#34;&gt;Warming Up&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s a very simple example. We want to count the number of words from a text stream coming  from
+a tcp connection. More specifically, we want to compute the number of occurrences for each different word
+read from the stream.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import org.apache.spark.sql.functions._
+import org.apache.spark.sql.SparkSession
+
+val spark = SparkSession
+  .builder
+  .appName(&amp;quot;StructuredNetworkWordCount&amp;quot;)
+  .getOrCreate()
+
+import spark.implicits._
+
+// Create DataFrame representing the stream of input lines from connection to localhost:9999
+val lines = spark.readStream
+  .format(&amp;quot;socket&amp;quot;)
+  .option(&amp;quot;host&amp;quot;, &amp;quot;localhost&amp;quot;)
+  .option(&amp;quot;port&amp;quot;, 9999)
+  .load()
+
+// Split the lines into words
+val words = lines.as[String].flatMap(_.split(&amp;quot; &amp;quot;))
+
+// Generate running word count
+val wordCounts = words.groupBy(&amp;quot;value&amp;quot;).count()
+
+//run the above query and print the result to theh console
+val query = wordCounts.writeStream
+  .outputMode(&amp;quot;complete&amp;quot;)
+  .format(&amp;quot;console&amp;quot;)
+  .start()
+
+query.awaitTermination()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the above code we first create a &lt;code&gt;SparSession&lt;/code&gt; which is responsible for the initialization of both the
+SQL engine and the stream processing engine.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;lines&lt;/code&gt; &lt;code&gt;DataFrame&lt;/code&gt; represents the unbounded table containing the streaming data – the unbounded table is
+the table that receive the input data from the stream, it is constantly updated – which has only one
+string-valued column named value. Each line of the streaming text becomes a new entry.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;lines&lt;/code&gt; variable is then converted into a &lt;code&gt;DataSet&lt;/code&gt; of &lt;code&gt;String&lt;/code&gt; values by splitting each line.
+After this operation you will have a new &lt;code&gt;DataSet&lt;/code&gt; where each entry contains exactly a word.&lt;/p&gt;
+&lt;p&gt;In order to count the number of occurrence for each word, we need to first aggregate by the column
+&lt;code&gt;value&lt;/code&gt;  and then count.&lt;/p&gt;
+&lt;p&gt;So far we have just defined the operations, they are not actually run by the engine. In order to start
+the entire processing we need to write the stream – in this case we print on the system console – and then
+call &lt;code&gt;start&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Usually, when your run the query, you use &lt;code&gt;awaitTermination&lt;/code&gt; so that process will continue to listen for
+new data until you ask it to stop.&lt;/p&gt;
+&lt;h1 id=&#34;programming-model&#34;&gt;Programming Model&lt;/h1&gt;
+&lt;p&gt;The main abstraction used in structured streaming is the Unbounded Table.
+It is a table that  continuously grows, as new are fed into the stream and eventually into
+the table – new records are appended at the end of the table.&lt;/p&gt;
+&lt;p&gt;Figure &lt;a id=&#34;orgb3c2ebd&#34;&gt;&lt;/a&gt;  shows a high level representation of an unbounded img.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-data--stream&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/utable.png&#34; data-caption=&#34;Data  Stream&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/utable.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Data  Stream
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In the previous example, the unbounded table was the &lt;code&gt;lines&lt;/code&gt; &lt;code&gt;DataFrame&lt;/code&gt;.
+When a you run a query on the input, you generate a result table. This result table is updated
+every trigger interval – for instance 1 sec –  in order to account for newly generated data.&lt;/p&gt;
+&lt;p&gt;The following figure shows how the result table is updated as time goes and new data is available from the
+stream.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-programming-model&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/pmodel.png&#34; data-caption=&#34;Programming Model&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/pmodel.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Programming Model
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The bottom layer of the above image represents how Spark shows the results related to the query.
+You have three different options:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;complete mode&lt;/em&gt;, the entire Result Table will be written to the external storage&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;append mode&lt;/em&gt;, only the new rows appended in the Result Table since the last trigger will be written
+to the external storage.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;update mode&lt;/em&gt;, only the rows in the Result Table that are updated since the last trigger will be written to the
+external storage.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let&amp;rsquo;s see how this model applies to the above example.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-model-of-the-example&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/Screenshot%20from%202020-12-21%2016-30-09.png&#34; data-caption=&#34;Model of the example&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/Screenshot%20from%202020-12-21%2016-30-09.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Model of the example
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;lines&lt;/code&gt; DataFrame is the input table while the &lt;code&gt;wordCounts&lt;/code&gt; is the result table.&lt;br&gt;
+Any time new data comes in, the counter all the counters are updated.&lt;/p&gt;
+&lt;p&gt;One main advantage of Spark Streaming as opposed to other solutions for stream processing is that
+it keeps the minimum amount of data in order to run the query.&lt;/p&gt;
+&lt;p&gt;In this case, it means that it does not actually materialize the entire input table, but
+it keeps the minimal amount of &lt;em&gt;intermediate&lt;/em&gt; data needed to update the result.&lt;/p&gt;
+&lt;p&gt;This model prevents the programmer from having to reason about fault-tolerance and data consistency, as
+they are automatically managed by the Spark engine.&lt;/p&gt;
+&lt;h2 id=&#34;how-to-use-datasets-and-dataframes&#34;&gt;How to use Datasets and DataFrames&lt;/h2&gt;
+&lt;p&gt;You can create streaming Datasets or DataFrames from a variety of different sources.
+For instance you can have:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;File Source. Supported formats are: CSV, JSON, text, ORC and Parquet files&lt;/li&gt;
+&lt;li&gt;Kafka Source. For integrating Spark with Kafka&lt;/li&gt;
+&lt;li&gt;Socket Source. For reading text from a socket connection&lt;/li&gt;
+&lt;li&gt;Rate Source. For generating data at the specified number of rows per second. This source is used only for
+testing and benchmarking&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In order to use any of the above source you must the &lt;code&gt;readStream&lt;/code&gt; method on the Spark session and then
+specify a set of source-specific options, which are summarized in the following (not exhaustive) table:&lt;/p&gt;
+&lt;table border=&#34;2&#34; cellspacing=&#34;0&#34; cellpadding=&#34;6&#34; rules=&#34;groups&#34; frame=&#34;hsides&#34;&gt;
+&lt;colgroup&gt;
+&lt;col  class=&#34;org-left&#34; /&gt;
+&lt;col  class=&#34;org-left&#34; /&gt;
+&lt;col  class=&#34;org-left&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope=&#34;col&#34; class=&#34;org-left&#34;&gt;Source&lt;/th&gt;
+&lt;th scope=&#34;col&#34; class=&#34;org-left&#34;&gt;Option&lt;/th&gt;
+&lt;th scope=&#34;col&#34; class=&#34;org-left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;File&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`path`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;Path to the input directory&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`maxFilesPerTrigger`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;maximum number of new files to be considered in every trigger (by default no max is set)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`latestFirst`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;True if the latest files have to be processed first&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`fileNameOnly`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;True if you want to ignore file extension&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`maxFileAge`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;Maximum age of a file before it is ignored&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;Socket&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`host`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;the host to connect to&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`port`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;the port to connect to&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;Rate&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`rowsPersecond`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;how many rows should be generate every second&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`numPartitions`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;the partition number for the generated rows&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;Kafka&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`subscribe`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;Topic to subscribe to&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&#34;org-left&#34;&gt;&amp;#xa0;&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;`kafka.bootstrap.servers`&lt;/td&gt;
+&lt;td class=&#34;org-left&#34;&gt;URL of a Kafka broker (you can specify more than one address)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Here are some examples:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val spark: SparkSession = ...
+
+// Read text from socket
+val socketDF = spark
+  .readStream
+  .format(&amp;quot;socket&amp;quot;)
+  .option(&amp;quot;host&amp;quot;, &amp;quot;localhost&amp;quot;)
+  .option(&amp;quot;port&amp;quot;, 9999)
+  .load()
+
+socketDF.isStreaming    // Returns True for DataFrames that have streaming sources
+
+socketDF.printSchema
+
+// Read all the csv files written atomically in a directory
+val userSchema = new StructType().add(&amp;quot;name&amp;quot;, &amp;quot;string&amp;quot;).add(&amp;quot;age&amp;quot;, &amp;quot;integer&amp;quot;)
+val csvDF = spark
+  .readStream
+  .option(&amp;quot;sep&amp;quot;, &amp;quot;;&amp;quot;)
+  .schema(userSchema)      // Specify schema of the csv files
+  .csv(&amp;quot;/path/to/directory&amp;quot;)    // Equivalent to format(&amp;quot;csv&amp;quot;).load(&amp;quot;/path/to/directory&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It should be noted that in this examples Spark is not able to infer the schema at compile time.
+However, some operations like &lt;code&gt;map&lt;/code&gt; or &lt;code&gt;flatMap&lt;/code&gt; need to work with a compile time known type. In these case
+you must first convert the &lt;code&gt;DataFrame&lt;/code&gt;  into the corresponding, typed, &lt;code&gt;Datasets&lt;/code&gt; and then run the
+map operations.&lt;/p&gt;
+&lt;p&gt;Also, interestingly, when you read data from a source file, Spark forces you to explicitly define the schema of your data.
+In this way, avoiding runtime inference, Spark ensures consistency between the input and the output data.&lt;/p&gt;
+&lt;h1 id=&#34;stream-operations&#34;&gt;Stream Operations&lt;/h1&gt;
+&lt;h2 id=&#34;basic-operations&#34;&gt;Basic Operations&lt;/h2&gt;
+&lt;p&gt;Streaming datasets/dataframe are no different from the their batch counterparts. It means that they support any
+operation that is also supported by a regular DataFrame/Dataset, &lt;strong&gt;&lt;strong&gt;although there are some exceptions&lt;/strong&gt;&lt;/strong&gt; which
+are listed below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Multiple streaming aggregation – you cannot define chain of aggregations&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You cannot take the first N rows&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Distinct operations are not supported&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sorting operations are only supported after you apply some aggregation on the input dataset, and only if
+you use &lt;em&gt;complete&lt;/em&gt; output mode&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some types of outer joins are not supported&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Example&lt;/p&gt;
+&lt;p&gt;Here is an  example on how to execute queries on a streaming dataframe.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;case class DeviceData(device: String, deviceType: String, signal: Double, time: DateTime)
+    
+val df: DataFrame = ... // streaming DataFrame with IOT device data with schema { device: string, deviceType: string, signal: double, time: string }
+val ds: Dataset[DeviceData] = df.as[DeviceData]    // streaming Dataset with IOT device data
+    
+// Select the devices which have signal more than 10
+df.select(&amp;quot;device&amp;quot;).where(&amp;quot;signal &amp;gt; 10&amp;quot;)      // using untyped APIs   
+ds.filter(_.signal &amp;gt; 10).map(_.device)         // using typed APIs
+    
+// Running count of the number of updates for each device type
+df.groupBy(&amp;quot;deviceType&amp;quot;).count()                          // using untyped API
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;window-operations-on-event-time&#34;&gt;Window Operations on Event Time&lt;/h2&gt;
+&lt;p&gt;One interesting feature provided by Spark streaming is the ability to aggregate data based on event-time windows.&lt;/p&gt;
+&lt;p&gt;For instance, let&amp;rsquo;s change the first example a little bit. More specifically, here we want to count the number
+of occurrences for each word and for each specific time-frame. Therefore, you can imagine there is a sliding
+time window, which groups the input records accordingly to the timestamp the have been generated.
+You can think ad the log data coming from a web servers, each log is associated with a timestamp and it
+has a text data associated with it. Therefore each entry has the following schema:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{timestamp: Timestamp, word: String} 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The following image shows the result table if we set a time-window that has  a 10 minutes width and it moves
+every 5 minutes:
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-time-window-aggregation&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/window.png&#34; data-caption=&#34;Time-window aggregation&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/window.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Time-window aggregation
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;To achieve the above result with must modify the above example as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;val windowedCounts = words.groupBy(
+  window($&amp;quot;timestamp&amp;quot;, &amp;quot;10 minutes&amp;quot;, &amp;quot;5 minutes&amp;quot;),
+  $&amp;quot;word&amp;quot;
+).count()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above example means that we want to aggregate data accordingly to a 10 minutes time window which moves
+forward, i.e., it is updated, every 5 minutes.&lt;/p&gt;
+&lt;p&gt;Aggregating by a time window increases the complexity of the entire picture. In fact, it might happen that
+the time a record is generated is significantly different from the time the same data is received by Spark.&lt;/p&gt;
+&lt;p&gt;Here is an example:
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-late-data&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/late.png&#34; data-caption=&#34;Late data&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/late.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Late data
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Imagine you have to run the above query for days? In this case, if you allow the aggregation function to account
+for data received with a, let&amp;rsquo;s say, two days of delay, you will increase the footprint of your application
+in a very dramatic way.
+Therefore, we need a mechanism for letting Spark to understand when the intermediate result of a time window
+can be dropped, therefore any other data referring to that window can be ignored.&lt;/p&gt;
+&lt;p&gt;For instance, in the above example, we want to ignore the update due to the arrival of the entry
+&lt;code&gt;\{12:04, dog\}&lt;/code&gt; received two times windows after the one it refers to.&lt;/p&gt;
+&lt;p&gt;We can implement this mechanism with &lt;em&gt;watermarking&lt;/em&gt;. With this behavior we can set a threshold to the
+maximum delay of any record. For instance if we want maximum 10 minutes delay for each time-window we can use
+the following snippet.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import spark.implicits._
+val words = ... // streaming DataFrame of schema { timestamp: Timestamp, word: String }
+// Group the data by window and word and compute the count of each group
+val windowedCounts = words
+    .withWatermark(&amp;quot;timestamp&amp;quot;, &amp;quot;10 minutes&amp;quot;)
+    .groupBy(
+    window($&amp;quot;timestamp&amp;quot;, &amp;quot;10 minutes&amp;quot;, &amp;quot;5 minutes&amp;quot;),
+    $&amp;quot;word&amp;quot;)
+    .count()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Having a 10 minutes watermark means that any time windows cannot account for data arrived with more than
+a 10 minutes delay.  More formally, for a specific window ending at time T, the engine will maintain the
+intermediate state and allow late data to update the state until
+&lt;code&gt;max event time seen - time threshold &amp;lt; T&lt;/code&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-watermarking-with-update-mode&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/water.png&#34; data-caption=&#34;Watermarking with update mode&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/water.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Watermarking with update mode
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;We have the following time windows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;w1 -&amp;gt; 12:00-12:10&lt;/li&gt;
+&lt;li&gt;w2 -&amp;gt; 12:05-12:15&lt;/li&gt;
+&lt;li&gt;w3 -&amp;gt; 12:10-12:20&lt;/li&gt;
+&lt;li&gt;w4 -&amp;gt; 12:15-12:25&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Also, we have the following triggers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;t1 -&amp;gt; 12:05&lt;/li&gt;
+&lt;li&gt;t2 -&amp;gt; 12:10&lt;/li&gt;
+&lt;li&gt;t3 -&amp;gt; 12:15&lt;/li&gt;
+&lt;li&gt;t4 -&amp;gt; 12:20&lt;/li&gt;
+&lt;li&gt;t5 -&amp;gt; 12:25&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The watermark is updated at every trigger.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;t1 -&amp;gt; no data is received, the watermark is not set&lt;/li&gt;
+&lt;li&gt;t2 -&amp;gt; the max event time is 12:08. The watermark is not set as 12:08 - 10 is lower than the starting time&lt;/li&gt;
+&lt;li&gt;t3 -&amp;gt; the max event time is 12:14. The watermark is set to 12:04. It means that any data with event time
+after 12:04 should be taken into account in order to update the time window w1 and w2.&lt;/li&gt;
+&lt;li&gt;t4 -&amp;gt; before the trigger is reached, two watermark updates happen.
+&lt;ul&gt;
+&lt;li&gt;The first   update happens when &lt;code&gt;{12:15, cat}&lt;/code&gt; is received. The watermark is set to 12:05. It means that
+the watermark is set to 12:05, therefore the &lt;code&gt;{12:08, dog}&lt;/code&gt;  will be taken into account to update
+w1 and  &lt;code&gt;{12:13, own}&lt;/code&gt; is taken into account to update w2.&lt;/li&gt;
+&lt;li&gt;The second watermark happens when  &lt;code&gt;{12:21, owl}&lt;/code&gt; is received. The watermark thus becomes 12:11.
+It means that any data with event time previous to this value will be ignored.
+For this reason, &lt;code&gt;{12:04, donkey}&lt;/code&gt; is ignored while &lt;code&gt;{12:17, monkey}&lt;/code&gt; is considered to update
+the time window w4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the above example, the update output model has been enabled. It means that the result table is actually
+update after each trigger.&lt;/p&gt;
+&lt;p&gt;If we enable…. all the intermediate steps are kept in memory and only the final result is written to the update table.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-watermarking-with-append-mode&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/lateappend.png&#34; data-caption=&#34;Watermarking with append mode&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/lateappend.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Watermarking with append mode
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h1 id=&#34;running-queries&#34;&gt;Running Queries&lt;/h1&gt;
+&lt;p&gt;Once you have defined the final result DataFrame/Dataset all that is left is for you
+is to start the steaming  computation. In order to do it, you need to obtain
+a &lt;code&gt;DataSteamWriter&lt;/code&gt; by calling &lt;code&gt;writeStream&lt;/code&gt; on the queried dataset.
+When you use a &lt;code&gt;DataSteamWriter&lt;/code&gt; you need to specify the following information:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;details of the output sink&lt;/em&gt;, Data format, location, etc.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;output mode&lt;/em&gt;, specify what gets written to the output sink&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;query name&lt;/em&gt;, optionally, specify a unique name to the query&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;trigger interval&lt;/em&gt;. optionally, specify the trigger interval. It it is not specified
+the system will check for availability of new data as soon as the previous batch has been processed.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;checkpoint location&lt;/em&gt;, for some output sinks, in order to obtain the fault tolerance you
+need to specify where to store the information for a potential recovery.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;output-sinks&#34;&gt;Output Sinks&lt;/h2&gt;
+&lt;p&gt;Spark steaming provides a variety of built-in output sinks.
+Here are the most common ones.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;strong&gt;File Sink&lt;/strong&gt;&lt;/strong&gt; - Supported Modes: Append&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;writeStream
+.format(&amp;quot;parquet&amp;quot;)        // can be &amp;quot;orc&amp;quot;, &amp;quot;json&amp;quot;, &amp;quot;csv&amp;quot;, etc.
+.option(&amp;quot;path&amp;quot;, &amp;quot;path/to/destination/dir&amp;quot;)
+.start()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;strong&gt;Kafka Sink&lt;/strong&gt;&lt;/strong&gt; - Supported Modes: Append, Update, Complete&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;writeStream
+.format(&amp;quot;kafka&amp;quot;)
+.option(&amp;quot;kafka.bootstrap.servers&amp;quot;, &amp;quot;host1:port1,host2:port2&amp;quot;)
+.option(&amp;quot;topic&amp;quot;, &amp;quot;updates&amp;quot;)
+.start()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;strong&gt;Foreach Sink&lt;/strong&gt;&lt;/strong&gt; - Supported Modes: Append, Update, Complete&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;writeStream
+.foreach(...)
+.start()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;strong&gt;Console Sink&lt;/strong&gt;&lt;/strong&gt; (debugging) - Supported Modes: Append, Update, Complete&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;writeStream
+.format(&amp;quot;console&amp;quot;)
+.start()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;strong&gt;Memory sink&lt;/strong&gt;&lt;/strong&gt; (debugging) Supported Modes: Append, Complete&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;writeStream
+.format(&amp;quot;memory&amp;quot;)
+.queryName(&amp;quot;tableName&amp;quot;)
+.start()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     

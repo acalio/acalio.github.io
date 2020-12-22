@@ -1,0 +1,1703 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 4.8.0 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Antonio Caliò">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Structured Streaming is a very efficient stream processing engine built on top of the Spark SQL.
+There is no significance difference in the way you define your computations between an input stream and a batch of static data.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/bdanalytics/sparkstreaming/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/courses/bdanalytics/sparkstreaming/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Antonio Caliò">
+  <meta property="og:url" content="/courses/bdanalytics/sparkstreaming/">
+  <meta property="og:title" content="Structured Streaming | Antonio Caliò">
+  <meta property="og:description" content="Structured Streaming is a very efficient stream processing engine built on top of the Spark SQL.
+There is no significance difference in the way you define your computations between an input stream and a batch of static data."><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Structured Streaming | Antonio Caliò</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class=" ">
+
+  
+  
+  
+    <script>window.wcDarkLightEnabled = true;</script>
+  
+  
+    <script>const isSiteThemeDark = false;</script>
+  
+  
+  <script src="/js/load-theme.js"></script>
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Antonio Caliò</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Antonio Caliò</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+    
+  
+
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/scalaintro/">Introduction to Scala and its Build System</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparkeco/">The Spark Ecosystem</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/advancedspark/">Spark (More) Advanced Examples</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparksql/">Introduction to Spark SQL</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparkgraphx/">Working with Graphs</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparkmllib/">Machine Learning with Spark</a>
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/courses/bdanalytics/sparkstreaming/">Structured Streaming</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/kafka/">Introduction to Apache Kafka</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/bdanalytics/exampleproject/">Example Project</a>
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#warming-up">Warming Up</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#how-to-use-datasets-and-dataframes">How to use Datasets and DataFrames</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#basic-operations">Basic Operations</a></li>
+    <li><a href="#window-operations-on-event-time">Window Operations on Event Time</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#output-sinks">Output Sinks</a></li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>Structured Streaming</h1>
+
+          <div class="article-style">
+            <p>Structured Streaming is a very efficient stream processing engine built on top of the Spark SQL.</p>
+<p>There is no significance difference in the way you define your computations between an input stream and
+a batch of static data.</p>
+<p>The SQL engine takes care of   running your queries or transformations incrementally, updating the results
+as the streaming data continue to arrive. It should be also noted that Spark process each data <em>exactly once</em>.</p>
+<p>Spark Streaming can work in two different modes:</p>
+<ul>
+<li><em>micro-batch</em>, it the one used by default. The streams of data is processed as a series of small batches of data.
+The latency in this case can decrease as low as 100 milliseconds.</li>
+<li><em>continuous processing</em>, the latency is decreased further, so that it can be achieved a 1 millisecond latency.</li>
+</ul>
+<p>The code for this lesson is available <a href="https://github.com/acalio/BDAnalytics/tree/main/07-Streaming" target="_blank" rel="noopener">here</a>.</p>
+<h2 id="warming-up">Warming Up</h2>
+<p>Let&rsquo;s a very simple example. We want to count the number of words from a text stream coming  from
+a tcp connection. More specifically, we want to compute the number of occurrences for each different word
+read from the stream.</p>
+<pre><code>import org.apache.spark.sql.functions._
+import org.apache.spark.sql.SparkSession
+
+val spark = SparkSession
+  .builder
+  .appName(&quot;StructuredNetworkWordCount&quot;)
+  .getOrCreate()
+
+import spark.implicits._
+
+// Create DataFrame representing the stream of input lines from connection to localhost:9999
+val lines = spark.readStream
+  .format(&quot;socket&quot;)
+  .option(&quot;host&quot;, &quot;localhost&quot;)
+  .option(&quot;port&quot;, 9999)
+  .load()
+
+// Split the lines into words
+val words = lines.as[String].flatMap(_.split(&quot; &quot;))
+
+// Generate running word count
+val wordCounts = words.groupBy(&quot;value&quot;).count()
+
+//run the above query and print the result to theh console
+val query = wordCounts.writeStream
+  .outputMode(&quot;complete&quot;)
+  .format(&quot;console&quot;)
+  .start()
+
+query.awaitTermination()
+</code></pre>
+<p>In the above code we first create a <code>SparSession</code> which is responsible for the initialization of both the
+SQL engine and the stream processing engine.</p>
+<p>The <code>lines</code> <code>DataFrame</code> represents the unbounded table containing the streaming data – the unbounded table is
+the table that receive the input data from the stream, it is constantly updated – which has only one
+string-valued column named value. Each line of the streaming text becomes a new entry.</p>
+<p>The <code>lines</code> variable is then converted into a <code>DataSet</code> of <code>String</code> values by splitting each line.
+After this operation you will have a new <code>DataSet</code> where each entry contains exactly a word.</p>
+<p>In order to count the number of occurrence for each word, we need to first aggregate by the column
+<code>value</code>  and then count.</p>
+<p>So far we have just defined the operations, they are not actually run by the engine. In order to start
+the entire processing we need to write the stream – in this case we print on the system console – and then
+call <code>start</code>.</p>
+<p>Usually, when your run the query, you use <code>awaitTermination</code> so that process will continue to listen for
+new data until you ask it to stop.</p>
+<h1 id="programming-model">Programming Model</h1>
+<p>The main abstraction used in structured streaming is the Unbounded Table.
+It is a table that  continuously grows, as new are fed into the stream and eventually into
+the table – new records are appended at the end of the table.</p>
+<p>Figure <a id="orgb3c2ebd"></a>  shows a high level representation of an unbounded img.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-data--stream">
+
+
+  <a data-fancybox="" href="/media/img/utable.png" data-caption="Data  Stream">
+
+
+  <img src="/media/img/utable.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Data  Stream
+  </figcaption>
+
+
+</figure>
+</p>
+<p>In the previous example, the unbounded table was the <code>lines</code> <code>DataFrame</code>.
+When a you run a query on the input, you generate a result table. This result table is updated
+every trigger interval – for instance 1 sec –  in order to account for newly generated data.</p>
+<p>The following figure shows how the result table is updated as time goes and new data is available from the
+stream.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-programming-model">
+
+
+  <a data-fancybox="" href="/media/img/pmodel.png" data-caption="Programming Model">
+
+
+  <img src="/media/img/pmodel.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Programming Model
+  </figcaption>
+
+
+</figure>
+</p>
+<p>The bottom layer of the above image represents how Spark shows the results related to the query.
+You have three different options:</p>
+<ul>
+<li><em>complete mode</em>, the entire Result Table will be written to the external storage</li>
+<li><em>append mode</em>, only the new rows appended in the Result Table since the last trigger will be written
+to the external storage.</li>
+<li><em>update mode</em>, only the rows in the Result Table that are updated since the last trigger will be written to the
+external storage.</li>
+</ul>
+<p>Let&rsquo;s see how this model applies to the above example.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-model-of-the-example">
+
+
+  <a data-fancybox="" href="/media/img/Screenshot%20from%202020-12-21%2016-30-09.png" data-caption="Model of the example">
+
+
+  <img src="/media/img/Screenshot%20from%202020-12-21%2016-30-09.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Model of the example
+  </figcaption>
+
+
+</figure>
+</p>
+<p>The <code>lines</code> DataFrame is the input table while the <code>wordCounts</code> is the result table.<br>
+Any time new data comes in, the counter all the counters are updated.</p>
+<p>One main advantage of Spark Streaming as opposed to other solutions for stream processing is that
+it keeps the minimum amount of data in order to run the query.</p>
+<p>In this case, it means that it does not actually materialize the entire input table, but
+it keeps the minimal amount of <em>intermediate</em> data needed to update the result.</p>
+<p>This model prevents the programmer from having to reason about fault-tolerance and data consistency, as
+they are automatically managed by the Spark engine.</p>
+<h2 id="how-to-use-datasets-and-dataframes">How to use Datasets and DataFrames</h2>
+<p>You can create streaming Datasets or DataFrames from a variety of different sources.
+For instance you can have:</p>
+<ul>
+<li>File Source. Supported formats are: CSV, JSON, text, ORC and Parquet files</li>
+<li>Kafka Source. For integrating Spark with Kafka</li>
+<li>Socket Source. For reading text from a socket connection</li>
+<li>Rate Source. For generating data at the specified number of rows per second. This source is used only for
+testing and benchmarking</li>
+</ul>
+<p>In order to use any of the above source you must the <code>readStream</code> method on the Spark session and then
+specify a set of source-specific options, which are summarized in the following (not exhaustive) table:</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col  class="org-left" />
+<col  class="org-left" />
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Source</th>
+<th scope="col" class="org-left">Option</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">File</td>
+<td class="org-left">`path`</td>
+<td class="org-left">Path to the input directory</td>
+</tr>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">`maxFilesPerTrigger`</td>
+<td class="org-left">maximum number of new files to be considered in every trigger (by default no max is set)</td>
+</tr>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">`latestFirst`</td>
+<td class="org-left">True if the latest files have to be processed first</td>
+</tr>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">`fileNameOnly`</td>
+<td class="org-left">True if you want to ignore file extension</td>
+</tr>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">`maxFileAge`</td>
+<td class="org-left">Maximum age of a file before it is ignored</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Socket</td>
+<td class="org-left">`host`</td>
+<td class="org-left">the host to connect to</td>
+</tr>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">`port`</td>
+<td class="org-left">the port to connect to</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Rate</td>
+<td class="org-left">`rowsPersecond`</td>
+<td class="org-left">how many rows should be generate every second</td>
+</tr>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">`numPartitions`</td>
+<td class="org-left">the partition number for the generated rows</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Kafka</td>
+<td class="org-left">`subscribe`</td>
+<td class="org-left">Topic to subscribe to</td>
+</tr>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">`kafka.bootstrap.servers`</td>
+<td class="org-left">URL of a Kafka broker (you can specify more than one address)</td>
+</tr>
+</tbody>
+</table>
+<p>Here are some examples:</p>
+<pre><code>val spark: SparkSession = ...
+
+// Read text from socket
+val socketDF = spark
+  .readStream
+  .format(&quot;socket&quot;)
+  .option(&quot;host&quot;, &quot;localhost&quot;)
+  .option(&quot;port&quot;, 9999)
+  .load()
+
+socketDF.isStreaming    // Returns True for DataFrames that have streaming sources
+
+socketDF.printSchema
+
+// Read all the csv files written atomically in a directory
+val userSchema = new StructType().add(&quot;name&quot;, &quot;string&quot;).add(&quot;age&quot;, &quot;integer&quot;)
+val csvDF = spark
+  .readStream
+  .option(&quot;sep&quot;, &quot;;&quot;)
+  .schema(userSchema)      // Specify schema of the csv files
+  .csv(&quot;/path/to/directory&quot;)    // Equivalent to format(&quot;csv&quot;).load(&quot;/path/to/directory&quot;)
+</code></pre>
+<p>It should be noted that in this examples Spark is not able to infer the schema at compile time.
+However, some operations like <code>map</code> or <code>flatMap</code> need to work with a compile time known type. In these case
+you must first convert the <code>DataFrame</code>  into the corresponding, typed, <code>Datasets</code> and then run the
+map operations.</p>
+<p>Also, interestingly, when you read data from a source file, Spark forces you to explicitly define the schema of your data.
+In this way, avoiding runtime inference, Spark ensures consistency between the input and the output data.</p>
+<h1 id="stream-operations">Stream Operations</h1>
+<h2 id="basic-operations">Basic Operations</h2>
+<p>Streaming datasets/dataframe are no different from the their batch counterparts. It means that they support any
+operation that is also supported by a regular DataFrame/Dataset, <strong><strong>although there are some exceptions</strong></strong> which
+are listed below:</p>
+<ul>
+<li>
+<p>Multiple streaming aggregation – you cannot define chain of aggregations</p>
+</li>
+<li>
+<p>You cannot take the first N rows</p>
+</li>
+<li>
+<p>Distinct operations are not supported</p>
+</li>
+<li>
+<p>Sorting operations are only supported after you apply some aggregation on the input dataset, and only if
+you use <em>complete</em> output mode</p>
+</li>
+<li>
+<p>Some types of outer joins are not supported</p>
+</li>
+<li>
+<p>Example</p>
+<p>Here is an  example on how to execute queries on a streaming dataframe.</p>
+<pre><code>case class DeviceData(device: String, deviceType: String, signal: Double, time: DateTime)
+    
+val df: DataFrame = ... // streaming DataFrame with IOT device data with schema { device: string, deviceType: string, signal: double, time: string }
+val ds: Dataset[DeviceData] = df.as[DeviceData]    // streaming Dataset with IOT device data
+    
+// Select the devices which have signal more than 10
+df.select(&quot;device&quot;).where(&quot;signal &gt; 10&quot;)      // using untyped APIs   
+ds.filter(_.signal &gt; 10).map(_.device)         // using typed APIs
+    
+// Running count of the number of updates for each device type
+df.groupBy(&quot;deviceType&quot;).count()                          // using untyped API
+</code></pre>
+</li>
+</ul>
+<h2 id="window-operations-on-event-time">Window Operations on Event Time</h2>
+<p>One interesting feature provided by Spark streaming is the ability to aggregate data based on event-time windows.</p>
+<p>For instance, let&rsquo;s change the first example a little bit. More specifically, here we want to count the number
+of occurrences for each word and for each specific time-frame. Therefore, you can imagine there is a sliding
+time window, which groups the input records accordingly to the timestamp the have been generated.
+You can think ad the log data coming from a web servers, each log is associated with a timestamp and it
+has a text data associated with it. Therefore each entry has the following schema:</p>
+<pre><code>{timestamp: Timestamp, word: String} 
+</code></pre>
+<p>The following image shows the result table if we set a time-window that has  a 10 minutes width and it moves
+every 5 minutes:
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-time-window-aggregation">
+
+
+  <a data-fancybox="" href="/media/img/window.png" data-caption="Time-window aggregation">
+
+
+  <img src="/media/img/window.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Time-window aggregation
+  </figcaption>
+
+
+</figure>
+</p>
+<p>To achieve the above result with must modify the above example as follows:</p>
+<pre><code>val windowedCounts = words.groupBy(
+  window($&quot;timestamp&quot;, &quot;10 minutes&quot;, &quot;5 minutes&quot;),
+  $&quot;word&quot;
+).count()
+</code></pre>
+<p>The above example means that we want to aggregate data accordingly to a 10 minutes time window which moves
+forward, i.e., it is updated, every 5 minutes.</p>
+<p>Aggregating by a time window increases the complexity of the entire picture. In fact, it might happen that
+the time a record is generated is significantly different from the time the same data is received by Spark.</p>
+<p>Here is an example:
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-late-data">
+
+
+  <a data-fancybox="" href="/media/img/late.png" data-caption="Late data">
+
+
+  <img src="/media/img/late.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Late data
+  </figcaption>
+
+
+</figure>
+</p>
+<p>Imagine you have to run the above query for days? In this case, if you allow the aggregation function to account
+for data received with a, let&rsquo;s say, two days of delay, you will increase the footprint of your application
+in a very dramatic way.
+Therefore, we need a mechanism for letting Spark to understand when the intermediate result of a time window
+can be dropped, therefore any other data referring to that window can be ignored.</p>
+<p>For instance, in the above example, we want to ignore the update due to the arrival of the entry
+<code>\{12:04, dog\}</code> received two times windows after the one it refers to.</p>
+<p>We can implement this mechanism with <em>watermarking</em>. With this behavior we can set a threshold to the
+maximum delay of any record. For instance if we want maximum 10 minutes delay for each time-window we can use
+the following snippet.</p>
+<pre><code>import spark.implicits._
+val words = ... // streaming DataFrame of schema { timestamp: Timestamp, word: String }
+// Group the data by window and word and compute the count of each group
+val windowedCounts = words
+    .withWatermark(&quot;timestamp&quot;, &quot;10 minutes&quot;)
+    .groupBy(
+    window($&quot;timestamp&quot;, &quot;10 minutes&quot;, &quot;5 minutes&quot;),
+    $&quot;word&quot;)
+    .count()
+</code></pre>
+<p>Having a 10 minutes watermark means that any time windows cannot account for data arrived with more than
+a 10 minutes delay.  More formally, for a specific window ending at time T, the engine will maintain the
+intermediate state and allow late data to update the state until
+<code>max event time seen - time threshold &lt; T</code>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-watermarking-with-update-mode">
+
+
+  <a data-fancybox="" href="/media/img/water.png" data-caption="Watermarking with update mode">
+
+
+  <img src="/media/img/water.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Watermarking with update mode
+  </figcaption>
+
+
+</figure>
+</p>
+<p>We have the following time windows:</p>
+<ul>
+<li>w1 -&gt; 12:00-12:10</li>
+<li>w2 -&gt; 12:05-12:15</li>
+<li>w3 -&gt; 12:10-12:20</li>
+<li>w4 -&gt; 12:15-12:25</li>
+</ul>
+<p>Also, we have the following triggers:</p>
+<ul>
+<li>t1 -&gt; 12:05</li>
+<li>t2 -&gt; 12:10</li>
+<li>t3 -&gt; 12:15</li>
+<li>t4 -&gt; 12:20</li>
+<li>t5 -&gt; 12:25</li>
+</ul>
+<p>The watermark is updated at every trigger.</p>
+<ul>
+<li>t1 -&gt; no data is received, the watermark is not set</li>
+<li>t2 -&gt; the max event time is 12:08. The watermark is not set as 12:08 - 10 is lower than the starting time</li>
+<li>t3 -&gt; the max event time is 12:14. The watermark is set to 12:04. It means that any data with event time
+after 12:04 should be taken into account in order to update the time window w1 and w2.</li>
+<li>t4 -&gt; before the trigger is reached, two watermark updates happen.
+<ul>
+<li>The first   update happens when <code>{12:15, cat}</code> is received. The watermark is set to 12:05. It means that
+the watermark is set to 12:05, therefore the <code>{12:08, dog}</code>  will be taken into account to update
+w1 and  <code>{12:13, own}</code> is taken into account to update w2.</li>
+<li>The second watermark happens when  <code>{12:21, owl}</code> is received. The watermark thus becomes 12:11.
+It means that any data with event time previous to this value will be ignored.
+For this reason, <code>{12:04, donkey}</code> is ignored while <code>{12:17, monkey}</code> is considered to update
+the time window w4</li>
+</ul>
+</li>
+</ul>
+<p>In the above example, the update output model has been enabled. It means that the result table is actually
+update after each trigger.</p>
+<p>If we enable…. all the intermediate steps are kept in memory and only the final result is written to the update table.
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-watermarking-with-append-mode">
+
+
+  <a data-fancybox="" href="/media/img/lateappend.png" data-caption="Watermarking with append mode">
+
+
+  <img src="/media/img/lateappend.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Watermarking with append mode
+  </figcaption>
+
+
+</figure>
+</p>
+<h1 id="running-queries">Running Queries</h1>
+<p>Once you have defined the final result DataFrame/Dataset all that is left is for you
+is to start the steaming  computation. In order to do it, you need to obtain
+a <code>DataSteamWriter</code> by calling <code>writeStream</code> on the queried dataset.
+When you use a <code>DataSteamWriter</code> you need to specify the following information:</p>
+<ul>
+<li><em>details of the output sink</em>, Data format, location, etc.</li>
+<li><em>output mode</em>, specify what gets written to the output sink</li>
+<li><em>query name</em>, optionally, specify a unique name to the query</li>
+<li><em>trigger interval</em>. optionally, specify the trigger interval. It it is not specified
+the system will check for availability of new data as soon as the previous batch has been processed.</li>
+<li><em>checkpoint location</em>, for some output sinks, in order to obtain the fault tolerance you
+need to specify where to store the information for a potential recovery.</li>
+</ul>
+<h2 id="output-sinks">Output Sinks</h2>
+<p>Spark steaming provides a variety of built-in output sinks.
+Here are the most common ones.</p>
+<ul>
+<li>
+<p><strong><strong>File Sink</strong></strong> - Supported Modes: Append</p>
+<pre><code>writeStream
+.format(&quot;parquet&quot;)        // can be &quot;orc&quot;, &quot;json&quot;, &quot;csv&quot;, etc.
+.option(&quot;path&quot;, &quot;path/to/destination/dir&quot;)
+.start()
+</code></pre>
+</li>
+<li>
+<p><strong><strong>Kafka Sink</strong></strong> - Supported Modes: Append, Update, Complete</p>
+<pre><code>writeStream
+.format(&quot;kafka&quot;)
+.option(&quot;kafka.bootstrap.servers&quot;, &quot;host1:port1,host2:port2&quot;)
+.option(&quot;topic&quot;, &quot;updates&quot;)
+.start()
+</code></pre>
+</li>
+<li>
+<p><strong><strong>Foreach Sink</strong></strong> - Supported Modes: Append, Update, Complete</p>
+<pre><code>writeStream
+.foreach(...)
+.start()
+</code></pre>
+</li>
+<li>
+<p><strong><strong>Console Sink</strong></strong> (debugging) - Supported Modes: Append, Update, Complete</p>
+<pre><code>writeStream
+.format(&quot;console&quot;)
+.start()
+</code></pre>
+</li>
+<li>
+<p><strong><strong>Memory sink</strong></strong> (debugging) Supported Modes: Append, Complete</p>
+<pre><code>writeStream
+.format(&quot;memory&quot;)
+.queryName(&quot;tableName&quot;)
+.start()
+</code></pre>
+</li>
+</ul>
+
+          </div>
+
+          
+
+
+
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/bdanalytics/sparkStreaming.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    Published with
+    <a href="https://wowchemy.com" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/wowchemy.min.832c0c66be3ec862b3635a8119cc9647.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

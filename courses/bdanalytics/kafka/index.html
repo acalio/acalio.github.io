@@ -34,10 +34,12 @@
   
     
   
-  <meta name="description" content="SparkSQL is a library for structured data processing. It provides an abstraction mechanism – the main one is called DataFrame – which can serve as a distributed SQL query engine.">
+  <meta name="description" content="Apache kafka is a distributed streaming platform.
+  What is Event Streaming?
+Event streaming is the practice of capturing data in real-time from event sources like databases, sensors or mobile devices.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/courses/bdanalytics/sparksql/">
+  <link rel="alternate" hreflang="en-us" href="/courses/bdanalytics/kafka/">
 
   
 
@@ -259,7 +261,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/courses/bdanalytics/sparksql/">
+  <link rel="canonical" href="/courses/bdanalytics/kafka/">
 
   
   
@@ -275,9 +277,11 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Antonio Caliò">
-  <meta property="og:url" content="/courses/bdanalytics/sparksql/">
-  <meta property="og:title" content="Introduction to Spark SQL | Antonio Caliò">
-  <meta property="og:description" content="SparkSQL is a library for structured data processing. It provides an abstraction mechanism – the main one is called DataFrame – which can serve as a distributed SQL query engine."><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="/courses/bdanalytics/kafka/">
+  <meta property="og:title" content="Introduction to Apache Kafka | Antonio Caliò">
+  <meta property="og:description" content="Apache kafka is a distributed streaming platform.
+  What is Event Streaming?
+Event streaming is the practice of capturing data in real-time from event sources like databases, sensors or mobile devices."><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -302,7 +306,7 @@
 
 
 
-  <title>Introduction to Spark SQL | Antonio Caliò</title>
+  <title>Introduction to Apache Kafka | Antonio Caliò</title>
 
 </head>
 
@@ -741,7 +745,7 @@
 
   </div>
   
-  <div class="docs-toc-item active">
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/courses/bdanalytics/sparksql/">Introduction to Spark SQL</a>
 
   </div>
@@ -761,7 +765,7 @@
 
   </div>
   
-  <div class="docs-toc-item">
+  <div class="docs-toc-item active">
     <a class="docs-toc-link" href="/courses/bdanalytics/kafka/">Introduction to Apache Kafka</a>
 
   </div>
@@ -782,17 +786,7 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents">
-  <ul>
-    <li><a href="#features-of-a-dataframe">Features of a DataFrame</a></li>
-    <li><a href="#running-sql-queries">Running SQL Queries</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#dataframe-vs-dataset">DataFrame vs DataSet</a></li>
-    <li><a href="#dataset-vs-rdd">DataSet vs RDD</a></li>
-  </ul>
-</nav>
+      <nav id="TableOfContents"></nav>
 
       
     </div>
@@ -803,38 +797,115 @@
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Introduction to Spark SQL</h1>
+          <h1>Introduction to Apache Kafka</h1>
 
           <div class="article-style">
-            <p>SparkSQL is a library for structured data processing.
-It provides an abstraction mechanism – the main one is called <code>DataFrame</code> – which can
-serve as  a distributed SQL query engine.</p>
-<p>Spark SQL offers the following features:</p>
-<ul>
+            <p>Apache kafka is a distributed streaming platform.</p>
+<ol>
 <li>
-<p><strong>Integrated</strong>.</p>
+<p>What is Event Streaming?</p>
+<p>Event streaming is the practice of capturing data in real-time from
+event sources like databases, sensors or mobile devices.</p>
+<p>With event-streaming you need to design your application as an event-driven
+application. This means that events your application has constantly to reach
+to what is happening in its surrounding environment.</p>
+<p>Event streaming nsures a continuous flow and interpretation of data so that the right information is at the right
+time.</p>
+</li>
+<li>
+<p>What can I use event streaming for?</p>
+<p>There is number of different contexts where real-time processing is a real thing.
+For instance:</p>
 <ul>
-<li>Seamlessly mix SQL queries with Spark programs.</li>
-<li>Spark SQL lets you query structured data as a distributed dataset (RDD) in Spark</li>
-<li>This tight integration makes it easy to run SQL queries alongside complex analytic algorithms</li>
+<li>To process payments and financial transactions</li>
+<li>To track and monitor cars, trucks, fleets and shipments</li>
+<li>To continuously capture and analyze sensor data coming from and IoT ecosystem</li>
+<li>To collect and immediately react to customer interactions and orders</li>
+<li>To monitor patients in a hospital to ensures timely treatment in emergencies</li>
+<li>To connect, store and make available data produced by different division of a company</li>
+<li>To serve as the foundation for data platforms and event-driven architectures</li>
 </ul>
 </li>
 <li>
-<p><strong>Unified Data Access</strong></p>
+<p>Apache Kafka in the real world</p>
+<p>Here is a list of company that are using Kafka:</p>
 <ul>
-<li>Load and query data from a variety of different sources like: Apache Hive tables, parquet files, JSON files, etc.</li>
+<li><em>The New York Times</em></li>
+<li><em>Pinterest</em></li>
+<li><em>zalando</em></li>
+<li><em>line</em></li>
+<li><em>adidas</em></li>
+<li><em>airbnb</em></li>
+<li><em>cisco</em></li>
 </ul>
 </li>
 <li>
-<p><strong>Scalability</strong></p>
+<p>What does it mean to be an event streaming platform?</p>
+<p>Kafka combines together three key capabilities:</p>
 <ul>
-<li>Use the same engine for both interactive and long queries</li>
-<li>SparkSQL leverages on the RDD model to provide fault tolerance an scalability</li>
+<li><strong>publish</strong> (write) and <strong>subscribe to</strong> (read) to stream of events</li>
+<li><strong>store</strong> streams of events in a durable and reliable fashion</li>
+<li><strong>process</strong> streams of event as they occur or retrospectively</li>
+</ul>
+<p>All this functionality is provided in a distributed, highly scalable, elastic, fault-tolerant and
+secure manner.</p>
+</li>
+<li>
+<p>How does Kafka work in a nutshell?</p>
+<p>The Kafka system consists of <strong>servers</strong> and <strong>clients</strong> communicating with each over via high-performance
+TCP network protocol.</p>
+<ul>
+<li><strong>SERVERS</strong>. Kafka runs on a cluster comprising several servers which can be distributed across different
+datacenters or cloud regions.
+One of  the advantage of using Kafka as a cluster is that if a server goes down there is always
+another server that  will cover for the failed server – this means being fault-tolerant.</li>
+<li><strong>CLIENTS</strong>. In the client-side of a Kafka application are to one in charge of the process either
+writing or process the stream of events.
+Kafka has several client libraries that allows you to develop kafka clients in a variety of
+different languages.</li>
 </ul>
 </li>
+<li>
+<p>Main Concepts and Terminology</p>
+<p>Kafka is built around the following concepts:</p>
+<ul>
+<li>
+<p><strong>Event</strong>. Generally speaking, an event records the fact that <em>something happened</em> in your business world.
+An event is often referred as <strong>message</strong>.
+An event is associated with a key, and it has a value and a timestamp (plus, optional metadata).
+An example is the following:</p>
+<ul>
+<li>Event Key: &ldquo;Alice&rdquo;</li>
+<li>Event Value: &ldquo;Made a payment to Bob&rdquo;</li>
+<li>Event timestamp: &ldquo;Sept 29, 2020 at 11:00&rdquo;</li>
 </ul>
-<p>The code for this lesson is available <a href="https://github.com/acalio/BDAnalytics/tree/main/04-Spark-SQL" target="_blank" rel="noopener">here</a>.</p>
-<h1 id="architecture">Architecture</h1>
+</li>
+<li>
+<p><strong>Producers</strong> and <strong>Consumers</strong>.  The producers are all the client applications that write the events
+on Kafka, while the consumers are those application that <em>subscribe</em> to these events, thus they are
+the one consuming the data produced by the producers.
+Kafka provides several guarantees, for instance with Kafka you have the guarantee that each event
+will be processed exactly once</p>
+</li>
+<li>
+<p><strong>Topics</strong>. Event are organized in topics. They resemble the concept of folder within a file system.
+For instance, you can have a topic called &ldquo;payments&rdquo; that records all the transactions that happened
+in your business.</p>
+<p>A topic can have zero-to-multiple producers or receivers.</p>
+<p>Events can be consumed any time, in fact they can reside with the Kafka storage system for
+an arbitrarily long time, without affecting the performance of the application. In fact,
+one cool feature about Kafka is that its operations are constant with respect to the data size.
+Therefore, storing data for a long time is perfectly fine.</p>
+</li>
+<li>
+<p><strong>Partitions</strong>. Usually, a topic is spread across different &ldquo;buckets&rdquo; located on different Kafka
+brokers.
+When an event occurs, it is actually appended to one of the topic partitions,
+Kafka is able to guarantee:</p>
+<ul>
+<li>Events with same event key are always written in the same partition</li>
+<li>Consumers  read the event within the same partition in the exact order of arrival</li>
+</ul>
 
 
 
@@ -855,282 +926,417 @@ serve as  a distributed SQL query engine.</p>
 
 
 
-<figure id="figure-sparksql-architecture">
+<figure id="figure-a-topic-with-four-partitions">
 
 
-  <a data-fancybox="" href="/media/img/arch.png" data-caption="SparkSQL architecture">
+  <a data-fancybox="" href="/media/img/kafka-partititons.png" data-caption="A topic with four partitions">
 
 
-  <img src="/media/img/arch.png" alt=""  >
+  <img src="/media/img/kafka-partititons.png" alt=""  >
 </a>
 
 
   
   
   <figcaption>
-    SparkSQL architecture
+    A topic with four partitions
   </figcaption>
 
 
 </figure>
 
-<p>The architecture contains three layers namely:</p>
-<ol>
-<li>Language API − Spark is compatible with different languages and Spark SQL. It is also, supported by these languages- API (python, scala, java, HiveQL).</li>
-<li>Schema RDD − Spark Core is designed with special data structure called RDD. Generally, Spark SQL works on schemas, tables, and records. Therefore, we can use the Schema RDD as temporary table. We can call this Schema RDD as Data Frame.</li>
-<li>Data Sources − Usually the Data source for spark-core is a text file, Avro file, etc. However, the Data Sources for Spark SQL is different. Those are Parquet file, JSON document, HIVE tables, and Cassandra database.</li>
+</li>
+<li>
+<p><strong>Replica</strong>. In order to achieve the fault-tolerance and high-availability each topic is
+replicated across different datacenters or geographical regions.
+Therefore there are always multiple brokers that have a copy of the data, just in case something
+goes wrong.
+A commonly used setting is to use a replication factor of 3 – these each data is copied three times.</p>
+</li>
+</ul>
+</li>
 </ol>
-<h1 id="what-is-a-dataframe">What is a DataFrame</h1>
-<p>A DataFrame is a distributed collection of data,
-which is organized into named columns.
-You can think of a DataFrame as a relational table.</p>
-<p>DataFrames can be constructed from a variety of different sources such as Hive tables, Structured Data files,
-external database, or also an existing RDD.</p>
-<h2 id="features-of-a-dataframe">Features of a DataFrame</h2>
+<p>The code for this lesson is available <a href="https://github.com/acalio/BDAnalytics/tree/main/08-Kafka" target="_blank" rel="noopener">here</a>.</p>
+<h1 id="quickstart">QuickStart</h1>
+<ol>
+<li>
+<p>Step-1: Download Kafka from: <a href="https://downloads.apache.org/kafka/2.6.0/kafka_2.13-2.6.0.tgz" target="_blank" rel="noopener">https://downloads.apache.org/kafka/2.6.0/kafka<sub>2.13</sub>-2.6.0.tgz</a></p>
+<pre><code>wget https://downloads.apache.org/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+tar -xzf kafka_2.13-2.6.0.tgz
+cd kafka_2.13-2.6.0
+</code></pre>
+</li>
+<li>
+<p>Step-2: Start the Kafka Environment</p>
+<p>First you need to activate the Zookeeper service.</p>
+<pre><code>zookeper-server-start.sh config/zookeper.properties
+</code></pre>
+<p>In another terminal session run:</p>
+<pre><code>kafka-server-start.sh config/server.properties
+</code></pre>
+</li>
+<li>
+<p>Step-3: Create a topic to store your events</p>
+<p>Before you can write your first event you have to create a topic.</p>
+<p>In order to create a topic, you must issue the following command:</p>
+<pre><code>kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+</code></pre>
+<p>If you want to obtain some information on the topic you have just created, you need to issue the
+following command:</p>
+<pre><code>kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
+</code></pre>
+</li>
+<li>
+<p>Step-4: Setup a producer and a consumer from the command line</p>
+<p>First you need to setup a <em>producer</em>. There is a built-in command line tool.</p>
+<pre><code>$ kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
+</code></pre>
+<p>Then you can produce messages directly from the console:</p>
+<pre><code>&gt; my first event
+&gt; my second event
+</code></pre>
+<p>There is also a built-in command line tool for the consumer.
+You can run the following command:</p>
+<pre><code>kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+</code></pre>
+</li>
+</ol>
+<h1 id="kafka-architecture">Kafka Architecture</h1>
+<p>Kafka is essentially a commit with a very simple data structure that is able
+to be extremely fault tolerant and (horizontally) scalable.</p>
+<p>The Kafka commit log is basically ad queue where the records cannot be directly
+deleted or modified, but they can only be appended at the end of the data structure.</p>
+<p>The order of items stored in the queue reflects the order of arrival to the system.
+In particular, for all the messages stored in the same partition kafka guarantees its order.</p>
+<p>Because of this strong guarantee, records are immutable, once they are in the queue
+they cannot be modified.</p>
+<p>Moreover, Kafka automatically assigns each record with a unique sequential ID, known
+as &ldquo;offset&rdquo;.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-kafka-offset">
+
+
+  <a data-fancybox="" href="/media/img/kafka-offset.png" data-caption="Kafka Offset">
+
+
+  <img src="/media/img/kafka-offset.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Kafka Offset
+  </figcaption>
+
+
+</figure>
+
+<h1 id="component-overview">Component Overview</h1>
+<p>In the Kafka architecture the following entities are involved:</p>
 <ul>
-<li>
-<p>Ability to process the data in the size of Kilobytes to Petabytes on a single node cluster to large cluster</p>
-</li>
-<li>
-<p>Supports different data formats (Avro, csv, elastic search, and Cassandra) and storage systems (HDFS, HIVE tables, mysql, etc).</p>
-</li>
-<li>
-<p>State of art optimization and code generation through the Spark SQL Catalyst optimizer (tree transformation framework).</p>
-</li>
-<li>
-<p>Can be easily integrated with all Big Data tools and frameworks via Spark-Core.</p>
-</li>
-<li>
-<p>Optimized application of udf function over the entire dataframe.
-The following instructions will create a new column whose values are given by the column value to the power of two</p>
-<p>import org.apache.spark.sql.functions.udf
-val square = (x=&gt; x*x)
-val squaredDF = df.withColumn(&ldquo;square&rdquo;, square(&ldquo;value&rdquo;))</p>
-</li>
-<li>
-<p>Example</p>
-<p>Imagine you have the following data, formatted as a JSON file:</p>
-<pre><code>{
-   {&quot;id&quot; : &quot;1201&quot;, &quot;name&quot; : &quot;satish&quot;, &quot;age&quot; : &quot;25&quot;}
-   {&quot;id&quot; : &quot;1202&quot;, &quot;name&quot; : &quot;krishna&quot;, &quot;age&quot; : &quot;28&quot;}
-   {&quot;id&quot; : &quot;1203&quot;, &quot;name&quot; : &quot;amith&quot;, &quot;age&quot; : &quot;39&quot;}
-   {&quot;id&quot; : &quot;1204&quot;, &quot;name&quot; : &quot;javed&quot;, &quot;age&quot; : &quot;23&quot;}
-   {&quot;id&quot; : &quot;1205&quot;, &quot;name&quot; : &quot;prudvi&quot;, &quot;age&quot; : &quot;23&quot;}
-}
-</code></pre>
-<p>You can read this file and create a dataframe as follows:</p>
-<pre><code>...
-val spark = SparkSession
-      .builder
-      .appName(&quot;SparkSQL&quot;)
-      .master(&quot;local[*]&quot;)
-      .getOrCreate()
-val df =  spark.sqlContext.read.json(&quot;example.json&quot;)
-df.show()
-</code></pre>
-<p>The last instruction returns the following result:</p>
-<pre><code>+----+------+--------+
-|age | id   |  name  |
-+----+------+--------+
-| 25 | 1201 | satish |
-| 28 | 1202 | krishna|
-| 39 | 1203 | amith  |
-| 23 | 1204 | javed  |
-| 23 | 1205 | prudvi |
-+----+------+--------+
-</code></pre>
-<p>You can access to the structure underlying a dataframe as follows:</p>
-<pre><code>df.printSchema
-</code></pre>
-<p>In this case it returns the following:</p>
-<pre><code>root
-   |-- age: string (nullable = true)
-   |-- id: string (nullable = true)
-   |-- name: string (nullable = true)
-</code></pre>
-<p>You handle a DataFrame in a very similar fashion to a Pandas dataframe.</p>
-<p>For instance:</p>
-<pre><code>df.select(&quot;name&quot;).show 
-</code></pre>
-<p>Or also</p>
-<pre><code>// This import is needed to use the $-notation
-import spark.sqlContext.implicts._ 
-df.select($&quot;name&quot;).show 
-</code></pre>
-<p>It returns:</p>
-<pre><code>+--------+
-|  name  |
-+--------+
-| satish |
-| krishna|
-| amith  |
-| javed  |
-| prudvi |
-+--------+
-</code></pre>
-<p>You can use filter:</p>
-<pre><code>dfs.filter(dfs(&quot;age&quot;) &gt; 23).show()
-</code></pre>
-<p>It returns:</p>
-<pre><code>+----+------+--------+
-|age | id   | name   |
-+----+------+--------+
-| 25 | 1201 | satish |
-| 28 | 1202 | krishna|
-| 39 | 1203 | amith  |
-+----+------+--------+
-</code></pre>
-<p>You can group and apply aggregate functions to your data as follows:</p>
-<pre><code>dfs.groupBy(&quot;age&quot;).count().show()
-</code></pre>
-<p>It returns:</p>
-<pre><code>+----+-----+
-|age |count|
-+----+-----+
-| 23 |  2  |
-| 25 |  1  |
-| 28 |  1  |
-| 39 |  1  |
-+----+-----+
-</code></pre>
-</li>
+<li>Topics</li>
+<li>Producers</li>
+<li>Consumers</li>
+<li>Consumers groups</li>
+<li>Clusters</li>
+<li>Brokers</li>
+<li>Partitions</li>
+<li>Replicas</li>
+<li>Leaders</li>
+<li>Followers</li>
 </ul>
-<h2 id="running-sql-queries">Running SQL Queries</h2>
-<p>An SQLContext enables applications to run SQL queries programmatically while running SQL functions and returns the result as a DataFrame.</p>
-<p>Generally, in the background, SparkSQL supports two different methods for converting existing RDDs into DataFrames.</p>
-<ul>
+<p>The following diagram provides a high lever overview of how
+these components interact with each others
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-kafka-components-overview">
+
+
+  <a data-fancybox="" href="/media/img/kafka-component.png" data-caption="Kafka components overview">
+
+
+  <img src="/media/img/kafka-component.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Kafka components overview
+  </figcaption>
+
+
+</figure>
+</p>
+<h1 id="kafka-api-architecture">Kafka API Architecture</h1>
+<p>There are four different APIs:</p>
+<ol>
+<li><strong>Producer API</strong>. It enables an application to publish a stream of records to one
+or more Kafka topics.</li>
+<li><strong>Consumer API</strong>. It enables an application to subscribe to one or more Kafka topics.
+It also enables an application to process the stream of data deriving from the topic it
+is subscribed to.</li>
+<li><strong>Streams API</strong>. It enables an application to process  input streams and to produce
+other streams as output. It is very useful when you need to design stream-oriented applications</li>
+<li><strong>Connect API</strong>. It connects application or data systems to Kafka topics.
+For instance, with the Connect API, a connector could capture all the updates
+to a database and ensure that all the updates are available within a Kafka topic</li>
+</ol>
+<h1 id="kafka-cluster-architecture">Kafka Cluster Architecture</h1>
+<p>Here is a list of the main Kafka components within a Kafka cluster.</p>
+<ol>
 <li>
-<p>Inferring the schema via reflection</p>
-<p>This method uses reflection to generate the schema of an RDD that contains specific types
-of objects. The Scala interface for Spark SQL supports automatically converting an RDD containing case classes to a DataFrame.
-The <strong>case class</strong> defines the schema of the table. The names
-of the arguments to the case class are read using reflection and they become the names of the columns.</p>
-<p>Case classes can also be nested or contain complex
-types such as Sequences or Arrays. This RDD can be implicitly be
-converted to a DataFrame and then registered as a table.
-Tables can be used in subsequent SQL statements.</p>
-<ul>
-<li>
-<p>Example</p>
-<p>Imagine you are given with the following data:</p>
-<pre><code>1201, satish, 25
-1202, krishna, 28
-1203, amith, 39
-1204, javed, 23
-1205, prudvi, 23
-</code></pre>
-<p>First you need to define a case class – which is  class that only define its contructor – to provide your data with a fixed structure:</p>
-<pre><code>case class Employee(id: Int, name: String, age: Int)
-</code></pre>
-<p>Next, you create an RDD mapping each line to the above case class and then convert it to a DataFrame</p>
-<pre><code>val spark = SparkSession
-      .builder
-      .appName(&quot;SparkSQL&quot;)
-      .master(&quot;local[*]&quot;)
-      .getOrCreate()
-        
-val df =  spark.sparkContext.textFile(&quot;employee.txt&quot;)
-   .map(_.split(&quot;,&quot;)).map(e=&gt;Employee(e(0).trim.toInt, e(1), e(2).trim.toInt)).toDF
-df.show()
-</code></pre>
-<p>Now you have a fully functional data frame. If you want to use the SQL engine your first need to register
-the dataframe as a table:</p>
-<pre><code>empl.registerTempTable(&quot;employee&quot;) //set the name of the table associated with the dataset
-</code></pre>
-<p>Then your can perform regular SQL query as follows:</p>
-<pre><code>spark.sqlContext.sql(&quot;Select * from employee*&quot;).show
-</code></pre>
-<p>It returns:</p>
-<pre><code>+------+---------+----+
-|  id  |  name   |age |
-+------+---------+----+
-| 1201 | satish  | 25 |
-| 1202 | krishna | 28 |
-| 1203 | amith   | 39 |
-| 1204 | javed   | 23 |
-| 1205 | prudvi  | 23 |
-+------+---------+----+
-</code></pre>
-<p>SparkSQL understands any sql query – so if you know SQL you are good to go.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Specify the schema programmatically</p>
-<p>The second method for creating DataFrame is through programmatic interface that allows you to construct a schema and then apply it to an existing RDD. We can create a DataFrame programmatically using the following three steps.</p>
-<ul>
-<li>
-<p>Create an RDD of Rows from an Original RDD.</p>
-</li>
-<li>
-<p>Create the schema represented by a StructType matching the structure of Rows in the RDD created in Step 1.</p>
-</li>
-<li>
-<p>Apply the schema to the RDD of Rows via createDataFrame method provided by SQLContext.</p>
+<p>Broker</p>
+<p>Any server within a Kafka cluster is considered a Kafka Broker.
+Brokers achieves the requirement of fault-tolerance, reliability and
+availability at the heart of the Kafka ecosystem.</p>
+<p>Each broker is able to handle, thus to read and write, hundreds of messages every second.</p>
+<p>A broker has a unique ID and it responsible for a number of partitions belonging to one of
+more topics.</p>
+<p>The brokers leverage ZooKeper to elect a leader among them. A leader is in charge
+for dealing with client requests directed towards a particular partition.</p>
+<p>Clearly, the more brokers are in the cluster, the higher the reliability of the entire
+system will be.</p>
 </li>
 <li>
-<p>Example</p>
-<p>Imagine you are given with the following data:</p>
-<pre><code>1201, satish, 25
-1202, krishna, 28
-1203, amith, 39
-1204, javed, 23
-1205, prudvi, 23
-</code></pre>
-<p>Next, you create an RDD from the text file.</p>
-<pre><code>//remember to include these imports
-import org.apache.spark.sql.Row
-import org.apache.spark.sql.types.{StructType, StructField, StringType}
-        
-val spark = SparkSession
-      .builder
-      .appName(&quot;SparkSQL&quot;)
-      .master(&quot;local[*]&quot;)
-      .getOrCreate()
-        
-val df =  spark.sparkContext.textFile(&quot;employee.txt&quot;)
-</code></pre>
-<p>Now, instead of defining a case class as we did earlier, we define schema with a String.</p>
-<pre><code>val schemaString = &quot;id name age&quot;
-</code></pre>
-<p>The above string is then used to generate a schema as follows:</p>
-<pre><code>val schema = StructType(schemaString.split(&quot; &quot;).map(fieldName =&gt; =StructField(fieldName, StringType, true)))
-</code></pre>
-<p>Use the following command to convert an RDD (employee) to Rows. It means, here we are specifying the logic for reading the RDD data and store it into rowRDD. Here we are using two map functions: one is a delimiter for splitting the record string (.map(<sub>.split</sub>(&quot;,&quot;))) and the second
-map function for defining a Row with the field index
-value (.map(e ⇒ Row(e(0).trim.toInt, e(1), e(2).trim.toInt))).</p>
-<pre><code>val rowRDD = employee.map(_.split(&quot;,&quot;)).map(e ⇒ Row(e(0).trim.toInt, e(1), e(2).trim.toInt))
-val employeeDF = sqlContext.createDataFrame(rowRDD, schema)
-</code></pre>
+<p>Apache Zookeeper Architecture</p>
+<p>ZooKeper is the manager of the entire cluster.
+It knows, every time, who are the nodes involved in the cluster and
+it notifies the other brokers when something changes in terms of
+topics added or removed.</p>
+<p>For instance, when a new Broker joins the cluster, ZooKeper is responsible for
+informing the entire cluster. It does the same thing also when a Borker fails.</p>
+<p>Furthermore, the ZooKeeper coordinates the  elections of the leader of each partition.</p>
+<p>The election is run every time something changes from the broker perspective.</p>
 </li>
-</ul>
+<li>
+<p>Producer</p>
+<p>It represents a data source. The process that publishes messages to
+one or more Kafka topics.</p>
+<p>A Kafka producer is also able to balance the data among  different brokers</p>
 </li>
-</ul>
-<h1 id="comparative-evaluation">Comparative evaluation</h1>
-<h2 id="dataframe-vs-dataset">DataFrame vs DataSet</h2>
-<p>They are basically the same object, namely a collection of structured data
-– for instance DataSet[Person], DataSet[(String, Double)].</p>
-<p>Actually, a <code>DataFrame</code> is an alias for <code>Dataset[Row]</code>.</p>
-<p>The major difference between the two is that the structure of the data contained within
-a  <code>DataFrame</code>  is inferred at runtime, while for a <code>DataSet</code> object Scala is able to infer the
-actual type of the objects at compile time.
-Clearly, this second mechanism is beneficial in terms of performance and it is also less prone
-to potential errors.</p>
-<h2 id="dataset-vs-rdd">DataSet vs RDD</h2>
-<p>An RDD can be converted to a <code>DataSet</code> object with the method <code>toDS</code>.</p>
-<p>DataSets are more convenient than RDD for the following reasons:</p>
-<ul>
-<li>better efficiency</li>
-<li>better interoperability with other libraries:
-<ul>
-<li>MLlib relies on Datasets</li>
-<li>Spark streaming is moving towards structured streaming</li>
-<li>Everything that use apache Avro</li>
-</ul>
+<li>
+<p>Consumer</p>
+<p>It reads data by reading messages directly from the topics it is subscribed to.</p>
 </li>
-</ul>
-<hr>
-<p>The material for this lesson is available  <a href="https://github.com/acalio/BDAnalytics/tree/main/04-Spark-SQL/" target="_blank" rel="noopener">here</a></p>
+</ol>
+<h1 id="kafka-architecture-1">Kafka Architecture</h1>
+<p>The following concepts are the main concepts required to understand the entire
+framework.</p>
+<ol>
+<li>
+<p>Kafka Topic</p>
+<p>It is basically a channel through which data is streamed.</p>
+<p>Producers publish their messages to topics while consumers read messages from
+the topic thy are subscribed to.</p>
+<p>Topics are useful because they provide the ability of organizing messages within
+groups. A topic is identified with a unique names within the same Kafka cluster.</p>
+<p>There is no limit to the number of topics that can be created on the same cluster.</p>
+</li>
+<li>
+<p>Kafka Partitions</p>
+<p>Topics are divided into partitions.
+The partitions are also replicated across the different brokers partecipating to
+a Kafka cluster.</p>
+<p>From each partition, multiple consumers and producers can read and write in parallel.</p>
+<p>All the messages  that have the same keys will be written on the same partition.</p>
+<p>As regards messages without a key, they will be written among different partitions in
+a round robin fashion.</p>
+<p>Messages with the same key will be processed respecting the order of their arrival.</p>
+<p>There is no limit on the number of different partitions that can be created on
+topic.</p>
+</li>
+<li>
+<p>Topic Replication Factor</p>
+<p>Replicating data is essential in order to achieve both availability and reliability.
+The replication factor determines how many replicas are there for every topic.</p>
+<p>It is defined on the topic level and it applies on the partition level.</p>
+<p>For instance, a topic replication factor of 3 means that each partition, belonging to
+that topic, will be replicated 3 times.</p>
+<p>Given a topic, for each partition a broker is elected as leaders while the other ones
+are in charge of keeping the replicas.</p>
+<p>Clearly, the replication factor cannot be greater than the total number of brokers.</p>
+<p>When a replica is up to date with the leader is said to be an In-Sync Replica (ISR)</p>
+</li>
+<li>
+<p>Consumer Group</p>
+<p>A group of consumers includes all the consumers that share a common task.</p>
+<p>When Kafka sends messages to a group of consumers, each individual consumer is assigned
+to a particular partition, then only that particular consumer will read from that partition.
+This means that there is a one-to-one relationship between partitions and consumers within
+the group. As a consequence, if the number of consumer within group exceeds the number
+partitions, some consumer will be inactive.</p>
+</li>
+</ol>
+<h1 id="understanding-the-entire-architecture">Understanding the entire Architecture</h1>
+<p>Here we focus on understanding how the components
+presented above cooperate with each others.</p>
+<ol>
+<li>Example 1: One Consumer, One Producer</li>
+</ol>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-one-producer-one-consumer">
+
+
+  <a data-fancybox="" href="/media/img/kafka-example1.png" data-caption="One Producer, One Consumer">
+
+
+  <img src="/media/img/kafka-example1.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    One Producer, One Consumer
+  </figcaption>
+
+
+</figure>
+
+<ol start="2">
+<li>
+<p>Example 2: One Producer, Multiple Consumers
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-one-producers-multiple-consumers">
+
+
+  <a data-fancybox="" href="/media/img/kafka-example2.png" data-caption="One Producers, Multiple Consumers">
+
+
+  <img src="/media/img/kafka-example2.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    One Producers, Multiple Consumers
+  </figcaption>
+
+
+</figure>
+</p>
+</li>
+<li>
+<p>Example 3: Consumer Groups
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-consumer-groups">
+
+
+  <a data-fancybox="" href="/media/img/kafka-example3.png" data-caption="Consumer Groups">
+
+
+  <img src="/media/img/kafka-example3.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Consumer Groups
+  </figcaption>
+
+
+</figure>
+</p>
+</li>
+</ol>
 
           </div>
 
@@ -1155,7 +1361,7 @@ to potential errors.</p>
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/bdanalytics/sparkSQL.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/bdanalytics/kafka.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>
