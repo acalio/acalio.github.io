@@ -3373,82 +3373,6 @@ An edge triplet has five properties:&lt;/p&gt;
     </item>
     
     <item>
-      <title>Clustering</title>
-      <link>/courses/datamining/clustering/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/datamining/clustering/</guid>
-      <description>&lt;p&gt;Learn how to deal with clustering problems
-with scikit-learn.&lt;/p&gt;
-&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/Data-Mining-Course/blob/master/Lecture%207/Lecture%207b.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Ensamble Learning</title>
-      <link>/courses/datamining/enslearn/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/datamining/enslearn/</guid>
-      <description>&lt;p&gt;This lesson introduces you to a variety of
-Ensamble Learning techniques.&lt;/p&gt;
-&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/Data-Mining-Course/blob/master/Lecture%207/Lecture%207a.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Final Lesson</title>
-      <link>/courses/datamining/finallesson/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/datamining/finallesson/</guid>
-      <description>&lt;p&gt;In this  lesson we will discuss about the final
-project you are required to develop in order to pass the exam.&lt;/p&gt;
-&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/Data-Mining-Course/blob/master/Lecture%208/Lecture%208.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Introduction to NumPy</title>
-      <link>/courses/datamining/numpyintro/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/datamining/numpyintro/</guid>
-      <description>&lt;p&gt;This lesson introduces you to one of the building block
-Python as a scientific computing tool.&lt;/p&gt;
-&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/Data-Mining-Course/blob/master/Lecture%201/Lecture%201.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Data Handling &amp; Visualization</title>
-      <link>/courses/datamining/pandasintro/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/datamining/pandasintro/</guid>
-      <description>&lt;p&gt;This lesson introduces you to Pandas. The main
-library for handling data in Python.&lt;/p&gt;
-&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/Data-Mining-Course/blob/master/Lecture%202-3/Lecture2.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Introduction to scikit-learn</title>
-      <link>/courses/datamining/introscikit/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/datamining/introscikit/</guid>
-      <description>&lt;p&gt;In this lesson you will address a real machine learning project.
-This lesson provides also a primer into scikit-learn.&lt;/p&gt;
-&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/Data-Mining-Course/blob/master/Lecture%204-5/Lecture%204.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Solving A Classification Problem</title>
-      <link>/courses/datamining/classproblem/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/datamining/classproblem/</guid>
-      <description>&lt;p&gt;In this lesson you will address a classifcation problem.&lt;/p&gt;
-&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/Data-Mining-Course/blob/master/Lecture%206/lecture6.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Complex Influence Propagation based on Trust-aware Dynamic Linear Threshold Models</title>
       <link>/project/f2dlt/</link>
       <pubDate>Wed, 14 Oct 2020 09:44:20 +0200</pubDate>
@@ -3541,6 +3465,17 @@ Pleas follow the link for detailed instructions on how to install and use this p
     </item>
     
     <item>
+      <title>Data Handling &amp; Visualization</title>
+      <link>/courses/datamining/pandasintro/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/pandasintro/</guid>
+      <description>&lt;p&gt;This lesson introduces you to Pandas.
+Your swiss-knife  for handling data in Python.&lt;/p&gt;
+&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Trust-based dynamic linear threshold models for non-competitive and competitive influence propagation</title>
       <link>/talk/trustcom/</link>
       <pubDate>Wed, 01 Aug 2018 15:29:00 +0200</pubDate>
@@ -3561,6 +3496,54 @@ Pleas follow the link for detailed instructions on how to install and use this p
       <link>/talk/google-jam/</link>
       <pubDate>Sat, 09 Jun 2018 15:29:36 +0200</pubDate>
       <guid>/talk/google-jam/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/courses/datamining/classproblem/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/classproblem/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/courses/datamining/clustering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/clustering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/courses/datamining/enslearn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/enslearn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/courses/datamining/finallesson/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/finallesson/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/courses/datamining/introscikit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/introscikit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/courses/datamining/numpyintro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/numpyintro/</guid>
       <description></description>
     </item>
     
