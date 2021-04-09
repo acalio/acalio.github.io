@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Antonio Caliò</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 14 Oct 2020 09:44:20 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png</url>
       <title>Antonio Caliò</title>
@@ -3373,6 +3373,14 @@ An edge triplet has five properties:&lt;/p&gt;
     </item>
     
     <item>
+      <title>Attribute based Diversification of Seeds for Targeted Influence Maximization</title>
+      <link>/publication/calio-attribute-2020/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>/publication/calio-attribute-2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Complex Influence Propagation based on Trust-aware Dynamic Linear Threshold Models</title>
       <link>/project/f2dlt/</link>
       <pubDate>Wed, 14 Oct 2020 09:44:20 +0200</pubDate>
@@ -3417,14 +3425,6 @@ Pleas follow the link for detailed instructions on how to install and use this p
     </item>
     
     <item>
-      <title>Attribute based Diversification of Seeds for Targeted Influence Maximization</title>
-      <link>/publication/calio-attribute-2020/</link>
-      <pubDate>Tue, 01 Sep 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/calio-attribute-2020/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title> Cores matter? An analysis of graph decomposition effects on influence maximization</title>
       <link>/talk/websci/</link>
       <pubDate>Tue, 14 Jul 2020 00:00:00 +0000</pubDate>
@@ -3462,6 +3462,16 @@ Pleas follow the link for detailed instructions on how to install and use this p
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       <guid>/publication/calio-topology-driven-2018/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Classification</title>
+      <link>/courses/datamining/classproblem/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/classproblem/</guid>
+      <description>&lt;p&gt;In this lesson you are going to solve a classification problem.&lt;/p&gt;
+&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/03-classification&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -3507,14 +3517,6 @@ You will go through a real-world data mining problem.&lt;/p&gt;
       <link>/talk/google-jam/</link>
       <pubDate>Sat, 09 Jun 2018 15:29:36 +0200</pubDate>
       <guid>/talk/google-jam/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/courses/datamining/classproblem/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/courses/datamining/classproblem/</guid>
       <description></description>
     </item>
     

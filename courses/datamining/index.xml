@@ -13,6 +13,16 @@
     </image>
     
     <item>
+      <title>Classification</title>
+      <link>/courses/datamining/classproblem/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/classproblem/</guid>
+      <description>&lt;p&gt;In this lesson you are going to solve a classification problem.&lt;/p&gt;
+&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/03-classification&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Data Handling &amp; Visualization</title>
       <link>/courses/datamining/pandasintro/</link>
       <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
@@ -32,14 +42,6 @@ Your swiss-knife  for handling data in Python.&lt;/p&gt;
 You will go through a real-world data mining problem.&lt;/p&gt;
 &lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/blob/main/02-Scikit_intro/scikit_intro.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/courses/datamining/classproblem/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/courses/datamining/classproblem/</guid>
-      <description></description>
     </item>
     
     <item>
