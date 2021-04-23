@@ -3465,12 +3465,33 @@ Pleas follow the link for detailed instructions on how to install and use this p
     </item>
     
     <item>
+      <title>Anomaly Detection</title>
+      <link>/courses/datamining/anomaly/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/anomaly/</guid>
+      <description>&lt;p&gt;This lesson introduces you to the anomaly detection problem.&lt;/p&gt;
+&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/04-anomaly&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Classification</title>
       <link>/courses/datamining/classproblem/</link>
       <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
       <guid>/courses/datamining/classproblem/</guid>
       <description>&lt;p&gt;In this lesson you are going to solve a classification problem.&lt;/p&gt;
 &lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/03-classification&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Clustering</title>
+      <link>/courses/datamining/clustering/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/clustering/</guid>
+      <description>&lt;p&gt;In this lesson we are going to address
+the clustering problem.&lt;/p&gt;
+&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/05-clustering&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -3517,14 +3538,6 @@ You will go through a real-world data mining problem.&lt;/p&gt;
       <link>/talk/google-jam/</link>
       <pubDate>Sat, 09 Jun 2018 15:29:36 +0200</pubDate>
       <guid>/talk/google-jam/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/courses/datamining/clustering/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/courses/datamining/clustering/</guid>
       <description></description>
     </item>
     
