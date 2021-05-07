@@ -268,6 +268,11 @@
   </url>
   
   <url>
+    <loc>/courses/datamining/enslearn/</loc>
+    <lastmod>2018-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/courses/datamining/introscikit/</loc>
     <lastmod>2018-09-09T00:00:00+00:00</lastmod>
   </url>
@@ -395,10 +400,6 @@
   <url>
     <loc>/talk/google-jam/</loc>
     <lastmod>2020-10-03T15:29:36+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/datamining/enslearn/</loc>
   </url>
   
   <url>
