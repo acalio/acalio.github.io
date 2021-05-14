@@ -1,0 +1,1853 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  
+  
+  <meta name="generator" content="Wowchemy 4.8.0 for Hugo">
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Antonio Caliò">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="If you have hard time in minimizing the cost function of your learning algorithm, you should give it a try to one of the following solutions:
+ increase the number of data points try to focus on a subset of the original features try to add more features (e.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/datamining/debugging/">
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-TmDwFLhg3UA4ZG0Eb4MIyT1O1Mb+Oww5kFG0uHqXsdbyZz9DcvYQhKpGgNkamAI6h2lGGZq2X8ftOJvF/XjTUg==" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/courses/datamining/debugging/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Antonio Caliò">
+  <meta property="og:url" content="/courses/datamining/debugging/">
+  <meta property="og:title" content="Diagnostic &amp; Debugging | Antonio Caliò">
+  <meta property="og:description" content="If you have hard time in minimizing the cost function of your learning algorithm, you should give it a try to one of the following solutions:
+ increase the number of data points try to focus on a subset of the original features try to add more features (e."><meta property="og:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu28aae1bbe67b568759c86bc74a5bbfe0_150966_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2018-09-09T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2018-09-09T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Diagnostic &amp; Debugging | Antonio Caliò</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class=" ">
+
+  
+  
+  
+    <script>window.wcDarkLightEnabled = true;</script>
+  
+  
+    <script>const isSiteThemeDark = false;</script>
+  
+  
+  <script src="/js/load-theme.js"></script>
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Antonio Caliò</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Antonio Caliò</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/courses/"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+    
+  
+
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/datamining/">Overview</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/datamining/pandasintro/">Data Handling &amp; Visualization</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/datamining/introscikit/">Introduction to scikit-learn</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/datamining/classproblem/">Classification</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/datamining/clustering/">Clustering</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/datamining/anomaly/">Anomaly Detection</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/datamining/enslearn/">Ensamble Learning</a>
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/courses/datamining/debugging/">Diagnostic &amp; Debugging</a>
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#performance-evaluation">Performance Evaluation</a></li>
+    <li><a href="#the-model-selection-problem">The Model Selection Problem</a>
+      <ul>
+        <li><a href="#the-validation-set">The validation set</a></li>
+      </ul>
+    </li>
+    <li><a href="#bias-vs-variance">Bias vs Variance</a>
+      <ul>
+        <li><a href="#the-impact-of-regularization">The impact of regularization</a></li>
+      </ul>
+    </li>
+    <li><a href="#learning-curves">Learning Curves</a>
+      <ul>
+        <li><a href="#high-bias">High Bias</a></li>
+        <li><a href="#high-variance">High Variance</a></li>
+        <li><a href="#recap">Recap</a></li>
+      </ul>
+    </li>
+    <li><a href="#use-case-spam-classifier">Use Case: Spam Classifier</a>
+      <ul>
+        <li><a href="#data-engineering">Data Engineering</a></li>
+        <li><a href="#error-analysis">Error Analysis</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>Diagnostic &amp; Debugging</h1>
+
+          <div class="article-style">
+            <p>If you have hard time in minimizing the cost function of your
+learning algorithm, you should give it a try to one of the following
+solutions:</p>
+<ul>
+<li>increase the number of data points</li>
+<li>try to focus on a subset of the original features</li>
+<li>try to add more features (e.g., some linear combination of the existing features)</li>
+<li>play with different regularization terms</li>
+</ul>
+<p><strong>Which is the right option?</strong></p>
+<p>It depends! In order to understand the most profitable option among
+above directions requires you to perform a diagnosis of your ML algorithm.</p>
+<p>Diagnostic can guide you to select the most effective strategy to improve
+the performance of your algorithm.</p>
+<h2 id="performance-evaluation">Performance Evaluation</h2>
+<p>There are two main scenario to avoid:</p>
+<ul>
+<li><strong>Overfitting</strong></li>
+<li><strong>Underfitting</strong></li>
+</ul>
+<p>A standard approach is to split your dataset into two disjoint sets.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-trainingtest-set-split">
+
+
+  <a data-fancybox="" href="/media/img/train-test-split.png" data-caption="Training/Test Set split">
+
+
+  <img src="/media/img/train-test-split.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Training/Test Set split
+  </figcaption>
+
+
+</figure>
+
+<p>The largest fraction of your data has to be reserved to the training set.
+The amount of data in your training set is roughly about the 30% of the entire daatset.
+It is also recommended to shuffle your data before executing the splitting.</p>
+<p>Once you have split the data you can compute two
+cost functions, denoted by:</p>
+<!-- - <img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" /> -->
+<ul>
+<li>J(Θ) - Value of the cost function on the training set</li>
+<li>J<sub>test</sub>(Θ) - Value of the cost function on the test set.</li>
+</ul>
+<p>Θ denotes the parameter vector that characterize your hypothesis &ndash;
+hereinafter denoted by h<sub>Θ</sub>, i.e.,
+your model.</p>
+<p>Usually, J(Θ) and J<sub>test</sub>(Θ)  are the same function.
+However, they can also be different from each other.</p>
+<p>For instance, in the context of (binary) classification, your model minimize the following
+function:</p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J(\Theta)=-\frac{1}{2m} \sum_i^{m} y^{(i)} \log h_{\Theta} (x^{(i)}) + (1-y^{(i)}) \log h_{\Theta} (x^{(i)})" title="Cross Entropy Loss" /></p>
+<p>But you can use the mis-classification error to evaluate the performance on the test set.
+More formally, given a data point x, the error is defined as:</p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;err(h_{\Theta}(x), y) = \left\{ \begin{array}{ll} 0 & \mbox{if $ \hat{y}=y$};\\1 & \mbox{otherwise}.\end{array} \right." title="" /></p>
+<p>Where ŷ denotes the value predicted by your model.</p>
+<p>Finally, the total error is obtained by summing the above function upon each data
+point in the test.</p>
+<h2 id="the-model-selection-problem">The Model Selection Problem</h2>
+<p>Usually &ndash; <strong>not necessarily</strong> &ndash; the error computed on the test set
+will be higher than the one obtained on the training set.</p>
+<p>The error on the test set is referred as <em>generalization error</em>.</p>
+<p>Your goal  as a data scientist is to provide a model with
+the lowest generalization error.</p>
+<p>However, <strong>you are not supposed to select your best model based
+on the performance achieved on the test set</strong>.</p>
+<p>Imagine you have to train a model upon different representations of your
+original dataset.</p>
+<p>For instance, you can have several polynomial representations by changing the order
+of the polynomial.</p>
+<table>
+<thead>
+<tr>
+<th>Degree</th>
+<th>Hypothesis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>h<sub>Θ</sub>(x) = θ<sub>0</sub> + θ<sub>1</sub>x<sub>1</sub></td>
+</tr>
+<tr>
+<td>2</td>
+<td>h<sub>Θ</sub>(x) = θ<sub>0</sub> + θ<sub>1</sub>x +  θ<sub>2</sub>x<sup>2</sup></td>
+</tr>
+<tr>
+<td>3</td>
+<td>h<sub>Θ</sub>(x) = θ<sub>0</sub> + θ<sub>1</sub>x +  θ<sub>2</sub>x<sup>2</sup> +  θ<sub>3</sub>x<sup>3</sup></td>
+</tr>
+<tr>
+<td>.</td>
+<td>.</td>
+</tr>
+<tr>
+<td>.</td>
+<td>.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>h<sub>Θ</sub>(x) = θ<sub>0</sub> + θ<sub>1</sub>x<sup>1</sup> +  θ<sub>2</sub>x<sup>2</sup> + &hellip; +  θ<sub>10</sub>x<sup>10</sup></td>
+</tr>
+</tbody>
+</table>
+<p>Clearly, each polynomial representation leads to a different hypothesis (i.e.,
+Θ<sup>(1)</sup>, Θ<sup>(2)</sup>, &hellip;, Θ<sup>(10)</sup>).</p>
+<p>At this point we need to establish which is the best model among the above 10 different
+hypothesis.</p>
+<p><strong>A pitfall to avoid</strong> is to establish the best model based on the test error. In fact,
+the test error is often an optimistic estimate of the true performance of our
+model.</p>
+<p>Therefore, in the above scenario, we cannot decide which is the best choice for the degree
+of the polynomial representation based on the performance on the test of each model.</p>
+<p><strong>This is wrong because it is like we were trying to fit the test set!</strong>.
+The test set is only meant to report the generalization error, you are not  supposed
+to take any design decision based on the above error.</p>
+<h3 id="the-validation-set">The validation set</h3>
+<p>In order to solve the above problem, you can split the data into three separate sets.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-trainingvalidationtest-set-split">
+
+
+  <a data-fancybox="" href="/media/img/train-test-vali-split.png" data-caption="Training/Validation/Test Set split">
+
+
+  <img src="/media/img/train-test-vali-split.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Training/Validation/Test Set split
+  </figcaption>
+
+
+</figure>
+
+<p>Typically, the training set takes roughly the 60% of the entire dataset, the
+remaining part is equally divided between the validation and the test set.</p>
+<p>Now for each of the above hypothesis you should also evaluate the cost function with
+respect to the new validation set (J_<sub>val</sub>(Θ))</p>
+<p>For instance, if you have the following situation (J(Θ) is an arbitrary cost function).</p>
+<table>
+<thead>
+<tr>
+<th>Degree</th>
+<th>Hypothesis</th>
+<th>J(Θ)</th>
+<th>(J_<sub>val</sub>(Θ)</th>
+<th>(J_<sub>test</sub>(Θ)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>h<sub>Θ</sub>(x) = θ<sub>0</sub> + θ<sub>1</sub>x<sub>1</sub></td>
+<td>.5</td>
+<td>.6</td>
+<td>.65</td>
+</tr>
+<tr>
+<td>2</td>
+<td>h<sub>Θ</sub>(x) = θ<sub>0</sub> + θ<sub>1</sub>x +  θ<sub>2</sub>x<sup>2</sup></td>
+<td>.23</td>
+<td>.5</td>
+<td>.43</td>
+</tr>
+<tr>
+<td>3</td>
+<td>h<sub>Θ</sub>(x) = θ<sub>0</sub> + θ<sub>1</sub>x +  &hellip; +  θ<sub>3</sub>x<sup>3</sup></td>
+<td>.2</td>
+<td>.3</td>
+<td>.45</td>
+</tr>
+<tr>
+<td>4</td>
+<td>h<sub>Θ</sub>(x) = θ<sub>0</sub> + &hellip; +  θ<sub>4</sub>x<sup>4</sup></td>
+<td>.2</td>
+<td>.2</td>
+<td>.39</td>
+</tr>
+</tbody>
+</table>
+<p>Based on the above results you should decide that the 4th model is the best option.
+The test set error is reported only as an estimate of the generalization error.</p>
+<p>With this approach we ensure that J<sub>test</sub>(Θ) is a more accurate estimate of the
+actual generalization error, since it did not play any role in the decision related
+to the best model.</p>
+<h5 id="take-home-lesson">Take Home Lesson</h5>
+<ul>
+<li>The test set error should not play any role in the model selection</li>
+<li>The only purpose of the test set error is to provide an (optimistic) estimate of
+the generalization error</li>
+<li>Always split your data into Training/Validation/Test Set error.</li>
+</ul>
+<h2 id="bias-vs-variance">Bias vs Variance</h2>
+<p>Bias and variance are the reasons underlying your model underfitting or overfitting the data.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-bias-vs-variance">
+
+
+  <a data-fancybox="" href="/media/img/bias-variance.png" data-caption="Bias vs Variance">
+
+
+  <img src="/media/img/bias-variance.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Bias vs Variance
+  </figcaption>
+
+
+</figure>
+
+<p>Typically, when your model underfits the data means that it has too high bias.
+Conversely, when your overfits your data means that it has too high variance.</p>
+<p>More formally, we can define bias and variance as follows.</p>
+<ul>
+<li><strong>Bias Error</strong> -  it is the error derived from erroneous assumptions made by your learning algorithm (e.g., a linear regression implicitly assumes that a lines can fit your data).</li>
+<li><strong>Variance Error</strong> - it is the error derived from the fluctuations in your training set (e.g., a powerful neural network might be able to fit the noise in your training data).</li>
+</ul>
+<p>At a high level, the goal of any learning algorithm is to minimize both the bias and the variance error.</p>
+<p>Unfortunately, improving on one error is likely to have a negative impact
+on the other error. This is often referred as the <strong>bias-variance dilemma!</strong>.</p>
+<p>Let&rsquo;s consider the above example on the polynomial representation of your data.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-training-error-vs-validation-error">
+
+
+  <a data-fancybox="" href="/media/img/train-val-error.png" data-caption="Training Error vs Validation Error">
+
+
+  <img src="/media/img/train-val-error.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Training Error vs Validation Error
+  </figcaption>
+
+
+</figure>
+
+<p>The above image suggests that as the degree of the polynomial increases,
+the training error progressively decreases.</p>
+<p>Conversely, the validation error tends to decrease at first, but when the
+degree of the polynomial goes beyond a certain threshold it tends to
+significantly increase.</p>
+<p>When you have a high test/validation error it means that your are in either
+one of the two situations highlighted by the purple circle in the figure below.</p>
+<p>Specifically, if your are in the situation corresponding to the <strong>left</strong>
+side of the figure, then your high test/validation error can be ascribed to your model suffering from a <strong>high bias</strong> problem (i.e., the model is not
+powerful enough to fit the training data).</p>
+<p>On the other hand, the <strong>right</strong> side of the image corresponds
+to a <strong>high variance</strong> problem (i.e., your model is so powerful that
+it is able to fit the noise in the training set).</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-training-error-vs-validation-error">
+
+
+  <a data-fancybox="" href="/media/img/train-val-error_.png" data-caption="Training Error vs Validation Error">
+
+
+  <img src="/media/img/train-val-error_.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Training Error vs Validation Error
+  </figcaption>
+
+
+</figure>
+
+<p><strong>How to distinguish between the two situations?</strong></p>
+<ul>
+<li>In the first scenario &ndash; leftmost circle &ndash; the training and test error are both very high. In this case, you should try with a more powerful model.</li>
+<li>In the second scenario &ndash; rightmost circle &ndash; the training error is kept low, but there is a significant difference with the test/validation error. In this case you should try to <strong>regularize</strong> your algorithm.</li>
+</ul>
+<h3 id="the-impact-of-regularization">The impact of regularization</h3>
+<p>Imagine you decide to use a powerful model to fit your data, let&rsquo;s say you are using a pretty powerful, cocky, deep neural network.</p>
+<p>Clearly, neural networks might suffer from a high variance problem, since they are very powerful. Therefore, you need a strategy to prevent them to overfit the training data.</p>
+<p>This is indeed the goal of regularization.
+Concretely, when you use regularization, the cost function used during
+the training phase accounts for an additional parameter, i.e., the regularization term.</p>
+<p>Therefore, the cost function is defined as follows:</p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2" title="" /></p>
+<p>The effect of the regularization term is to constrain the variance of the
+learning algorithm. The value of λ determines
+how much you want to penalize the weights of your hypothesis.</p>
+<p>Let&rsquo;s see the impact of the regularization term on the learned hypothesis.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-effect-of-the-regularization-term">
+
+
+  <a data-fancybox="" href="/media/img/regularization.png" data-caption="Effect of the regularization term">
+
+
+  <img src="/media/img/regularization.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Effect of the regularization term
+  </figcaption>
+
+
+</figure>
+
+<ul>
+<li>Larger values of λ increase the chance of underfitting the data, thus they introduce a higher bias. In the rightmost figure, most of the parameters of your hypothesis are close to 0</li>
+<li>Smaller values of λ increase the chance of overfitting the data, they introduce a higher variance in your learning model. In the leftmost figure the effect of the regularization term is almost negligible</li>
+</ul>
+<p><strong>How to choose the right value for λ?</strong>
+Similarly to the model selection problem you should let the validation error
+guide your selection.</p>
+<p>A meaningful range of value to try is the following.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>λ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Θ<sup>(1)</sup></td>
+<td>0</td>
+</tr>
+<tr>
+<td>Θ<sup>(2)</sup></td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>Θ<sup>(3)</sup></td>
+<td>0.02</td>
+</tr>
+<tr>
+<td>Θ<sup>(4)</sup></td>
+<td>0.04</td>
+</tr>
+<tr>
+<td>.</td>
+<td>.</td>
+</tr>
+<tr>
+<td>.</td>
+<td>.</td>
+</tr>
+<tr>
+<td>Θ<sup>(12)</sup></td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p>Each model is trained by minimizing the cost function plus the regularization term.</p>
+<p>Finally, you can compute the validation error with respect to each
+possible configuration of λ and then you select the regularization
+term that provided the best performance on the validation set.</p>
+<p><strong>A pitfall to avoid</strong> is to use the regularized cost function to report the
+error on the validation set. In fact, the regularization term introduce
+a competitive advantage in favor of the models trained with higher values
+of λ</p>
+<p>Therefore is you use the following function during training.</p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2" title="" /></p>
+<p>Then you should use the following cost function for the validation and the test set.</p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J_{val/test}(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y)" title="" /></p>
+<p>Let&rsquo;s focus on the impact of the regularization term on the bias/variance
+trade-off.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-effect-of-the-regularization-on-the-biasvariance-trade-off">
+
+
+  <a data-fancybox="" href="/media/img/regularization_.png" data-caption="Effect of the regularization on the Bias/Variance Trade-off">
+
+
+  <img src="/media/img/regularization_.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Effect of the regularization on the Bias/Variance Trade-off
+  </figcaption>
+
+
+</figure>
+
+<p>Clearly, the best choice for lambda is the one highlighted by the dashed line in the above image. In fact,
+the corresponding value of λ provides the lowest validation error.</p>
+<h2 id="learning-curves">Learning Curves</h2>
+<p>Plotting the learning curves of your algorithm is another useful tool to
+spot the presence of underfitting or overfitting.</p>
+<p>With learning curves you are able to understand which is the benefit
+of bringing new data to your problem. In fact, here we focus on the value
+of the training and val/test error as a function of the number of data
+points available to your learning algorithm.</p>
+<p>In order to derive the learning curves of your algorithm you can train the algorithm on a progressively larger portion of your training data.</p>
+<p>This is a possible approach:</p>
+<ol>
+<li>Select m data points</li>
+<li>Train your data on the first m data points of your training set</li>
+<li>Plot the J(Θ) and J<sub>val/test</sub>(Θ) with respect to the entire first m training points  and test/validation set, respectively</li>
+<li>Increase m and go to 1</li>
+</ol>
+<p>Clearly, when you have few data points your model will be able to fit them all without any particular problem.
+However, as the number of points increases, it will be harder for your model
+to fit all the data, as a consequence the training error will increase.</p>
+<p>This is how the learning curves look like on a &ldquo;wealthy&rdquo;
+model.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-learning-curves">
+
+
+  <a data-fancybox="" href="/media/img/lcuves.png" data-caption="Learning Curves">
+
+
+  <img src="/media/img/lcuves.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Learning Curves
+  </figcaption>
+
+
+</figure>
+
+<p>We can say that this model well behaves for the
+following reasons:</p>
+<ul>
+<li>the training error and the validation error are very close to each others. It means that the model does not suffer from overfitting</li>
+<li>both the training error and the validation error are relatively low. It means the model does not suffer from underfitting</li>
+</ul>
+<h3 id="high-bias">High Bias</h3>
+<p>If your model suffer from high bias, it means that it tends to underfit the data. In this case, the
+learning curves will look as follows.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-learning-curves---high-bias">
+
+
+  <a data-fancybox="" href="/media/img/lcuves_hb.png" data-caption="Learning Curves - High Bias">
+
+
+  <img src="/media/img/lcuves_hb.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Learning Curves - High Bias
+  </figcaption>
+
+
+</figure>
+
+<ul>
+<li>both training and validation error are pretty high</li>
+<li>the benefit of adding new data points becomes negligible very soon (your model is not able to learn from the data)</li>
+</ul>
+<h3 id="high-variance">High Variance</h3>
+<p>If your model suffer from high variance, it means that it tends to overfit the data. In this case, the
+learning curves will look as follows.</p>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-learning-curves---high-variance">
+
+
+  <a data-fancybox="" href="/media/img/lcuves_hv.png" data-caption="Learning Curves - High Variance">
+
+
+  <img src="/media/img/lcuves_hv.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Learning Curves - High Variance
+  </figcaption>
+
+
+</figure>
+
+<ul>
+<li>the difference between the training and the validation error is significant</li>
+<li>the training error grows slowly with the amount of training data, while the validation error continues to decrease</li>
+</ul>
+<h3 id="recap">Recap</h3>
+<p>Going back to the question at the beginning of this lesson:
+which is the best strategy to improve the performance of your algorithm
+when you are having hard times in minimizing the cost function?</p>
+<table>
+<thead>
+<tr>
+<th>High Bias</th>
+<th>High Variance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Try to get additional features</td>
+<td>Get More Training Examples</td>
+</tr>
+<tr>
+<td>Try decreasing the  reg. term</td>
+<td>Try with a reduce set of features</td>
+</tr>
+<tr>
+<td></td>
+<td>Try increasing the reg. term</td>
+</tr>
+</tbody>
+</table>
+<h2 id="use-case-spam-classifier">Use Case: Spam Classifier</h2>
+<p>You are required to build a Spam classifier, namely a model that takes
+as input the vector representation of an email and it output:</p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;h_{\Theta}(x) = \left\{ \begin{array}{ll} 1 & \mbox{if spam};\\0 & \mbox{otherwise}.\end{array} \right." title="" /></p>
+<h3 id="data-engineering">Data Engineering</h3>
+<p>The first problem to address is to decide how to represent an email.
+p
+A possible solution would be to determines a set of words &ndash; the
+most frequent k (top-k) &ndash; so that we can map an email to a {0,1} vector of
+k positions.</p>
+<p>How to proceed from here?</p>
+<ul>
+<li>You can collect more data</li>
+<li>Design more sophisticated features
+<ul>
+<li>We can encode the information related to the email routing, contained in the header of an email</li>
+<li>Apply text-based preprocessing techniques. For instance, you can use methods to detect semantic analogies; you can use design features based on the punctuation of the text</li>
+</ul>
+</li>
+</ul>
+<h3 id="error-analysis">Error Analysis</h3>
+<p>Unfortunately, there is no way to tell which of the above strategies will prove to be the most effective. Therefore, the most reasonable thing to do is
+error analysis.</p>
+<p>The recommended approach is the following:</p>
+<ol>
+<li>Start with a simple algorithm and test its performance on the validation set</li>
+<li>Plot the learning curves to spot the presence of high-bias or high-variance</li>
+<li>Perform Error Analysis. Manually examine the examples in the validation set that your algorithm made errors on. See if your are able to spot any systematic trend in the type of examples it is making errors on.</li>
+</ol>
+<p>For instance, imagine that your algorithm misclassifies 100 emails over the
+500 examples in the validation set.</p>
+<p>You should manually examine the 100 errors and the categorize them based on
+aspects such as:</p>
+<ul>
+<li>the type of email (e.g., reply email, password reset emails, pharmaceutical)</li>
+</ul>
+<p>Then you should ask yourself: <strong>what features would have helped the algorithm to classify them correctly?</strong></p>
+<p>The answer to the above question could lead to the definition of the
+following features:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pharmaceutical</td>
+<td>Is the email related to some drug?</td>
+</tr>
+<tr>
+<td>Reset Password</td>
+<td>Is the email asking you to insert a password?</td>
+</tr>
+<tr>
+<td>Number of mispellings</td>
+<td>Medicine becomes med1cine, mortgage becomes m0rgage</td>
+</tr>
+<tr>
+<td>Unusual punctuation</td>
+<td>The email uses a lot of !!!!!! or ??? and other unusual symbols</td>
+</tr>
+</tbody>
+</table>
+<p>This analysis is arguably a valuable tool. However, sometimes it is hard to understand
+how to define new features in order to help your classifier.</p>
+<p>For instance, error analysis is not able to suggest your whether or not stemming will increase
+the performance of your algorithm.</p>
+<p>In these situations the best strategy to adopt is based on trial-and-error.
+In order to understand if a given technique is able to improve the performance of your algorithm
+you should always assess its effectiveness on the validation set.</p>
+<h4 id="example">Example</h4>
+<ul>
+<li>Should you use stemming?
+<ul>
+<li>Compute the validation error with and w/o stemming</li>
+</ul>
+</li>
+<li>Should you use distinguish between upper and lower case?
+<ul>
+<li>Compute the validation error with and w/o distinguish between upper and lower case</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          
+
+
+
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Sep 9, 2018</p>
+
+          
+
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/courses/datamining/debugging.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    Published with
+    <a href="https://wowchemy.com" target="_blank" rel="noopener">Wowchemy</a>  —
+    the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">
+    open source</a> website builder that empowers creators.
+    
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js" integrity="sha512-I7w3ZdSFzw5j3jU3ZkNikBNeIrl3i+hEuEdwNmqUJvwNcaBUNcijnP2gd9DtGlgVYDplfjGoD8vTNsID+lCjqg==" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/wowchemy.min.8078d8993807525be6a8950d1c49c93d.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

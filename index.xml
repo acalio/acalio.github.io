@@ -3507,6 +3507,823 @@ Your swiss-knife  for handling data in Python.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Diagnostic &amp; Debugging</title>
+      <link>/courses/datamining/debugging/</link>
+      <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>/courses/datamining/debugging/</guid>
+      <description>&lt;p&gt;If you have hard time in minimizing the cost function of your
+learning algorithm, you should give it a try to one of the following
+solutions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;increase the number of data points&lt;/li&gt;
+&lt;li&gt;try to focus on a subset of the original features&lt;/li&gt;
+&lt;li&gt;try to add more features (e.g., some linear combination of the existing features)&lt;/li&gt;
+&lt;li&gt;play with different regularization terms&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Which is the right option?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;It depends! In order to understand the most profitable option among
+above directions requires you to perform a diagnosis of your ML algorithm.&lt;/p&gt;
+&lt;p&gt;Diagnostic can guide you to select the most effective strategy to improve
+the performance of your algorithm.&lt;/p&gt;
+&lt;h2 id=&#34;performance-evaluation&#34;&gt;Performance Evaluation&lt;/h2&gt;
+&lt;p&gt;There are two main scenario to avoid:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Overfitting&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Underfitting&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A standard approach is to split your dataset into two disjoint sets.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-trainingtest-set-split&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/train-test-split.png&#34; data-caption=&#34;Training/Test Set split&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/train-test-split.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Training/Test Set split
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;The largest fraction of your data has to be reserved to the training set.
+The amount of data in your training set is roughly about the 30% of the entire daatset.
+It is also recommended to shuffle your data before executing the splitting.&lt;/p&gt;
+&lt;p&gt;Once you have split the data you can compute two
+cost functions, denoted by:&lt;/p&gt;
+&lt;!-- - &lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}&#34; title=&#34;\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}&#34; /&gt; --&gt;
+&lt;ul&gt;
+&lt;li&gt;J(Θ) - Value of the cost function on the training set&lt;/li&gt;
+&lt;li&gt;J&lt;sub&gt;test&lt;/sub&gt;(Θ) - Value of the cost function on the test set.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Θ denotes the parameter vector that characterize your hypothesis &amp;ndash;
+hereinafter denoted by h&lt;sub&gt;Θ&lt;/sub&gt;, i.e.,
+your model.&lt;/p&gt;
+&lt;p&gt;Usually, J(Θ) and J&lt;sub&gt;test&lt;/sub&gt;(Θ)  are the same function.
+However, they can also be different from each other.&lt;/p&gt;
+&lt;p&gt;For instance, in the context of (binary) classification, your model minimize the following
+function:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J(\Theta)=-\frac{1}{2m} \sum_i^{m} y^{(i)} \log h_{\Theta} (x^{(i)}) + (1-y^{(i)}) \log h_{\Theta} (x^{(i)})&#34; title=&#34;Cross Entropy Loss&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;But you can use the mis-classification error to evaluate the performance on the test set.
+More formally, given a data point x, the error is defined as:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;err(h_{\Theta}(x), y) = \left\{ \begin{array}{ll} 0 &amp; \mbox{if $ \hat{y}=y$};\\1 &amp; \mbox{otherwise}.\end{array} \right.&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Where ŷ denotes the value predicted by your model.&lt;/p&gt;
+&lt;p&gt;Finally, the total error is obtained by summing the above function upon each data
+point in the test.&lt;/p&gt;
+&lt;h2 id=&#34;the-model-selection-problem&#34;&gt;The Model Selection Problem&lt;/h2&gt;
+&lt;p&gt;Usually &amp;ndash; &lt;strong&gt;not necessarily&lt;/strong&gt; &amp;ndash; the error computed on the test set
+will be higher than the one obtained on the training set.&lt;/p&gt;
+&lt;p&gt;The error on the test set is referred as &lt;em&gt;generalization error&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Your goal  as a data scientist is to provide a model with
+the lowest generalization error.&lt;/p&gt;
+&lt;p&gt;However, &lt;strong&gt;you are not supposed to select your best model based
+on the performance achieved on the test set&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Imagine you have to train a model upon different representations of your
+original dataset.&lt;/p&gt;
+&lt;p&gt;For instance, you can have several polynomial representations by changing the order
+of the polynomial.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Degree&lt;/th&gt;
+&lt;th&gt;Hypothesis&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;h&lt;sub&gt;Θ&lt;/sub&gt;(x) = θ&lt;sub&gt;0&lt;/sub&gt; + θ&lt;sub&gt;1&lt;/sub&gt;x&lt;sub&gt;1&lt;/sub&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;h&lt;sub&gt;Θ&lt;/sub&gt;(x) = θ&lt;sub&gt;0&lt;/sub&gt; + θ&lt;sub&gt;1&lt;/sub&gt;x +  θ&lt;sub&gt;2&lt;/sub&gt;x&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;h&lt;sub&gt;Θ&lt;/sub&gt;(x) = θ&lt;sub&gt;0&lt;/sub&gt; + θ&lt;sub&gt;1&lt;/sub&gt;x +  θ&lt;sub&gt;2&lt;/sub&gt;x&lt;sup&gt;2&lt;/sup&gt; +  θ&lt;sub&gt;3&lt;/sub&gt;x&lt;sup&gt;3&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;h&lt;sub&gt;Θ&lt;/sub&gt;(x) = θ&lt;sub&gt;0&lt;/sub&gt; + θ&lt;sub&gt;1&lt;/sub&gt;x&lt;sup&gt;1&lt;/sup&gt; +  θ&lt;sub&gt;2&lt;/sub&gt;x&lt;sup&gt;2&lt;/sup&gt; + &amp;hellip; +  θ&lt;sub&gt;10&lt;/sub&gt;x&lt;sup&gt;10&lt;/sup&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Clearly, each polynomial representation leads to a different hypothesis (i.e.,
+Θ&lt;sup&gt;(1)&lt;/sup&gt;, Θ&lt;sup&gt;(2)&lt;/sup&gt;, &amp;hellip;, Θ&lt;sup&gt;(10)&lt;/sup&gt;).&lt;/p&gt;
+&lt;p&gt;At this point we need to establish which is the best model among the above 10 different
+hypothesis.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A pitfall to avoid&lt;/strong&gt; is to establish the best model based on the test error. In fact,
+the test error is often an optimistic estimate of the true performance of our
+model.&lt;/p&gt;
+&lt;p&gt;Therefore, in the above scenario, we cannot decide which is the best choice for the degree
+of the polynomial representation based on the performance on the test of each model.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This is wrong because it is like we were trying to fit the test set!&lt;/strong&gt;.
+The test set is only meant to report the generalization error, you are not  supposed
+to take any design decision based on the above error.&lt;/p&gt;
+&lt;h3 id=&#34;the-validation-set&#34;&gt;The validation set&lt;/h3&gt;
+&lt;p&gt;In order to solve the above problem, you can split the data into three separate sets.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-trainingvalidationtest-set-split&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/train-test-vali-split.png&#34; data-caption=&#34;Training/Validation/Test Set split&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/train-test-vali-split.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Training/Validation/Test Set split
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;Typically, the training set takes roughly the 60% of the entire dataset, the
+remaining part is equally divided between the validation and the test set.&lt;/p&gt;
+&lt;p&gt;Now for each of the above hypothesis you should also evaluate the cost function with
+respect to the new validation set (J_&lt;sub&gt;val&lt;/sub&gt;(Θ))&lt;/p&gt;
+&lt;p&gt;For instance, if you have the following situation (J(Θ) is an arbitrary cost function).&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Degree&lt;/th&gt;
+&lt;th&gt;Hypothesis&lt;/th&gt;
+&lt;th&gt;J(Θ)&lt;/th&gt;
+&lt;th&gt;(J_&lt;sub&gt;val&lt;/sub&gt;(Θ)&lt;/th&gt;
+&lt;th&gt;(J_&lt;sub&gt;test&lt;/sub&gt;(Θ)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;h&lt;sub&gt;Θ&lt;/sub&gt;(x) = θ&lt;sub&gt;0&lt;/sub&gt; + θ&lt;sub&gt;1&lt;/sub&gt;x&lt;sub&gt;1&lt;/sub&gt;&lt;/td&gt;
+&lt;td&gt;.5&lt;/td&gt;
+&lt;td&gt;.6&lt;/td&gt;
+&lt;td&gt;.65&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;h&lt;sub&gt;Θ&lt;/sub&gt;(x) = θ&lt;sub&gt;0&lt;/sub&gt; + θ&lt;sub&gt;1&lt;/sub&gt;x +  θ&lt;sub&gt;2&lt;/sub&gt;x&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;.23&lt;/td&gt;
+&lt;td&gt;.5&lt;/td&gt;
+&lt;td&gt;.43&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;h&lt;sub&gt;Θ&lt;/sub&gt;(x) = θ&lt;sub&gt;0&lt;/sub&gt; + θ&lt;sub&gt;1&lt;/sub&gt;x +  &amp;hellip; +  θ&lt;sub&gt;3&lt;/sub&gt;x&lt;sup&gt;3&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;.2&lt;/td&gt;
+&lt;td&gt;.3&lt;/td&gt;
+&lt;td&gt;.45&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;h&lt;sub&gt;Θ&lt;/sub&gt;(x) = θ&lt;sub&gt;0&lt;/sub&gt; + &amp;hellip; +  θ&lt;sub&gt;4&lt;/sub&gt;x&lt;sup&gt;4&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;.2&lt;/td&gt;
+&lt;td&gt;.2&lt;/td&gt;
+&lt;td&gt;.39&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Based on the above results you should decide that the 4th model is the best option.
+The test set error is reported only as an estimate of the generalization error.&lt;/p&gt;
+&lt;p&gt;With this approach we ensure that J&lt;sub&gt;test&lt;/sub&gt;(Θ) is a more accurate estimate of the
+actual generalization error, since it did not play any role in the decision related
+to the best model.&lt;/p&gt;
+&lt;h5 id=&#34;take-home-lesson&#34;&gt;Take Home Lesson&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;The test set error should not play any role in the model selection&lt;/li&gt;
+&lt;li&gt;The only purpose of the test set error is to provide an (optimistic) estimate of
+the generalization error&lt;/li&gt;
+&lt;li&gt;Always split your data into Training/Validation/Test Set error.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;bias-vs-variance&#34;&gt;Bias vs Variance&lt;/h2&gt;
+&lt;p&gt;Bias and variance are the reasons underlying your model underfitting or overfitting the data.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-bias-vs-variance&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/bias-variance.png&#34; data-caption=&#34;Bias vs Variance&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/bias-variance.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Bias vs Variance
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;Typically, when your model underfits the data means that it has too high bias.
+Conversely, when your overfits your data means that it has too high variance.&lt;/p&gt;
+&lt;p&gt;More formally, we can define bias and variance as follows.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bias Error&lt;/strong&gt; -  it is the error derived from erroneous assumptions made by your learning algorithm (e.g., a linear regression implicitly assumes that a lines can fit your data).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Variance Error&lt;/strong&gt; - it is the error derived from the fluctuations in your training set (e.g., a powerful neural network might be able to fit the noise in your training data).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At a high level, the goal of any learning algorithm is to minimize both the bias and the variance error.&lt;/p&gt;
+&lt;p&gt;Unfortunately, improving on one error is likely to have a negative impact
+on the other error. This is often referred as the &lt;strong&gt;bias-variance dilemma!&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s consider the above example on the polynomial representation of your data.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-training-error-vs-validation-error&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/train-val-error.png&#34; data-caption=&#34;Training Error vs Validation Error&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/train-val-error.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Training Error vs Validation Error
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;The above image suggests that as the degree of the polynomial increases,
+the training error progressively decreases.&lt;/p&gt;
+&lt;p&gt;Conversely, the validation error tends to decrease at first, but when the
+degree of the polynomial goes beyond a certain threshold it tends to
+significantly increase.&lt;/p&gt;
+&lt;p&gt;When you have a high test/validation error it means that your are in either
+one of the two situations highlighted by the purple circle in the figure below.&lt;/p&gt;
+&lt;p&gt;Specifically, if your are in the situation corresponding to the &lt;strong&gt;left&lt;/strong&gt;
+side of the figure, then your high test/validation error can be ascribed to your model suffering from a &lt;strong&gt;high bias&lt;/strong&gt; problem (i.e., the model is not
+powerful enough to fit the training data).&lt;/p&gt;
+&lt;p&gt;On the other hand, the &lt;strong&gt;right&lt;/strong&gt; side of the image corresponds
+to a &lt;strong&gt;high variance&lt;/strong&gt; problem (i.e., your model is so powerful that
+it is able to fit the noise in the training set).&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-training-error-vs-validation-error&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/train-val-error_.png&#34; data-caption=&#34;Training Error vs Validation Error&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/train-val-error_.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Training Error vs Validation Error
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;How to distinguish between the two situations?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In the first scenario &amp;ndash; leftmost circle &amp;ndash; the training and test error are both very high. In this case, you should try with a more powerful model.&lt;/li&gt;
+&lt;li&gt;In the second scenario &amp;ndash; rightmost circle &amp;ndash; the training error is kept low, but there is a significant difference with the test/validation error. In this case you should try to &lt;strong&gt;regularize&lt;/strong&gt; your algorithm.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;the-impact-of-regularization&#34;&gt;The impact of regularization&lt;/h3&gt;
+&lt;p&gt;Imagine you decide to use a powerful model to fit your data, let&amp;rsquo;s say you are using a pretty powerful, cocky, deep neural network.&lt;/p&gt;
+&lt;p&gt;Clearly, neural networks might suffer from a high variance problem, since they are very powerful. Therefore, you need a strategy to prevent them to overfit the training data.&lt;/p&gt;
+&lt;p&gt;This is indeed the goal of regularization.
+Concretely, when you use regularization, the cost function used during
+the training phase accounts for an additional parameter, i.e., the regularization term.&lt;/p&gt;
+&lt;p&gt;Therefore, the cost function is defined as follows:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The effect of the regularization term is to constrain the variance of the
+learning algorithm. The value of λ determines
+how much you want to penalize the weights of your hypothesis.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s see the impact of the regularization term on the learned hypothesis.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-effect-of-the-regularization-term&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/regularization.png&#34; data-caption=&#34;Effect of the regularization term&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/regularization.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Effect of the regularization term
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Larger values of λ increase the chance of underfitting the data, thus they introduce a higher bias. In the rightmost figure, most of the parameters of your hypothesis are close to 0&lt;/li&gt;
+&lt;li&gt;Smaller values of λ increase the chance of overfitting the data, they introduce a higher variance in your learning model. In the leftmost figure the effect of the regularization term is almost negligible&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;How to choose the right value for λ?&lt;/strong&gt;
+Similarly to the model selection problem you should let the validation error
+guide your selection.&lt;/p&gt;
+&lt;p&gt;A meaningful range of value to try is the following.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;λ&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Θ&lt;sup&gt;(1)&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Θ&lt;sup&gt;(2)&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;0.01&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Θ&lt;sup&gt;(3)&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;0.02&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Θ&lt;sup&gt;(4)&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;0.04&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Θ&lt;sup&gt;(12)&lt;/sup&gt;&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Each model is trained by minimizing the cost function plus the regularization term.&lt;/p&gt;
+&lt;p&gt;Finally, you can compute the validation error with respect to each
+possible configuration of λ and then you select the regularization
+term that provided the best performance on the validation set.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A pitfall to avoid&lt;/strong&gt; is to use the regularized cost function to report the
+error on the validation set. In fact, the regularization term introduce
+a competitive advantage in favor of the models trained with higher values
+of λ&lt;/p&gt;
+&lt;p&gt;Therefore is you use the following function during training.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Then you should use the following cost function for the validation and the test set.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J_{val/test}(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y)&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s focus on the impact of the regularization term on the bias/variance
+trade-off.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-effect-of-the-regularization-on-the-biasvariance-trade-off&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/regularization_.png&#34; data-caption=&#34;Effect of the regularization on the Bias/Variance Trade-off&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/regularization_.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Effect of the regularization on the Bias/Variance Trade-off
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;Clearly, the best choice for lambda is the one highlighted by the dashed line in the above image. In fact,
+the corresponding value of λ provides the lowest validation error.&lt;/p&gt;
+&lt;h2 id=&#34;learning-curves&#34;&gt;Learning Curves&lt;/h2&gt;
+&lt;p&gt;Plotting the learning curves of your algorithm is another useful tool to
+spot the presence of underfitting or overfitting.&lt;/p&gt;
+&lt;p&gt;With learning curves you are able to understand which is the benefit
+of bringing new data to your problem. In fact, here we focus on the value
+of the training and val/test error as a function of the number of data
+points available to your learning algorithm.&lt;/p&gt;
+&lt;p&gt;In order to derive the learning curves of your algorithm you can train the algorithm on a progressively larger portion of your training data.&lt;/p&gt;
+&lt;p&gt;This is a possible approach:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Select m data points&lt;/li&gt;
+&lt;li&gt;Train your data on the first m data points of your training set&lt;/li&gt;
+&lt;li&gt;Plot the J(Θ) and J&lt;sub&gt;val/test&lt;/sub&gt;(Θ) with respect to the entire first m training points  and test/validation set, respectively&lt;/li&gt;
+&lt;li&gt;Increase m and go to 1&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Clearly, when you have few data points your model will be able to fit them all without any particular problem.
+However, as the number of points increases, it will be harder for your model
+to fit all the data, as a consequence the training error will increase.&lt;/p&gt;
+&lt;p&gt;This is how the learning curves look like on a &amp;ldquo;wealthy&amp;rdquo;
+model.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-learning-curves&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/lcuves.png&#34; data-caption=&#34;Learning Curves&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/lcuves.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Learning Curves
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;We can say that this model well behaves for the
+following reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the training error and the validation error are very close to each others. It means that the model does not suffer from overfitting&lt;/li&gt;
+&lt;li&gt;both the training error and the validation error are relatively low. It means the model does not suffer from underfitting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;high-bias&#34;&gt;High Bias&lt;/h3&gt;
+&lt;p&gt;If your model suffer from high bias, it means that it tends to underfit the data. In this case, the
+learning curves will look as follows.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-learning-curves---high-bias&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/lcuves_hb.png&#34; data-caption=&#34;Learning Curves - High Bias&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/lcuves_hb.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Learning Curves - High Bias
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;both training and validation error are pretty high&lt;/li&gt;
+&lt;li&gt;the benefit of adding new data points becomes negligible very soon (your model is not able to learn from the data)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;high-variance&#34;&gt;High Variance&lt;/h3&gt;
+&lt;p&gt;If your model suffer from high variance, it means that it tends to overfit the data. In this case, the
+learning curves will look as follows.&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-learning-curves---high-variance&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;/media/img/lcuves_hv.png&#34; data-caption=&#34;Learning Curves - High Variance&#34;&gt;
+
+
+  &lt;img src=&#34;/media/img/lcuves_hv.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Learning Curves - High Variance
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the difference between the training and the validation error is significant&lt;/li&gt;
+&lt;li&gt;the training error grows slowly with the amount of training data, while the validation error continues to decrease&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;recap&#34;&gt;Recap&lt;/h3&gt;
+&lt;p&gt;Going back to the question at the beginning of this lesson:
+which is the best strategy to improve the performance of your algorithm
+when you are having hard times in minimizing the cost function?&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;High Bias&lt;/th&gt;
+&lt;th&gt;High Variance&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Try to get additional features&lt;/td&gt;
+&lt;td&gt;Get More Training Examples&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Try decreasing the  reg. term&lt;/td&gt;
+&lt;td&gt;Try with a reduce set of features&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;Try increasing the reg. term&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;use-case-spam-classifier&#34;&gt;Use Case: Spam Classifier&lt;/h2&gt;
+&lt;p&gt;You are required to build a Spam classifier, namely a model that takes
+as input the vector representation of an email and it output:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;h_{\Theta}(x) = \left\{ \begin{array}{ll} 1 &amp; \mbox{if spam};\\0 &amp; \mbox{otherwise}.\end{array} \right.&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;data-engineering&#34;&gt;Data Engineering&lt;/h3&gt;
+&lt;p&gt;The first problem to address is to decide how to represent an email.
+p
+A possible solution would be to determines a set of words &amp;ndash; the
+most frequent k (top-k) &amp;ndash; so that we can map an email to a {0,1} vector of
+k positions.&lt;/p&gt;
+&lt;p&gt;How to proceed from here?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You can collect more data&lt;/li&gt;
+&lt;li&gt;Design more sophisticated features
+&lt;ul&gt;
+&lt;li&gt;We can encode the information related to the email routing, contained in the header of an email&lt;/li&gt;
+&lt;li&gt;Apply text-based preprocessing techniques. For instance, you can use methods to detect semantic analogies; you can use design features based on the punctuation of the text&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;error-analysis&#34;&gt;Error Analysis&lt;/h3&gt;
+&lt;p&gt;Unfortunately, there is no way to tell which of the above strategies will prove to be the most effective. Therefore, the most reasonable thing to do is
+error analysis.&lt;/p&gt;
+&lt;p&gt;The recommended approach is the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Start with a simple algorithm and test its performance on the validation set&lt;/li&gt;
+&lt;li&gt;Plot the learning curves to spot the presence of high-bias or high-variance&lt;/li&gt;
+&lt;li&gt;Perform Error Analysis. Manually examine the examples in the validation set that your algorithm made errors on. See if your are able to spot any systematic trend in the type of examples it is making errors on.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For instance, imagine that your algorithm misclassifies 100 emails over the
+500 examples in the validation set.&lt;/p&gt;
+&lt;p&gt;You should manually examine the 100 errors and the categorize them based on
+aspects such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the type of email (e.g., reply email, password reset emails, pharmaceutical)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Then you should ask yourself: &lt;strong&gt;what features would have helped the algorithm to classify them correctly?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The answer to the above question could lead to the definition of the
+following features:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Feature&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Pharmaceutical&lt;/td&gt;
+&lt;td&gt;Is the email related to some drug?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Reset Password&lt;/td&gt;
+&lt;td&gt;Is the email asking you to insert a password?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Number of mispellings&lt;/td&gt;
+&lt;td&gt;Medicine becomes med1cine, mortgage becomes m0rgage&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Unusual punctuation&lt;/td&gt;
+&lt;td&gt;The email uses a lot of !!!!!! or ??? and other unusual symbols&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This analysis is arguably a valuable tool. However, sometimes it is hard to understand
+how to define new features in order to help your classifier.&lt;/p&gt;
+&lt;p&gt;For instance, error analysis is not able to suggest your whether or not stemming will increase
+the performance of your algorithm.&lt;/p&gt;
+&lt;p&gt;In these situations the best strategy to adopt is based on trial-and-error.
+In order to understand if a given technique is able to improve the performance of your algorithm
+you should always assess its effectiveness on the validation set.&lt;/p&gt;
+&lt;h4 id=&#34;example&#34;&gt;Example&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Should you use stemming?
+&lt;ul&gt;
+&lt;li&gt;Compute the validation error with and w/o stemming&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Should you use distinguish between upper and lower case?
+&lt;ul&gt;
+&lt;li&gt;Compute the validation error with and w/o distinguish between upper and lower case&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Ensamble Learning</title>
       <link>/courses/datamining/enslearn/</link>
       <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
