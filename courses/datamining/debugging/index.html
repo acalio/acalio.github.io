@@ -1211,7 +1211,7 @@ it is able to fit the noise in the training set).</p>
 Concretely, when you use regularization, the cost function used during
 the training phase accounts for an additional parameter, i.e., the regularization term.</p>
 <p>Therefore, the cost function is defined as follows:</p>
-<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2" title="" /></p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J(\Theta)=\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2" title="" /></p>
 <p>The effect of the regularization term is to constrain the variance of the
 learning algorithm. The value of λ determines
 how much you want to penalize the weights of your hypothesis.</p>
@@ -1310,7 +1310,7 @@ error on the validation set. In fact, the regularization term introduce
 a competitive advantage in favor of the models trained with higher values
 of λ</p>
 <p>Therefore is you use the following function during training.</p>
-<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2" title="" /></p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J(\Theta)=\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2" title="" /></p>
 <p>Then you should use the following cost function for the validation and the test set.</p>
 <p><img src="https://latex.codecogs.com/svg.latex?\Large&space;J_{val/test}(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y)" title="" /></p>
 <p>Let&rsquo;s focus on the impact of the regularization term on the bias/variance

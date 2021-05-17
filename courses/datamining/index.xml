@@ -18,7 +18,7 @@
       <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
       <guid>/courses/datamining/anomaly/</guid>
       <description>&lt;p&gt;This lesson introduces you to the anomaly detection problem.&lt;/p&gt;
-&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/04-anomaly&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/04-anomaly&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -28,7 +28,7 @@
       <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
       <guid>/courses/datamining/classproblem/</guid>
       <description>&lt;p&gt;In this lesson you are going to solve a classification problem.&lt;/p&gt;
-&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/03-classification&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/03-classification&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -39,7 +39,7 @@
       <guid>/courses/datamining/clustering/</guid>
       <description>&lt;p&gt;In this lesson we are going to address
 the clustering problem.&lt;/p&gt;
-&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/05-clustering&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/05-clustering&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -50,7 +50,8 @@ the clustering problem.&lt;/p&gt;
       <guid>/courses/datamining/pandasintro/</guid>
       <description>&lt;p&gt;This lesson introduces you to Pandas.
 Your swiss-knife  for handling data in Python.&lt;/p&gt;
-&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The notebook
+for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -455,7 +456,7 @@ it is able to fit the noise in the training set).&lt;/p&gt;
 Concretely, when you use regularization, the cost function used during
 the training phase accounts for an additional parameter, i.e., the regularization term.&lt;/p&gt;
 &lt;p&gt;Therefore, the cost function is defined as follows:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J(\Theta)=\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The effect of the regularization term is to constrain the variance of the
 learning algorithm. The value of λ determines
 how much you want to penalize the weights of your hypothesis.&lt;/p&gt;
@@ -554,7 +555,7 @@ error on the validation set. In fact, the regularization term introduce
 a competitive advantage in favor of the models trained with higher values
 of λ&lt;/p&gt;
 &lt;p&gt;Therefore is you use the following function during training.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J(\Theta)=\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y) + \lambda \sum_i^d \theta_i^2&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Then you should use the following cost function for the validation and the test set.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://latex.codecogs.com/svg.latex?\Large&amp;space;J_{val/test}(\Theta)=-\frac{1}{m} \sum_i^{m} err(h_{\Theta}(x), y)&#34; title=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s focus on the impact of the regularization term on the bias/variance
@@ -877,7 +878,7 @@ you should always assess its effectiveness on the validation set.&lt;/p&gt;
       <pubDate>Sun, 09 Sep 2018 00:00:00 +0000</pubDate>
       <guid>/courses/datamining/enslearn/</guid>
       <description>&lt;p&gt;This lesson introduces you to the ensamble learning approach.&lt;/p&gt;
-&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/06-ensamble&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/tree/main/06-ensamble&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -888,16 +889,8 @@ you should always assess its effectiveness on the validation set.&lt;/p&gt;
       <guid>/courses/datamining/introscikit/</guid>
       <description>&lt;p&gt;This lesson introduces you to scikit-learn.
 You will go through a real-world data mining problem.&lt;/p&gt;
-&lt;p&gt;The notebok for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/blob/main/02-Scikit_intro/scikit_intro.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The notebook for this lesson is available &lt;a href=&#34;https://github.com/acalio/DM/blob/main/02-Scikit_intro/scikit_intro.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/courses/datamining/finallesson/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/courses/datamining/finallesson/</guid>
-      <description></description>
     </item>
     
     <item>
